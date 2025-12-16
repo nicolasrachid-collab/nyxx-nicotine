@@ -1,0 +1,88 @@
+/* Custom styles for Nyxx Nicotine site */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* Espaço para o header fixo */
+  -webkit-overflow-scrolling: touch; /* Momentum scrolling no iOS */
+}
+
+/* Melhorar performance de scroll */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Suavizar transições durante scroll */
+body {
+  overscroll-behavior-y: smooth;
+  scroll-behavior: smooth;
+  /* Melhorar performance de scroll */
+  will-change: scroll-position;
+}
+
+/* Prevenir scroll jump */
+html, body {
+  scroll-snap-type: y proximity;
+}
+
+/* Suavizar animações durante scroll */
+section {
+  scroll-snap-align: start;
+  scroll-margin-top: 100px;
+}
+
+/* Animações suaves para elementos que entram na viewport */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar personalizada (opcional, para melhor UX) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Melhorar performance de scroll em elementos com transform */
+[class*="translate"] {
+  will-change: transform;
+}
+
+/* Reduzir repaint durante scroll */
+[class*="opacity"] {
+  will-change: opacity;
+}
+
+/* Animações do menu */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
