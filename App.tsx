@@ -3,6 +3,9 @@ import { Menu, X, ArrowUpRight, Plus, Twitter, Instagram, Linkedin, ArrowRight, 
 import { CustomCursor } from './components/CustomCursor';
 import { MenuToggleButton } from './components/MenuToggleButton';
 import { DeusaAnimation } from './components/DeusaAnimation';
+import { ProductCard3D } from './components/ProductCard3D';
+import { ProductSlider } from './components/ProductSlider';
+import { ProductSliderClean } from './components/ProductSliderClean';
 
 // Tipos de idioma
 type Language = 'pt' | 'en' | 'es';
@@ -643,7 +646,7 @@ const HeroCard = () => {
         <div className="absolute bottom-7 md:bottom-14 left-7 md:left-14 max-w-md text-base md:text-lg lg:text-xl leading-relaxed opacity-90">
           <p>
             <span className="font-bold text-white">{t('noGenericWebsites')}</span>{' '}
-            <span className="text-gray-300">{t('justTools')}</span>
+            <span className="bg-gradient-to-r from-gray-300 via-white to-gray-400 bg-clip-text text-transparent">{t('justTools')}</span>
           </p>
         </div>
 
@@ -970,150 +973,62 @@ const TeamSection = () => {
   const { t } = useTranslation();
   const team: TeamMember[] = [
     {
-      name: "Lauren Thompson",
-      role: "Team Lead",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000"
+      name: "Coffee",
+      role: "Sabor",
+      image: "/Coffee_lado.png"
     },
     {
-      name: "Michael Wilson",
-      role: "Full Stack Developer",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000"
+      name: "Energy",
+      role: "Sabor",
+      image: "/Energy_lado.png"
     },
     {
-      name: "Sarah Johnson",
-      role: "Creative Director",
-      image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&q=80&w=1000"
+      name: "Mango",
+      role: "Sabor",
+      image: "/Mango_lado.png"
     },
     {
-      name: "Christopher Miller",
-      role: "UX/UI Designer",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1000"
+      name: "Watermelon",
+      role: "Sabor",
+      image: "/Watermelon_lado.png"
     },
     {
-      name: "Emma Davis",
-      role: "Marketing Lead",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=1000"
+      name: "Menthol",
+      role: "Sabor",
+      image: "/Menthol_lado.png"
     }
   ];
 
   return (
     <section 
       ref={ref}
-      className={`relative w-full bg-[#F5F5F5] rounded-none p-7 md:p-14 mb-4 text-black transition-all duration-700 ease-out ${
+      className={`relative w-full bg-[#F5F5F5] py-20 md:py-32 transition-all duration-700 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
-      
-      {/* Visual Grid Markers for this section - Absolute positioning relative to container */}
-      <div className="absolute left-[41.666%] top-[20%] hidden xl:block text-gray-400">
-        <Plus size={24} strokeWidth={1} />
-      </div>
-       <div className="absolute left-[41.666%] bottom-[45%] hidden xl:block text-gray-400">
-        <Plus size={24} strokeWidth={1} />
-      </div>
-      
-      {/* Container for content restriction */}
-      <div className="max-w-[1800px] mx-auto relative">
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left Column: Content */}
-          <div className="xl:col-span-5 flex flex-col relative pr-0 xl:pr-14">
-            
-            {/* Top: Header */}
-            <div className="space-y-6 pt-2">
-               <div className="flex items-center gap-2">
-                  <span className="font-bold text-sm">Nyxx®</span>
+      <div className="max-w-[1800px] mx-auto px-7 md:px-14">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+               <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white">
+                  <Plus size={14} strokeWidth={3} />
                </div>
-               
-               <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9]">
-                  <span className="text-black block">{t('theFaces')}</span>
-                  <span className="text-gray-400 font-semibold">{t('behind')}</span>
-                  <span className="text-gray-400 font-semibold block">{t('theProjects')}</span>
-               </h2>
+               <span className="text-sm font-semibold tracking-wide">Nossos Sabores</span>
             </div>
-
-            {/* Bottom: Info & CTA - Reorganized */}
-            <div className="flex flex-col gap-10 mt-12">
-               {/* Text block */}
-               <div className="max-w-lg">
-                  <p className="text-xl md:text-2xl leading-tight text-gray-800 font-medium">
-                     {t('weBelieve')} <span className="text-gray-400">{t('fromCollaboration')}</span> {t('collaborationText')}
-                  </p>
-               </div>
-               
-               {/* CTA Section */}
-               <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center pt-8 border-t border-gray-300/50">
-                  <div className="space-y-1">
-                     <h3 className="font-semibold text-lg">{t('bePartOfMission')}</h3>
-                     <p className="text-sm text-gray-500">
-                        {t('ifYoureReady')}
-                     </p>
-                  </div>
-                  <button className="bg-black text-white text-[10px] uppercase tracking-wider font-bold py-3 px-6 rounded-full flex items-center gap-4 hover:bg-gray-800 transition-colors shrink-0">
-                    {t('applyNow')}
-                    <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
-                  </button>
-               </div>
-            </div>
-
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.9]">
+               <span className="text-black">Descubra </span>
+               <span className="text-gray-400">seu sabor</span>
+            </h2>
           </div>
-
-          {/* Right Column: Team Grid - Asymmetric Layout */}
-          <div className="xl:col-span-7">
-             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {/* Card destacado - ocupa 2 colunas e 2 linhas */}
-                <div className="col-span-2 row-span-2 group relative w-full aspect-square rounded-2xl overflow-hidden bg-gray-200 cursor-pointer">
-                   <img 
-                     src={team[0].image} 
-                     alt={team[0].name} 
-                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                   />
-                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
-                   <div className="absolute inset-0 p-6 flex flex-col justify-between text-white">
-                      <div className="flex justify-between items-start">
-                         <Plus size={14} className="opacity-90 mt-1" />
-                         <div className="text-right">
-                            <span className="text-xs font-bold block leading-tight">{team[0].role}</span>
-                            <span className="text-[10px] opacity-80">at Nyxx®</span>
-                         </div>
-                      </div>
-                      <div className="pb-2">
-                         <h4 className="text-3xl font-bold leading-[1.1] tracking-tight">
-                           {team[0].name.split(' ')[0]}<br/>
-                           {team[0].name.split(' ')[1]}
-                         </h4>
-                      </div>
-                   </div>
-                </div>
-                
-                {/* Cards menores - 4 cards ao redor */}
-                {team.slice(1).map((member, idx) => (
-                   <div key={idx} className="group relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gray-200 cursor-pointer">
-                      <img 
-                        src={member.image} 
-                        alt={member.name} 
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute inset-0 p-4 flex flex-col justify-between text-white">
-                         <div className="flex justify-between items-start">
-                            <Plus size={12} className="opacity-90 mt-1" />
-                            <div className="text-right">
-                               <span className="text-[10px] font-bold block leading-tight">{member.role}</span>
-                               <span className="text-[8px] opacity-80">at Nyxx®</span>
-                            </div>
-                         </div>
-                         <div className="pb-1">
-                            <h4 className="text-lg font-bold leading-[1.1] tracking-tight">
-                              {member.name.split(' ')[0]}<br/>
-                              {member.name.split(' ')[1]}
-                            </h4>
-                         </div>
-                      </div>
-                   </div>
-                ))}
-             </div>
-          </div>
+          <button className="bg-black text-white text-[10px] uppercase tracking-wider font-bold py-3 px-6 rounded-full flex items-center gap-3 hover:bg-gray-800 transition-colors w-fit group">
+            Ver todos
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
+        
+        {/* Slider Clean */}
+        <ProductSliderClean products={team} />
       </div>
     </section>
   );

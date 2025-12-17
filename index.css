@@ -86,3 +86,13 @@ section {
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out;
 }
+
+/* Animação floating para produtos */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
