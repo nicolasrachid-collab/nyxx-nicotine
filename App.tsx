@@ -705,13 +705,13 @@ const ProvenResults = () => {
   return (
     <section 
       ref={ref}
-      className={`px-7 md:px-14 pt-20 md:pt-28 pb-36 md:pb-60 max-w-[1800px] mx-auto bg-[#F5F5F5] text-black transition-all duration-700 ease-out ${
+      className={`px-7 md:px-14 pt-20 md:pt-28 pb-12 md:pb-16 max-w-[1800px] mx-auto bg-[#F5F5F5] text-black transition-all duration-700 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+      <div className="flex flex-col gap-8">
         {/* Label */}
-        <div className="md:col-span-3 flex items-center gap-3">
+        <div className="flex items-center gap-3">
              <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white">
                 <Plus size={14} strokeWidth={3} />
              </div>
@@ -719,9 +719,9 @@ const ProvenResults = () => {
         </div>
         
         {/* Content */}
-        <div className="md:col-span-9">
-           <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] md:leading-[1.05]">
-              {t('provenResults')} <span className="text-gray-400">{t('withFocus')}</span>
+        <div className="max-w-[60%]">
+           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] md:leading-[1.05]">
+              Nosso propósito na NYXX é oferecer alternativas <span className="text-gray-400">mais seguras e inovadoras para o consumo de nicotina.</span>
            </h2>
         </div>
       </div>
@@ -794,24 +794,24 @@ const StatsSection = () => {
     <section className="px-7 md:px-14 pb-20 max-w-[1800px] mx-auto bg-[#F5F5F5]">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-14 gap-x-10">
         <AnimatedStat 
-          value={3} 
-          suffix="m+" 
-          label={<>{t('adImpressions').split('\n').map((line, i) => <React.Fragment key={i}>{line}{i === 0 && <br/>}</React.Fragment>)}</>} 
+          value={1} 
+          suffix="M+" 
+          label={<>Unidades distribuídas<br/>em mais de 10 países.</>} 
         />
         <AnimatedStat 
-          value={27} 
+          value={15} 
           suffix="+" 
-          label={<>{t('successfulProjects').split('\n').map((line, i) => <React.Fragment key={i}>{line}{i === 0 && <br/>}</React.Fragment>)}</>} 
+          label={<>Produtos desenvolvidos,<br/>atendendo diversas preferências.</>} 
         />
         <AnimatedStat 
-          value={98} 
+          value={95} 
           suffix="%" 
-          label={<>{t('clientSatisfaction').split('\n').map((line, i) => <React.Fragment key={i}>{line}{i === 0 && <br/>}</React.Fragment>)}</>} 
+          label={<>Taxa de satisfação,<br/>com feedbacks positivos.</>} 
         />
         <AnimatedStat 
-          value={50} 
+          value={500} 
           suffix="k+" 
-          label={<>{t('monthlyVisitors').split('\n').map((line, i) => <React.Fragment key={i}>{line}{i === 0 && <br/>}</React.Fragment>)}</>} 
+          label={<>Consumidores mensais,<br/>engajados com nosso conteúdo.</>} 
         />
       </div>
     </section>
@@ -988,6 +988,11 @@ const TeamSection = () => {
       name: "Christopher Miller",
       role: "UX/UI Designer",
       image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1000"
+    },
+    {
+      name: "Emma Davis",
+      role: "Marketing Lead",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=1000"
     }
   ];
 
@@ -1052,31 +1057,53 @@ const TeamSection = () => {
 
           </div>
 
-          {/* Right Column: Team Grid */}
+          {/* Right Column: Team Grid - Asymmetric Layout */}
           <div className="xl:col-span-7">
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {team.map((member, idx) => (
-                   <div key={idx} className="group relative w-full aspect-[4/5] md:aspect-square xl:aspect-[5/4] rounded-2xl overflow-hidden bg-gray-200 cursor-pointer">
+             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {/* Card destacado - ocupa 2 colunas e 2 linhas */}
+                <div className="col-span-2 row-span-2 group relative w-full aspect-square rounded-2xl overflow-hidden bg-gray-200 cursor-pointer">
+                   <img 
+                     src={team[0].image} 
+                     alt={team[0].name} 
+                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                   />
+                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
+                   <div className="absolute inset-0 p-6 flex flex-col justify-between text-white">
+                      <div className="flex justify-between items-start">
+                         <Plus size={14} className="opacity-90 mt-1" />
+                         <div className="text-right">
+                            <span className="text-xs font-bold block leading-tight">{team[0].role}</span>
+                            <span className="text-[10px] opacity-80">at Nyxx®</span>
+                         </div>
+                      </div>
+                      <div className="pb-2">
+                         <h4 className="text-3xl font-bold leading-[1.1] tracking-tight">
+                           {team[0].name.split(' ')[0]}<br/>
+                           {team[0].name.split(' ')[1]}
+                         </h4>
+                      </div>
+                   </div>
+                </div>
+                
+                {/* Cards menores - 4 cards ao redor */}
+                {team.slice(1).map((member, idx) => (
+                   <div key={idx} className="group relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gray-200 cursor-pointer">
                       <img 
                         src={member.image} 
                         alt={member.name} 
                         className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
-                      {/* Dark gradient overlay at bottom for legibility */}
                       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      
-                      {/* Card Content */}
-                      <div className="absolute inset-0 p-6 flex flex-col justify-between text-white">
+                      <div className="absolute inset-0 p-4 flex flex-col justify-between text-white">
                          <div className="flex justify-between items-start">
-                            <Plus size={14} className="opacity-90 mt-1" />
+                            <Plus size={12} className="opacity-90 mt-1" />
                             <div className="text-right">
-                               <span className="text-xs font-bold block leading-tight">{member.role}</span>
-                               <span className="text-[10px] opacity-80">at Nyxx®</span>
+                               <span className="text-[10px] font-bold block leading-tight">{member.role}</span>
+                               <span className="text-[8px] opacity-80">at Nyxx®</span>
                             </div>
                          </div>
-                         
-                         <div className="pb-2">
-                            <h4 className="text-2xl font-bold leading-[1.1] tracking-tight">
+                         <div className="pb-1">
+                            <h4 className="text-lg font-bold leading-[1.1] tracking-tight">
                               {member.name.split(' ')[0]}<br/>
                               {member.name.split(' ')[1]}
                             </h4>
@@ -1554,11 +1581,11 @@ const App = () => {
           <div>
              <HeroCard />
           </div>
-          <CaseStudySection />
-          <MissionSection />
           <ProvenResults />
           <StatsSection />
           <TeamSection />
+          <CaseStudySection />
+          <MissionSection />
           <FAQSection />
           <SocialSection />
           <Footer />
