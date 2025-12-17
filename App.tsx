@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, createContext, useContext } from 'r
 import { Menu, X, ArrowUpRight, Plus, Twitter, Instagram, Linkedin, ArrowRight, Star, MoreHorizontal, Heart, MessageCircle, Send, Bookmark, Globe } from 'lucide-react';
 import { CustomCursor } from './components/CustomCursor';
 import { MenuToggleButton } from './components/MenuToggleButton';
+import { DeusaAnimation } from './components/DeusaAnimation';
 
 // Tipos de idioma
 type Language = 'pt' | 'en' | 'es';
@@ -362,9 +363,9 @@ const Header = ({ isMenuOpen, toggleMenu }: { isMenuOpen: boolean; toggleMenu: (
   const [isScrolled, setIsScrolled] = useState(false);
 
   const languages: { code: Language; label: string }[] = [
-    { code: 'pt', label: t('portuguese') },
-    { code: 'en', label: t('english') },
-    { code: 'es', label: t('spanish') },
+    { code: 'pt', label: 'PT' },
+    { code: 'en', label: 'EN' },
+    { code: 'es', label: 'ES' },
   ];
 
   useEffect(() => {
@@ -382,36 +383,19 @@ const Header = ({ isMenuOpen, toggleMenu }: { isMenuOpen: boolean; toggleMenu: (
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center px-7 py-4 md:px-14 md:py-5 transition-all duration-300 bg-transparent text-black">
-      <div className="w-full max-w-[1800px] grid grid-cols-2 md:grid-cols-3 items-center">
+    <header className={`fixed top-0 left-0 right-0 z-50 flex justify-center items-center px-7 py-4 md:px-14 md:py-5 transition-all duration-300 ${isScrolled || isMenuOpen ? 'bg-white text-black shadow-sm' : 'bg-transparent text-white'}`}>
+      <div className="w-full max-w-[1800px] flex justify-between items-center">
         {/* Logo - Aligned Left */}
         <div className="flex justify-start">
           <a href="#" className="cursor-pointer hover:opacity-80 transition-opacity">
             <img 
               src="/logo_nyxx.svg" 
               alt="Nyxx Nicotine Technologies" 
-              className="h-8 md:h-10 w-auto object-contain brightness-0 invert"
+              className={`h-8 md:h-10 w-auto object-contain transition-all duration-300 ${isScrolled || isMenuOpen ? 'brightness-0' : 'brightness-0 invert'}`}
             />
           </a>
         </div>
 
-        {/* Desktop Navigation - Perfectly Centered */}
-        <nav className={`hidden md:flex justify-center items-center gap-10 text-sm font-medium tracking-wide transition-all duration-300 ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <div className="flex items-center gap-10 group">
-            <a href="#" className="relative transition-opacity duration-300 group-hover:opacity-50 hover:!opacity-100">
-              {t('studio')}
-            </a>
-            <a href="#" className="relative transition-opacity duration-300 group-hover:opacity-50 hover:!opacity-100">
-              {t('project27')}
-            </a>
-            <a href="#" className="relative transition-opacity duration-300 group-hover:opacity-50 hover:!opacity-100">
-              {t('blog')}
-            </a>
-            <a href="#" className="relative transition-opacity duration-300 group-hover:opacity-50 hover:!opacity-100">
-              {t('contact')}
-            </a>
-          </div>
-        </nav>
 
         {/* Right Side - Language Selector and Menu Trigger */}
         <div className="flex justify-end items-center gap-4">
@@ -419,12 +403,11 @@ const Header = ({ isMenuOpen, toggleMenu }: { isMenuOpen: boolean; toggleMenu: (
           <div className="relative">
             <button
               onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 text-xs md:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 shadow-sm"
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full transition-all duration-200 text-xs font-bold uppercase tracking-wide focus:outline-none ${isScrolled || isMenuOpen ? 'bg-black text-white hover:bg-gray-800' : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'}`}
               aria-label={t('language')}
             >
-              <Globe size={14} className="md:w-4 md:h-4 text-gray-600" />
-              <span className="hidden sm:inline font-medium">{languages.find(l => l.code === language)?.label}</span>
-              <span className="sm:hidden uppercase font-semibold">{language.toUpperCase()}</span>
+              <Globe size={12} />
+              <span>{language.toUpperCase()}</span>
             </button>
             
             {showLanguageMenu && (
@@ -459,7 +442,7 @@ const Header = ({ isMenuOpen, toggleMenu }: { isMenuOpen: boolean; toggleMenu: (
           </div>
 
           {/* Menu Trigger */}
-          <MenuToggleButton isMenuOpen={isMenuOpen} onClick={toggleMenu} />
+          <MenuToggleButton isMenuOpen={isMenuOpen} onClick={toggleMenu} isDark={isScrolled || isMenuOpen} />
         </div>
       </div>
     </header>
@@ -507,20 +490,6 @@ const MenuOverlay = ({ isOpen }: { isOpen: boolean }) => {
           ))}
         </nav>
 
-        {/* Socials / Extra */}
-        <div className={`hidden md:flex flex-col justify-end items-end gap-4 transition-all duration-700 delay-200 ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}>
-           <div className="flex gap-4">
-              <a href="#" className="hover:opacity-60 transition-opacity duration-300 hover:scale-110 transform">
-                <Twitter className="w-6 h-6" />
-              </a>
-              <a href="#" className="hover:opacity-60 transition-opacity duration-300 hover:scale-110 transform">
-                <Instagram className="w-6 h-6" />
-              </a>
-              <a href="#" className="hover:opacity-60 transition-opacity duration-300 hover:scale-110 transform">
-                <Linkedin className="w-6 h-6" />
-              </a>
-           </div>
-        </div>
       </div>
 
       {/* Language Selector */}
@@ -581,7 +550,7 @@ const MenuOverlay = ({ isOpen }: { isOpen: boolean }) => {
            </a>
         </div>
         <div className="hidden md:block">
-           © 2025 Nyxx® Nicotine
+           Siga a Nyxx
         </div>
       </div>
     </div>
@@ -617,18 +586,13 @@ const HeroCard = () => {
   }, []);
   // #endregion
   return (
-    <div className="relative w-full min-h-[88vh] md:min-h-[92vh] bg-[#0a0a0a] overflow-hidden text-white p-7 md:p-14 flex flex-col justify-between mt-[70px] md:mt-[80px] hero-card-container">
+    <div className="relative w-full min-h-[100vh] overflow-hidden text-white hero-card-container">
       
       {/* Background with texture/image overlay - Primeiro, com z-index mais baixo */}
       <div 
-        className="absolute"
+        className="absolute inset-0"
         style={{ 
           zIndex: 0,
-          top: '-80px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '100vw',
-          height: '100vh',
         }}
         // #region agent log
         ref={(el) => {
@@ -642,15 +606,8 @@ const HeroCard = () => {
         }}
         // #endregion
       >
-         {/* Imagem de fundo - Deusa Banner - Ocupa 100% da largura da tela e começa do topo */}
-         <div 
-           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-           style={{
-             backgroundImage: 'url(/deusa_banner.svg)',
-             backgroundColor: '#050505',
-             opacity: 1,
-           }}
-         ></div>
+         {/* Imagem de fundo - Deusa Banner com animação de desenho */}
+         <DeusaAnimation duration={5} />
       </div>
 
       {/* Grid Plus Markers - Absolute Positioning based on visual grid */}
@@ -662,59 +619,40 @@ const HeroCard = () => {
       </div>
 
       {/* Content Container for Grid Alignment */}
-      <div className="relative z-20 w-full max-w-[1800px] mx-auto h-full flex flex-col justify-between">
-        {/* Top Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full">
-          
-          {/* Huge Text Area */}
-          <div className="lg:col-span-8 flex flex-col pt-12 md:pt-24">
-            <div className="flex items-start leading-[0.8]">
-              <h1 className="text-[18vw] lg:text-[13vw] font-bold tracking-tightest">Nyxx</h1>
-              <span className="text-[4vw] lg:text-[3vw] mt-[2vw] ml-2 lg:ml-4 font-medium border-[0.1em] border-white rounded-full w-[1.5em] h-[1.5em] flex items-center justify-center leading-none">R</span>
-            </div>
-            <div className="flex justify-end pr-5 md:pr-24 -mt-2 md:-mt-6">
-               <h2 className="text-[10vw] lg:text-[6vw] font-semibold tracking-tighter">{t('nicotine')}</h2>
-            </div>
-          </div>
-
-          {/* Services List - Desktop */}
-          <div className="hidden lg:flex lg:col-span-4 flex-col justify-center items-start pt-36 pl-14 gap-4">
-            <ul className="text-lg xl:text-xl font-medium space-y-3">
-              <li>Smart</li>
-              <li>Powerful</li>
-              <li>Reliable</li>
-              <li>Premium</li>
-            </ul>
-          </div>
+      <div className="absolute inset-0 z-20 w-full max-w-[1800px] mx-auto px-7 md:px-14 pt-[90px] md:pt-[100px] pb-7 md:pb-14 left-1/2 -translate-x-1/2">
+        {/* Logo - Centered vertically, aligned left */}
+        <div className="absolute top-1/2 left-7 md:left-14 -translate-y-1/2 -mt-[60px] flex items-end">
+          <img 
+            src="/logo_reduzida.svg" 
+            alt="Nyxx" 
+            className="h-[20vw] md:h-[14vw] lg:h-[11vw] w-auto brightness-0 invert"
+          />
+          <span className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 ml-1 md:ml-2 text-[10px] md:text-xs font-medium border border-white rounded-full flex items-center justify-center leading-none mb-0.5 md:mb-1">R</span>
         </div>
 
-        {/* Bottom Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-end mt-auto pt-14 md:pt-0">
-          
-          {/* Mission Statement */}
-          <div className="lg:col-span-4 text-lg md:text-xl leading-relaxed opacity-90">
-            <p>
-              <span className="font-bold text-white">{t('noGenericWebsites')}</span> <span className="text-gray-300">{t('justTools')}</span>
-            </p>
-          </div>
+        {/* Middle Section - Nicotine (positioned center-right) */}
+        <div className="absolute top-1/2 right-7 md:right-14 -translate-y-1/2 mt-[60px]">
+          <img 
+            src="/nicotine_text.svg" 
+            alt={t('nicotine')}
+            className="h-[12vw] md:h-[8vw] lg:h-[6vw] w-auto brightness-0 invert"
+          />
+        </div>
 
-          {/* Copyright - Centerish */}
-          <div className="hidden lg:flex lg:col-span-4 justify-center items-end pb-1">
-            <span className="text-xs font-medium text-gray-400 tracking-wide">© 2025 Nyxx® Nicotine</span>
-          </div>
+        {/* Bottom Left - Mission Statement */}
+        <div className="absolute bottom-7 md:bottom-14 left-7 md:left-14 max-w-md text-base md:text-lg lg:text-xl leading-relaxed opacity-90">
+          <p>
+            <span className="font-bold text-white">{t('noGenericWebsites')}</span>{' '}
+            <span className="text-gray-300">{t('justTools')}</span>
+          </p>
+        </div>
 
-
-          {/* Mobile Copyright */}
-          <div className="lg:hidden flex justify-between items-end w-full mt-8 border-t border-white/10 pt-4">
-               <span className="text-xs font-medium text-gray-400">© 2025 Nyxx® Nicotine</span>
-          </div>
+        {/* Bottom Right - Copyright */}
+        <div className="absolute bottom-7 md:bottom-14 right-7 md:right-14">
+          <span className="text-xs font-medium text-gray-400 tracking-wide">© 2025 Nyxx® Nicotine</span>
         </div>
       </div>
       
-       {/* Badge */}
-       <div className="absolute bottom-4 right-6 text-[10px] opacity-30 hidden md:block font-medium uppercase tracking-widest">
-         Made with React
-       </div>
     </div>
   );
 };
@@ -1607,13 +1545,13 @@ const App = () => {
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       <div className="bg-[#F5F5F5] min-h-screen w-full relative overflow-x-hidden font-sans">
-         <CustomCursor size={20} color="rgba(0, 0, 0, 0.1)" borderColor="#000000" borderWidth={2} />
+         <CustomCursor size={20} />
          <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
          <MenuOverlay isOpen={isMenuOpen} />
        
        {/* Main Content */}
        <div className={`transition-opacity duration-500 ease-in-out ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <div className="pb-4">
+          <div>
              <HeroCard />
           </div>
           <CaseStudySection />

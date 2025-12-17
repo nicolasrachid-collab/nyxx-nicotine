@@ -61,24 +61,23 @@ export function MenuToggleIcon({
 interface MenuToggleButtonProps {
 	isMenuOpen: boolean;
 	onClick: () => void;
+	isDark?: boolean;
 }
 
-export function MenuToggleButton({ isMenuOpen, onClick }: MenuToggleButtonProps) {
+export function MenuToggleButton({ isMenuOpen, onClick, isDark = false }: MenuToggleButtonProps) {
+	const strokeColor = isDark || isMenuOpen ? 'black' : 'white';
+	
 	return (
 		<button
 			onClick={onClick}
-			className="focus:outline-none relative w-9 h-9 flex items-center justify-center group transition-all duration-300 text-white"
-			style={{ color: '#FFFFFF' }}
+			className={`focus:outline-none relative w-9 h-9 flex items-center justify-center group transition-all duration-300 ${isDark || isMenuOpen ? 'text-black' : 'text-white'}`}
 			aria-label="Toggle Menu"
 		>
-		<div
-			className="relative w-full h-full flex items-center justify-center rounded"
-			style={{ color: '#FFFFFF' }}
-		>
+		<div className="relative w-full h-full flex items-center justify-center rounded">
 			<MenuToggleIcon
 				open={isMenuOpen}
-				className="w-full h-full text-white"
-				stroke="white"
+				className="w-full h-full"
+				stroke={strokeColor}
 				strokeWidth={2.5}
 				duration={300}
 			/>

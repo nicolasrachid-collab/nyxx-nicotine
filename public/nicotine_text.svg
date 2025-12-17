@@ -1,0 +1,18 @@
+<svg width="598" height="120" viewBox="0 0 598 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- N -->
+  <path d="M0 120V0H18L58 80V0H76V120H58L18 40V120H0Z" fill="currentColor"/>
+  <!-- I -->
+  <path d="M95 120V0H113V120H95Z" fill="currentColor"/>
+  <!-- C -->
+  <path d="M135 120V0H195V18H153V102H195V120H135Z" fill="currentColor"/>
+  <!-- O -->
+  <path d="M215 120V0H293V120H215ZM233 102H275V18H233V102Z" fill="currentColor"/>
+  <!-- T -->
+  <path d="M313 120V18H283V0H361V18H331V120H313Z" fill="currentColor"/>
+  <!-- I -->
+  <path d="M380 120V0H398V120H380Z" fill="currentColor"/>
+  <!-- N -->
+  <path d="M420 120V0H438L478 80V0H496V120H478L438 40V120H420Z" fill="currentColor"/>
+  <!-- E -->
+  <path d="M520 120V0H598V18H538V51H588V69H538V102H598V120H520Z" fill="currentColor"/>
+</svg>
