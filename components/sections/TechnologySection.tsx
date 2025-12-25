@@ -38,30 +38,31 @@ export function TechnologySection() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start mb-24">
           {/* Left Column: Header */}
-          <div className="flex flex-col gap-6 sticky top-24">
+          <div className="flex flex-col gap-6 sticky top-24 items-center lg:items-start text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
+              className="w-full"
             >
               <motion.span 
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 mb-6 text-xs font-semibold tracking-wider uppercase border border-orange-200/50 bg-gradient-to-r from-orange-50/80 to-orange-100/60 text-orange-900 backdrop-blur-xl shadow-md shadow-orange-500/10 hover:shadow-lg hover:shadow-orange-500/20 hover:border-orange-300/70 hover:from-orange-100/90 hover:to-orange-200/70 hover:scale-105 transition-all duration-300"
+                className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 mb-6 text-xs font-semibold tracking-wider uppercase bg-orange-500 text-white shadow-md shadow-orange-500/20 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/30 hover:scale-105 transition-all duration-300"
               >
                 {t('technologyTitle')}
               </motion.span>
-              <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight text-white leading-[1.1]">
-            {t('technologySubtitle')}
-          </h1>
-              <p className="text-base text-zinc-400 leading-relaxed max-w-md mt-2">
-            {t('technologyDescription')}
-          </p>
+              <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight text-white leading-[1.1] max-w-md mx-auto lg:mx-0">
+                {t('technologySubtitle')}
+              </h1>
+              <p className="text-base text-zinc-400 leading-relaxed max-w-md mt-2 mx-auto lg:mx-0">
+                {t('technologyDescription')}
+              </p>
             </motion.div>
-        </div>
+          </div>
 
           {/* Right Column: Feature Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

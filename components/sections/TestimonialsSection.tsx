@@ -8,7 +8,16 @@ interface Testimonial {
   location: string;
   rating: number;
   text: string;
+  image?: string;
 }
+
+// Função para gerar URL de avatar com IA usando DiceBear Adventurer (estilo mais feliz e expressivo)
+const generateAvatarUrl = (name: string, seed?: number): string => {
+  const seedValue = seed || name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  // Usando adventurer que gera avatares mais alegres e expressivos por padrão
+  // Cores de fundo mais vibrantes e alegres
+  return `https://api.dicebear.com/7.x/adventurer/svg?seed=${seedValue}&backgroundColor=ffd5dc,ffdfbf,b6e3f4,c0aede&radius=50`;
+};
 
 const testimonials: Testimonial[] = [
   {
@@ -16,18 +25,21 @@ const testimonials: Testimonial[] = [
     location: 'São Paulo, SP',
     rating: 5,
     text: 'Melhor experiência que já tive com produtos de nicotina. O sabor é incrível e a qualidade é excepcional!',
+    image: generateAvatarUrl('João Silva', 1),
   },
   {
     name: 'Maria Santos',
     location: 'Rio de Janeiro, RJ',
     rating: 5,
     text: 'A conveniência mudou completamente minha rotina. Produtos premium que valem cada centavo.',
+    image: generateAvatarUrl('Maria Santos', 2),
   },
   {
     name: 'Carlos Oliveira',
     location: 'Belo Horizonte, MG',
     rating: 5,
     text: 'Qualidade superior em todos os aspectos. Recomendo sem hesitar para quem busca alternativas melhores.',
+    image: generateAvatarUrl('Carlos Oliveira', 3),
   },
 ];
 
@@ -109,10 +121,21 @@ export function TestimonialsSection() {
 
             {/* Author Info */}
             <div className="flex items-center gap-3 pt-4 border-t border-neutral-100 mt-auto">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md shadow-orange-500/20 group-hover:shadow-lg group-hover:shadow-orange-500/30 transition-all">
-                <span className="text-sm font-bold text-white">
-                  {testimonial.name.split(' ').map(n => n[0]).join('')}
-                </span>
+              <div className="w-12 h-12 rounded-full overflow-hidden shadow-md shadow-orange-500/20 group-hover:shadow-lg group-hover:shadow-orange-500/30 transition-all ring-2 ring-orange-100 group-hover:ring-orange-200">
+                {testimonial.image ? (
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                    <span className="text-sm font-bold text-white">
+                      {testimonial.name.split(' ').map(n => n[0]).join('')}
+                    </span>
+                  </div>
+                )}
               </div>
               <div>
                 <div className="text-sm font-bold text-gray-900">{testimonial.name}</div>
