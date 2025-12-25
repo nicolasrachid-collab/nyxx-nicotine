@@ -1,8 +1,37 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
+import { Coffee, Zap, Droplets, Snowflake, Circle } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
 import { products } from '../../data/products';
+
+// Dados dos passos do HowItWorks
+const steps = [
+  {
+    id: "01",
+    title: "Escolha",
+    description: "Selecione seu sabor favorito",
+  },
+  {
+    id: "02",
+    title: "Use",
+    description: "Quando e onde quiser",
+  },
+  {
+    id: "03",
+    title: "Desfrute",
+    description: "Experiência premium garantida",
+  },
+];
+
+// Mapeamento de ícones para cada produto
+const productIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  coffee: Coffee,
+  energy: Zap,
+  mango: Circle, // Mango não existe no lucide-react, usando Circle como alternativa
+  watermelon: Droplets,
+  menthol: Snowflake,
+};
 
 export function ProductsSection() {
   const { ref, isVisible } = useScrollAnimation(0.2);
@@ -123,7 +152,7 @@ export function ProductsSection() {
       ref={ref}
       className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans"
     >
-      <div className="mb-12 md:mb-16 text-center">
+      <div className="mb-16 md:mb-24 lg:mb-32 text-center">
         <div className="flex items-center justify-center gap-3 mb-6">
           <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
             {t('productsTitle')}
@@ -137,6 +166,42 @@ export function ProductsSection() {
         </p>
       </div>
 
+      {/* HowItWorks Section */}
+      <div className="container mx-auto max-w-7xl mb-16 md:mb-24 pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 justify-items-center items-start h-auto overflow-visible">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.2, duration: 0.6, ease: "easeOut" }}
+              className="group relative w-full h-auto"
+            >
+              {/* Decorative line */}
+              <div className="absolute top-8 left-0 w-full h-px bg-neutral-100 -z-10 hidden md:block" />
+              
+              <div className="relative flex flex-col pt-8 pb-6">
+                {/* Large Background Number */}
+                <span className="text-[10rem] leading-none font-bold text-neutral-100 absolute -top-20 -left-8 z-0 select-none transition-all duration-700 group-hover:text-black group-hover:-translate-y-4 pointer-events-none">
+                  {step.id}
+                </span>
+
+                <div className="flex flex-col items-start pt-4 relative z-10">
+                  <h3 className="text-2xl md:text-3xl lg:text-3xl font-bold text-neutral-900 mb-3 tracking-tight">
+                    {step.title}
+                  </h3>
+                  
+                  <p className="text-lg md:text-xl lg:text-xl text-neutral-500 leading-relaxed font-medium">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
       {/* Container principal com layout flex */}
       <div 
         ref={containerRef}
@@ -148,34 +213,95 @@ export function ProductsSection() {
           ref={scrollContainerRef}
           className="flex-1 space-y-0 w-full lg:w-1/2"
         >
-          {products.map((product, index) => (
-            <motion.div
-              key={product.id}
-              data-index={index}
-              className="product-section min-h-[70vh] flex items-center justify-center py-20"
-            >
-              <div className="w-full max-w-2xl px-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <span 
-                    className="text-xs font-semibold tracking-widest uppercase"
-                    style={{ color: product.color }}
+          {products.map((product, index) => {
+            const ProductIcon = productIcons[product.id] || Coffee;
+            const description = t(product.descriptionKey as keyof typeof t);
+            const subtitle = description.split('\n\n')[0];
+            const bodyText = description.split('\n\n').slice(1).join('\n\n');
+            const paragraphs = bodyText.split('\n\n').filter(p => p.trim());
+            
+            return (
+              <motion.div
+                key={product.id}
+                data-index={index}
+                className="product-section min-h-[70vh] flex items-center justify-center py-20"
+              >
+                <div className="w-full max-w-xl p-8 md:p-12 bg-white">
+                  {/* Number and Line */}
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="flex items-center gap-4 mb-6"
                   >
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <div className="flex-1 h-px bg-gray-300" />
+                    <span 
+                      className="font-medium text-sm tracking-widest"
+                      style={{ color: product.color }}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <motion.div 
+                      initial={{ scaleX: 0, originX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                      className="h-px bg-gray-200 flex-1"
+                    ></motion.div>
+                  </motion.div>
+
+                  {/* Title */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="flex items-center gap-4 mb-4"
+                  >
+                    <h1 
+                      className="text-5xl md:text-6xl font-bold tracking-tight line-clamp-2 break-words"
+                      style={{ color: product.color }}
+                    >
+                      {t(product.nameKey as keyof typeof t).replace(/[☕⚡🥭🍉❄️]/g, '').trim()}
+                    </h1>
+                    <div 
+                      className="p-2 rounded-full"
+                      style={{ backgroundColor: `${product.color}15` }}
+                    >
+                      <ProductIcon className="w-8 h-8" style={{ color: product.color }} />
+                    </div>
+                  </motion.div>
+
+                  {/* Subtitle */}
+                  <motion.h2 
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="text-xl font-medium mb-8"
+                    style={{ color: `${product.color}DD` }}
+                  >
+                    {subtitle}
+                  </motion.h2>
+
+                  {/* Body Text */}
+                  <div className="space-y-6 text-gray-600 leading-relaxed text-lg">
+                    {paragraphs.map((paragraph, pIndex) => (
+                      <motion.p
+                        key={pIndex}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.5 + pIndex * 0.1 }}
+                      >
+                        {paragraph.trim()}
+                      </motion.p>
+                    ))}
+                  </div>
                 </div>
-                <h3 
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
-                  style={{ color: product.color }}
-                >
-                  {t(product.nameKey as keyof typeof t)}
-                </h3>
-                <p className="text-base md:text-lg lg:text-lg text-gray-600 leading-relaxed whitespace-pre-line">
-                  {t(product.descriptionKey as keyof typeof t)}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Lado direito: Conteúdo sticky que acompanha o scroll */}

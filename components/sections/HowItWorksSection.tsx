@@ -26,7 +26,7 @@ export function HowItWorksSection() {
   return (
     <section className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans">
       <div className="container mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 justify-items-center items-center">
           {steps.map((step, index) => (
             <motion.div
               key={step.id}

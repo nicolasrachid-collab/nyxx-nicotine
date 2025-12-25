@@ -64,13 +64,6 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-      <div className="mb-12 md:mb-16">
-        <div className="flex items-center gap-3 mb-6">
-          <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
-            {t('testimonialsTitle')}
-          </span>
-        </div>
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         {testimonials.map((testimonial, index) => (
