@@ -50,7 +50,7 @@ export function HowItWorksSection() {
                     {step.title}
                   </h3>
                   
-                  <p className="text-lg md:text-xl lg:text-xl text-neutral-500 leading-relaxed font-medium">
+                  <p className="text-base text-neutral-500 leading-relaxed font-medium">
                     {step.description}
                   </p>
                 </div>

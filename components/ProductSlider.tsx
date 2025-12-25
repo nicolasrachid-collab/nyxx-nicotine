@@ -193,8 +193,8 @@ export function ProductSlider({ products }: ProductSliderProps) {
       {/* Nome do produto */}
       <div className="absolute bottom-20 md:bottom-28 left-0 right-0 text-center">
         <div className="overflow-hidden">
-          <h2 
-            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight transition-all duration-500"
+          <h1 
+            className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight transition-all duration-500"
             style={{
               color: theme.textColor,
               textShadow: `0 0 60px ${theme.glow}`,
@@ -202,7 +202,7 @@ export function ProductSlider({ products }: ProductSliderProps) {
             }}
           >
             {activeProduct?.name}
-          </h2>
+          </h1>
         </div>
         <p 
           className="text-white/60 text-sm md:text-base mt-2 transition-all duration-500"

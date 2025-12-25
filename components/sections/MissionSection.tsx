@@ -26,11 +26,11 @@ export function MissionSection() {
         </div>
 
         <div className="md:col-span-9 flex flex-col gap-8 md:gap-10">
-           <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1]">
+           <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight leading-[1.1]">
              {t('missionTitle')}
-           </h2>
+           </h1>
            
-           <p className="text-gray-500 text-lg md:text-xl font-medium leading-relaxed max-w-3xl">
+           <p className="text-gray-500 text-base font-medium leading-relaxed max-w-3xl">
              {t('missionText')}
            </p>
         </div>

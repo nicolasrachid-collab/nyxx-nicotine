@@ -54,10 +54,10 @@ export function FAQSection() {
       <div className="max-w-[1800px] mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
         <div className="lg:col-span-4 space-y-10">
-           <h2 id="faq-heading" className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+           <h1 id="faq-heading" className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight leading-[1.1]">
              {t('frequentlyAsked')} <br/>
              {t('questions')}
-           </h2>
+           </h1>
            <p className="text-lg font-medium text-gray-500 max-w-xs leading-relaxed">
              {t('gotSomething')}
            </p>
@@ -88,7 +88,7 @@ export function FAQSection() {
                   hidden={openIndex !== index}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-3xl">
+                    <p className="text-gray-500 text-base leading-relaxed max-w-3xl">
                       {faq.answer}
                     </p>
                   </div>

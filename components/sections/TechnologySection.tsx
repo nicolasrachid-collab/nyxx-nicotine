@@ -48,10 +48,10 @@ export function TechnologySection() {
               <Badge variant="outline" className="w-fit gap-2 px-4 py-2 mb-6 text-xs font-semibold tracking-wider uppercase border border-white/20 bg-white/10 text-white backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
                 {t('technologyTitle')}
               </Badge>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+              <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight text-white leading-[1.1]">
             {t('technologySubtitle')}
-          </h2>
-              <p className="text-lg text-zinc-400 leading-relaxed max-w-md mt-2">
+          </h1>
+              <p className="text-base text-zinc-400 leading-relaxed max-w-md mt-2">
             {t('technologyDescription')}
           </p>
             </motion.div>

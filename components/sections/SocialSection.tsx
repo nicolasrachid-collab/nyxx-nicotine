@@ -69,9 +69,9 @@ export function SocialSection() {
                {t('social')}
              </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight">
             {t('followAlong')}
-          </h2>
+          </h1>
         </div>
         
         <a href="#" className="group flex items-center gap-2 text-lg font-medium border-b border-black pb-1 hover:opacity-60 transition-opacity" aria-label="Follow @nyxx_nicotine on social media">

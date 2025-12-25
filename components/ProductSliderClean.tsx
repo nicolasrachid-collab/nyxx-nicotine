@@ -150,12 +150,12 @@ export function ProductSliderClean({ products }: ProductSliderCleanProps) {
                   >
                     Nyxx® Nicotine
                   </span>
-                  <h2 
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mt-2"
+                  <h1 
+                    className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight mt-2"
                     style={{ color }}
                   >
                     {product.name}
-                  </h2>
+                  </h1>
                   <p className="text-gray-500 text-lg mt-4 max-w-md">
                     Experimente o sabor premium com tecnologia de ponta.
                   </p>

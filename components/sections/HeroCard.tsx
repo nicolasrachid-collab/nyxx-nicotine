@@ -42,9 +42,6 @@ export function HeroCard() {
           </p>
         </div>
 
-        <div className="absolute bottom-7 md:bottom-14 right-7 md:right-14">
-          <span className="text-xs font-medium text-gray-400 tracking-wide">© 2025 Nyxx® Nicotine</span>
-        </div>
       </div>
     </div>
   );

@@ -55,10 +55,10 @@ export function TeamSection() {
                </div>
                <span className="text-sm font-semibold tracking-wide">Nossos Sabores</span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+            <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight leading-[1.1]">
                <span className="text-black">Descubra </span>
                <span className="text-gray-400">seu sabor</span>
-            </h2>
+            </h1>
           </div>
           <button className="bg-black text-white text-[10px] uppercase tracking-wider font-bold py-3 px-6 rounded-full flex items-center gap-3 hover:bg-gray-800 transition-colors w-fit group" aria-label="Ver todos os sabores">
             Ver todos
