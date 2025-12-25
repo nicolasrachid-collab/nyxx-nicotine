@@ -24,42 +24,55 @@ export function ProductsSection() {
       const container = containerRef.current;
       const containerRect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
+      const windowCenter = windowHeight / 2; // Centro da viewport
       const containerTop = containerRect.top;
       const containerHeight = container.offsetHeight;
+      const containerCenter = containerTop + containerHeight / 2; // Centro do container
       const containerBottom = containerRect.bottom;
       
-      // Calcular progresso baseado na posição do container em relação à viewport
-      // Progresso = 0 quando o topo do container está na parte inferior da viewport (containerTop = windowHeight)
+      // Calcular progresso baseado na posição do centro do container (para movimento Y da imagem)
+      // Progresso = 0 quando o centro do container está no centro da viewport (containerCenter = windowCenter)
       // Progresso = 1 quando o fundo do container está no topo da viewport (containerBottom = 0)
-      // Distância total a percorrer: windowHeight + containerHeight
-      const scrollDistance = windowHeight + containerHeight;
       
-      // Quando containerTop = windowHeight, scrolled = 0
-      // Quando containerBottom = 0, scrolled = scrollDistance
-      // scrolled = windowHeight - containerTop (quando container está entrando/saindo)
       let progress = 0;
-      if (containerTop <= windowHeight) {
-        // Container começou a entrar ou já está dentro
-        const scrolled = windowHeight - containerTop;
-        progress = Math.min(1, scrolled / scrollDistance);
+      if (containerCenter <= windowCenter && containerBottom > 0) {
+        // Centro do container passou do centro da viewport, começar movimento
+        // Quando containerCenter = windowCenter, progress = 0
+        // Quando containerBottom = 0, containerCenter = -containerHeight/2, então progress = 1
+        const scrollDistance = windowCenter + containerHeight / 2;
+        const scrolled = windowCenter - containerCenter;
+        progress = Math.min(1, Math.max(0, scrolled / scrollDistance));
+      } else if (containerBottom <= 0) {
+        // Container já saiu completamente da viewport
+        progress = 1;
       }
-      // Se containerTop > windowHeight, progress permanece 0
       
-      // Calcular productY baseado no progresso
-      // Limitar o movimento máximo para não sair da área visível
-      // Usar uma porcentagem da altura da viewport para movimento mais suave
-      const maxY = Math.min((products.length - 1) * 300, windowHeight * 0.8); // Máximo de 80% da altura da viewport
+      // Calcular productY baseado no progresso - movimento mais rápido e responsivo
+      const maxY = (products.length - 1) * windowHeight * 0.6; // 60% da altura da viewport por produto
       const newY = progress * maxY;
       setProductY(newY);
       
-      // Determinar qual seção está visível baseado no progresso do scroll
-      // Mapear progresso (0-1) para índices de produtos (0 a products.length-1)
-      const newActiveIndex = Math.min(
-        products.length - 1,
-        Math.floor(progress * products.length)
-      );
+      // Determinar qual seção está visível baseado na posição de cada seção individual
+      // Encontrar a seção mais próxima do centro da viewport
+      const sections = scrollContainerRef.current.querySelectorAll('.product-section');
+      let closestIndex = 0;
+      let closestDistance = Infinity;
       
-      setActiveIndex(newActiveIndex);
+      sections.forEach((section, index) => {
+        const sectionRect = section.getBoundingClientRect();
+        const sectionCenter = sectionRect.top + sectionRect.height / 2;
+        const distanceFromCenter = Math.abs(windowCenter - sectionCenter);
+        
+        // Só considerar seções que estão visíveis na viewport
+        if (sectionRect.bottom > 0 && sectionRect.top < windowHeight) {
+          if (distanceFromCenter < closestDistance) {
+            closestDistance = distanceFromCenter;
+            closestIndex = index;
+          }
+        }
+      });
+      
+      setActiveIndex(closestIndex);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
