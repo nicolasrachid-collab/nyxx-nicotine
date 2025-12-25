@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -55,11 +55,11 @@ export function TestimonialsSection() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6 tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold text-neutral-900 mb-6 tracking-tight">
             Uma nova forma de usar nicotina
-          </h2>
+          </h1>
           
-          <p className="text-lg md:text-xl lg:text-xl text-neutral-500 max-w-2xl font-medium">
+          <p className="text-base text-neutral-500 max-w-2xl font-medium">
             Tecnologia avançada para uma experiência mais suave e consciente.
           </p>
         </motion.div>
@@ -67,32 +67,52 @@ export function TestimonialsSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         {testimonials.map((testimonial, index) => (
-          <div
+          <motion.div
             key={index}
-            className="bg-white rounded-2xl p-6 md:p-8 flex flex-col justify-between hover:shadow-lg transition-shadow min-h-[240px]"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="group relative bg-white rounded-2xl p-6 md:p-8 flex flex-col border border-neutral-200/50 shadow-sm hover:shadow-xl hover:border-orange-200 transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="mb-6">
+            {/* Quote Icon */}
+            <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Quote className="w-12 h-12 text-orange-500" />
+            </div>
+
+            <div className="mb-6 relative z-10">
+              {/* Rating */}
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star key={i} size={16} className="fill-orange-400 text-orange-400" />
+                  <Star 
+                    key={i} 
+                    size={18} 
+                    className="fill-orange-400 text-orange-400 group-hover:fill-orange-500 group-hover:text-orange-500 transition-colors" 
+                  />
                 ))}
               </div>
-              <p className="text-sm md:text-base font-medium text-gray-700 leading-relaxed mb-6">
-                "{testimonial.text}"
+              
+              {/* Testimonial Text */}
+              <p className="text-sm md:text-base font-medium text-gray-800 leading-relaxed mb-6 relative">
+                <span className="text-2xl font-serif text-orange-400/30 leading-none absolute -left-2 -top-2">"</span>
+                {testimonial.text}
+                <span className="text-2xl font-serif text-orange-400/30 leading-none">"</span>
               </p>
             </div>
-            <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-              <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-                <span className="text-xs font-bold text-gray-600">
+
+            {/* Author Info */}
+            <div className="flex items-center gap-3 pt-4 border-t border-neutral-100 mt-auto">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md shadow-orange-500/20 group-hover:shadow-lg group-hover:shadow-orange-500/30 transition-all">
+                <span className="text-sm font-bold text-white">
                   {testimonial.name.split(' ').map(n => n[0]).join('')}
                 </span>
               </div>
               <div>
-                <div className="text-sm font-bold">{testimonial.name}</div>
+                <div className="text-sm font-bold text-gray-900">{testimonial.name}</div>
                 <div className="text-xs text-gray-500">{testimonial.location}</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
       </div>

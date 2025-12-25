@@ -1,10 +1,12 @@
 import { motion } from "motion/react";
 import { Shield, Star, Box, CheckCircle, ArrowRight } from "lucide-react";
+import { useTranslation } from "../hooks/useTranslation";
 
 // Padrão grego - imagem localizada em /public/greek-pattern.svg
 const greekCirclePattern = "/greek-pattern.svg";
 
 export function NyxxSection() {
+  const { t } = useTranslation();
   const features = [
     {
       icon: Shield,
@@ -44,9 +46,9 @@ export function NyxxSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(circle 400px at 20% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 70%),
-            radial-gradient(circle 400px at 80% 70%, rgba(37, 99, 235, 0.10) 0%, transparent 70%),
-            radial-gradient(circle 500px at 50% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 80%)
+            radial-gradient(circle 400px at 20% 30%, rgba(251, 146, 60, 0.12) 0%, transparent 70%),
+            radial-gradient(circle 400px at 80% 70%, rgba(249, 115, 22, 0.10) 0%, transparent 70%),
+            radial-gradient(circle 500px at 50% 50%, rgba(234, 88, 12, 0.08) 0%, transparent 80%)
           `,
         }}
       />
@@ -64,7 +66,12 @@ export function NyxxSection() {
             className="text-center max-w-4xl mx-auto"
             style={{ lineHeight: '16px' }}
           >
-            <h1 className="text-4xl font-bold text-black mb-6 lg:mb-8 leading-tight line-clamp-2 break-words" style={{ fontSize: '38px' }}>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
+                {t('productsTitle')}
+              </span>
+            </div>
+            <h1 className="text-4xl lg:text-[38px] font-bold text-black mb-6 lg:mb-8 leading-tight line-clamp-2 break-words">
               Uma forma mais <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent animate-gradient">inteligente</span><br />
               de consumir nicotina.
             </h1>
@@ -79,10 +86,6 @@ export function NyxxSection() {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col items-center text-center group"
             >
               {/* Greek Circle Icon Container */}

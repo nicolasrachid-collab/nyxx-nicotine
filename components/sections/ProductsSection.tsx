@@ -5,6 +5,9 @@ import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
 import { products } from '../../data/products';
 
+// Padrão grego - imagem localizada em /public/greek-pattern.svg
+const greekCirclePattern = "/greek-pattern.svg";
+
 // Dados dos passos do HowItWorks
 const steps = [
   {
@@ -158,10 +161,7 @@ export function ProductsSection() {
             {t('productsTitle')}
           </span>
         </div>
-        <h1 
-          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto"
-          style={{ width: '623px', marginLeft: '38px' }}
-        >
+        <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto">
           {t('productsSubtitle')}
         </h1>
         <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">
@@ -184,18 +184,30 @@ export function ProductsSection() {
               {/* Decorative line */}
               <div className="absolute top-8 left-0 w-full h-px bg-neutral-100 -z-10 hidden md:block" />
               
-              <div className="relative flex flex-col items-center pt-8 pb-6">
-                {/* Large Background Number */}
-                <span className="text-[6rem] md:text-[7rem] leading-none font-bold text-neutral-100 absolute -top-12 left-1/2 -translate-x-1/2 z-0 select-none transition-all duration-700 group-hover:text-black group-hover:-translate-y-4 pointer-events-none">
+              <div className="relative flex flex-col items-center pt-8 pb-6 group-hover:scale-[1.02] transition-all duration-500">
+                {/* Greek Pattern - mais visível */}
+                <motion.img 
+                  src={greekCirclePattern} 
+                  alt="Greek Pattern" 
+                  className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 object-contain invert opacity-30 group-hover:opacity-50 transition-opacity duration-500 z-0"
+                  animate={{ rotate: 360 }} 
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
+                />
+                
+                {/* Large Background Number - preto no hover */}
+                <span className="text-[6rem] md:text-[7rem] leading-none font-bold text-neutral-100 absolute -top-12 left-1/2 -translate-x-1/2 z-10 select-none transition-all duration-500 group-hover:text-black group-hover:-translate-y-3 pointer-events-none">
                   {step.id}
                 </span>
 
-                <div className="flex flex-col items-center pt-4 relative z-10">
-                  <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-neutral-900 mb-2 tracking-tight">
+                {/* Subtle glow effect - apenas no hover */}
+                <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full bg-orange-400/0 group-hover:bg-orange-400/10 blur-2xl transition-all duration-500 z-0" />
+
+                <div className="flex flex-col items-center pt-4 relative z-20">
+                  <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-neutral-900 mb-2 tracking-tight group-hover:text-orange-600 transition-colors duration-300">
                     {step.title}
                   </h3>
                   
-                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-medium max-w-[200px]">
+                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-medium max-w-[200px] group-hover:text-neutral-600 transition-colors duration-300">
                     {step.description}
                   </p>
                 </div>
@@ -235,7 +247,7 @@ export function ProductsSection() {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                     className="flex items-center gap-4 mb-6"
                   >
                     <span 
@@ -248,7 +260,7 @@ export function ProductsSection() {
                       initial={{ scaleX: 0, originX: 0 }}
                       whileInView={{ scaleX: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                      transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
                       className="h-px bg-gray-200 flex-1"
                     ></motion.div>
                   </motion.div>
@@ -258,11 +270,11 @@ export function ProductsSection() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
+                    transition={{ duration: 0.4, delay: 0.15 }}
                     className="flex items-center gap-4 mb-4"
                   >
                     <h1 
-                      className="text-4xl font-bold tracking-tight line-clamp-2 break-words"
+                      className="text-4xl lg:text-[38px] font-bold tracking-tight line-clamp-2 break-words"
                       style={{ color: product.color }}
                     >
                       {t(product.nameKey as keyof typeof t).replace(/[☕⚡🥭🍉❄️]/g, '').trim()}
@@ -280,7 +292,7 @@ export function ProductsSection() {
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
                     className="text-base font-medium mb-8"
                     style={{ color: `${product.color}DD` }}
                   >
@@ -295,7 +307,7 @@ export function ProductsSection() {
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.5 + pIndex * 0.1 }}
+                        transition={{ duration: 0.4, delay: 0.25 + pIndex * 0.05 }}
                       >
                         {paragraph.trim()}
                       </motion.p>
@@ -331,6 +343,7 @@ export function ProductsSection() {
                   src={activeProduct.imageSide}
                   alt={activeProduct.name}
                   className="w-full h-full object-contain"
+                  style={{ mixBlendMode: 'multiply' }}
                   loading="lazy"
                 />
               </div>
