@@ -26,8 +26,8 @@ export const translations: Translations = {
     
     // Products
     productsTitle: 'NYXX Nicotine Pouches',
-    productsSubtitle: 'Sabores para evoluir sua experiência',
-    productsDescription: 'Tecnologia avançada, pH balanceado e sabores marcantes sem fumaça e sem ardor.',
+    productsSubtitle: 'Sabores marcantes em uma nova forma de usar nicotina',
+    productsDescription: 'Tecnologia avançada que garante uma experiência suave, sem fumaça, sem ardor e com pH balanceado.',
     productCoffee: 'Coffee ☕',
     productCoffeeDesc: 'Intensidade, cremosidade e sofisticação.\n\nO sabor Coffee entrega notas encorpadas de café premium, com perfil aromático intenso e acabamento suave. Ideal para quem busca foco, energia equilibrada e uma experiência refinada, perfeita para iniciar o dia ou acompanhar momentos de produtividade. Uma alternativa moderna para amantes de café que valorizam praticidade e performance.',
     productEnergy: 'Energy ⚡',
@@ -167,8 +167,8 @@ export const translations: Translations = {
     
     // Products
     productsTitle: 'NYXX Nicotine Pouches',
-    productsSubtitle: 'Flavors to evolve your experience',
-    productsDescription: 'Advanced technology, balanced pH and remarkable flavors without smoke and without irritation.',
+    productsSubtitle: 'Remarkable flavors in a new way to use nicotine',
+    productsDescription: 'Advanced technology that ensures a smooth experience, without smoke, without irritation and with balanced pH.',
     productCoffee: 'Coffee',
     productCoffeeDesc: 'The intense and creamy flavor of premium coffee, perfect to start your day.',
     productEnergy: 'Energy',
@@ -299,8 +299,8 @@ export const translations: Translations = {
     
     // Products
     productsTitle: 'NYXX Nicotine Pouches',
-    productsSubtitle: 'Sabores para evolucionar tu experiencia',
-    productsDescription: 'Tecnología avanzada, pH balanceado y sabores marcantes sin humo y sin ardor.',
+    productsSubtitle: 'Sabores marcantes en una nueva forma de usar nicotina',
+    productsDescription: 'Tecnología avanzada que garantiza una experiencia suave, sin humo, sin ardor y con pH balanceado.',
     productCoffee: 'Coffee',
     productCoffeeDesc: 'El sabor intenso y cremoso del café premium, perfecto para comenzar el día.',
     productEnergy: 'Energy',

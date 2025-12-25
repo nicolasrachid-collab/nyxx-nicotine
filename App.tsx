@@ -77,8 +77,8 @@ const App = () => {
           </div>
           <NyxxSection />
           <ProductsSection />
-          <TechnologySection />
           <HowItWorksSection />
+          <TechnologySection />
           <TestimonialsSection />
           <MissionSection />
           <FAQSection />

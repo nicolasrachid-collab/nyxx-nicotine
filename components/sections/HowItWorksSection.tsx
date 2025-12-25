@@ -26,27 +26,6 @@ export function HowItWorksSection() {
   return (
     <section className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans">
       <div className="container mx-auto max-w-7xl">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col items-center text-center mb-32"
-        >
-          <div className="flex items-center gap-2 mb-6">
-            <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
-              Como funciona
-            </span>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6 tracking-tight">
-            Uma nova forma de usar nicotina
-          </h2>
-          
-          <p className="text-xl text-neutral-500 max-w-2xl font-medium">
-            Tecnologia avançada para uma experiência mais suave e consciente.
-          </p>
-        </motion.div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
           {steps.map((step, index) => (
             <motion.div
@@ -62,7 +41,7 @@ export function HowItWorksSection() {
               
               <div className="relative flex flex-col pt-8">
                 {/* Large Background Number */}
-                <span className="text-[10rem] leading-none font-bold text-neutral-100 absolute -top-20 -left-8 z-0 select-none transition-all duration-700 group-hover:text-neutral-200 group-hover:-translate-y-4">
+                <span className="text-[10rem] leading-none font-bold text-neutral-100 absolute -top-20 -left-8 z-0 select-none transition-all duration-700 group-hover:text-black group-hover:-translate-y-4">
                   {step.id}
                 </span>
 

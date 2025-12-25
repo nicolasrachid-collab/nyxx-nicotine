@@ -63,7 +63,7 @@ export function NyxxSection() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 lg:mb-8 leading-tight">
+            <h1 className="text-3xl md:text-[44px] lg:text-[56px] font-bold text-black mb-6 lg:mb-8 leading-tight">
               Uma forma mais <span className="bg-gradient-to-r from-gray-400 via-gray-600 to-gray-400 bg-clip-text text-transparent animate-gradient">inteligente</span><br className="hidden lg:block" />
               de consumir nicotina.
             </h1>
