@@ -44,9 +44,9 @@ export function NyxxSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(circle 400px at 20% 30%, rgba(255, 165, 0, 0.12) 0%, transparent 70%),
-            radial-gradient(circle 400px at 80% 70%, rgba(255, 140, 0, 0.10) 0%, transparent 70%),
-            radial-gradient(circle 500px at 50% 50%, rgba(255, 165, 0, 0.08) 0%, transparent 80%)
+            radial-gradient(circle 400px at 20% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 70%),
+            radial-gradient(circle 400px at 80% 70%, rgba(37, 99, 235, 0.10) 0%, transparent 70%),
+            radial-gradient(circle 500px at 50% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 80%)
           `,
         }}
       />
@@ -62,11 +62,13 @@ export function NyxxSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
+            style={{ lineHeight: '16px' }}
           >
-            <h1 className="text-3xl md:text-[44px] lg:text-[56px] font-bold text-black mb-6 lg:mb-8 leading-tight line-clamp-2 break-words">
-              Uma forma mais <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent animate-gradient">inteligente</span> de consumir nicotina.
+            <h1 className="text-4xl font-bold text-black mb-6 lg:mb-8 leading-tight line-clamp-2 break-words" style={{ fontSize: '38px' }}>
+              Uma forma mais <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent animate-gradient">inteligente</span><br />
+              de consumir nicotina.
             </h1>
-            <p className="text-gray-600 text-lg md:text-xl lg:text-2xl leading-relaxed max-w-3xl lg:max-w-4xl mx-auto">
+            <p className="text-gray-600 text-base leading-relaxed max-w-2xl lg:max-w-3xl mx-auto" style={{ width: '468px' }}>
               Na NYXX, tecnologia inteligente se traduz em alternativas mais seguras e modernas, com uma experiência sem fumaça, sem combustão e total controle.
             </p>
           </motion.div>
