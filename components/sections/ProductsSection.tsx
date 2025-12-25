@@ -122,7 +122,7 @@ export function ProductsSection() {
   return (
     <section 
       ref={ref}
-      className="px-7 md:px-14 pt-20 md:pt-28 pb-12 md:pb-16 max-w-[1800px] mx-auto bg-[#F5F5F5] text-black"
+      className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans"
     >
       <div className="mb-12 md:mb-16">
         <div className="flex items-center gap-3 mb-6">

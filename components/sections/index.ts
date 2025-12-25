@@ -5,7 +5,6 @@ export { MissionSection } from './MissionSection';
 export { ProductsSection } from './ProductsSection';
 export { TechnologySection } from './TechnologySection';
 export { BenefitsSection } from './BenefitsSection';
-export { StatsSection } from './StatsSection';
 export { HowItWorksSection } from './HowItWorksSection';
 export { TestimonialsSection } from './TestimonialsSection';
 export { FAQSection } from './FAQSection';

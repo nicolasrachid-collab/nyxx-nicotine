@@ -7,7 +7,6 @@ import {
   HeroCard, 
   ProductsSection,
   TechnologySection,
-  StatsSection,
   HowItWorksSection,
   TestimonialsSection,
   MissionSection,
@@ -79,7 +78,6 @@ const App = () => {
           <NyxxSection />
           <ProductsSection />
           <TechnologySection />
-          <StatsSection />
           <HowItWorksSection />
           <TestimonialsSection />
           <MissionSection />
