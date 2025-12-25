@@ -158,17 +158,20 @@ export function ProductsSection() {
             {t('productsTitle')}
           </span>
         </div>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto">
+        <h1 
+          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto"
+          style={{ width: '623px', marginLeft: '38px' }}
+        >
           {t('productsSubtitle')}
-        </h2>
-        <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+        </h1>
+        <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">
           {t('productsDescription')}
         </p>
       </div>
 
       {/* HowItWorks Section */}
       <div className="container mx-auto max-w-7xl mb-16 md:mb-24 pt-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 justify-items-center items-start h-auto overflow-visible">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 justify-items-center items-center h-auto overflow-visible">
           {steps.map((step, index) => (
             <motion.div
               key={step.id}
@@ -176,23 +179,23 @@ export function ProductsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2, duration: 0.6, ease: "easeOut" }}
-              className="group relative w-full h-auto"
+              className="group relative w-full h-auto flex flex-col items-center text-center"
             >
               {/* Decorative line */}
               <div className="absolute top-8 left-0 w-full h-px bg-neutral-100 -z-10 hidden md:block" />
               
-              <div className="relative flex flex-col pt-8 pb-6">
+              <div className="relative flex flex-col items-center pt-8 pb-6">
                 {/* Large Background Number */}
-                <span className="text-[10rem] leading-none font-bold text-neutral-100 absolute -top-20 -left-8 z-0 select-none transition-all duration-700 group-hover:text-black group-hover:-translate-y-4 pointer-events-none">
+                <span className="text-[6rem] md:text-[7rem] leading-none font-bold text-neutral-100 absolute -top-12 left-1/2 -translate-x-1/2 z-0 select-none transition-all duration-700 group-hover:text-black group-hover:-translate-y-4 pointer-events-none">
                   {step.id}
                 </span>
 
-                <div className="flex flex-col items-start pt-4 relative z-10">
-                  <h3 className="text-2xl md:text-3xl lg:text-3xl font-bold text-neutral-900 mb-3 tracking-tight">
+                <div className="flex flex-col items-center pt-4 relative z-10">
+                  <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-neutral-900 mb-2 tracking-tight">
                     {step.title}
                   </h3>
                   
-                  <p className="text-lg md:text-xl lg:text-xl text-neutral-500 leading-relaxed font-medium">
+                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-medium max-w-[200px]">
                     {step.description}
                   </p>
                 </div>
@@ -259,7 +262,7 @@ export function ProductsSection() {
                     className="flex items-center gap-4 mb-4"
                   >
                     <h1 
-                      className="text-5xl md:text-6xl font-bold tracking-tight line-clamp-2 break-words"
+                      className="text-4xl font-bold tracking-tight line-clamp-2 break-words"
                       style={{ color: product.color }}
                     >
                       {t(product.nameKey as keyof typeof t).replace(/[☕⚡🥭🍉❄️]/g, '').trim()}
@@ -278,14 +281,14 @@ export function ProductsSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    className="text-xl font-medium mb-8"
+                    className="text-base font-medium mb-8"
                     style={{ color: `${product.color}DD` }}
                   >
                     {subtitle}
                   </motion.h2>
 
                   {/* Body Text */}
-                  <div className="space-y-6 text-gray-600 leading-relaxed text-lg">
+                  <div className="space-y-6 text-gray-600 leading-relaxed text-base">
                     {paragraphs.map((paragraph, pIndex) => (
                       <motion.p
                         key={pIndex}
