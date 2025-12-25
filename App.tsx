@@ -11,7 +11,6 @@ import {
   TestimonialsSection,
   MissionSection,
   FAQSection,
-  SocialSection,
   Footer
 } from './components/sections';
 import { NyxxSection } from './components/NyxxSection';
@@ -81,7 +80,6 @@ const App = () => {
           <TestimonialsSection />
           <MissionSection />
           <FAQSection />
-          <SocialSection />
           <Footer />
        </div>
       </div>

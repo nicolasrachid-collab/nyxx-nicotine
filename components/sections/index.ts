@@ -8,7 +8,6 @@ export { BenefitsSection } from './BenefitsSection';
 export { HowItWorksSection } from './HowItWorksSection';
 export { TestimonialsSection } from './TestimonialsSection';
 export { FAQSection } from './FAQSection';
-export { SocialSection } from './SocialSection';
 export { Footer } from './Footer';
 export { AnimatedStat } from './AnimatedStat';
 export { InstagramCard } from './InstagramCard';

@@ -67,12 +67,19 @@ export function NyxxSection() {
             style={{ lineHeight: '16px' }}
           >
             <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
-                {t('productsTitle')}
-              </span>
+              <motion.span 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase border border-orange-200/50 bg-gradient-to-r from-orange-50/80 to-orange-100/60 text-orange-900 backdrop-blur-xl shadow-md shadow-orange-500/10 hover:shadow-lg hover:shadow-orange-500/20 hover:border-orange-300/70 hover:from-orange-100/90 hover:to-orange-200/70 hover:scale-105 transition-all duration-300"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 group-hover:bg-orange-600 transition-colors duration-300" />
+                Propósito NYXX
+              </motion.span>
             </div>
             <h1 className="text-4xl lg:text-[38px] font-bold text-black mb-6 lg:mb-8 leading-tight line-clamp-2 break-words">
-              Uma forma mais <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent animate-gradient">inteligente</span><br />
+              Uma forma mais <span className="text-black">inteligente</span><br />
               de consumir nicotina.
             </h1>
             <p className="text-gray-600 text-base leading-relaxed max-w-2xl lg:max-w-3xl mx-auto" style={{ width: '468px' }}>
@@ -82,11 +89,11 @@ export function NyxxSection() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-12 gap-y-12 lg:gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-12 gap-y-12 lg:gap-y-16 items-start">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center text-center group"
+              className="flex flex-col items-center text-center group h-full"
             >
               {/* Greek Circle Icon Container */}
               <div className="relative w-24 h-24 mb-6 flex items-center justify-center">

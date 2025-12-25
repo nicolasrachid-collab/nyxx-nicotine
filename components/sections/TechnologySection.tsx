@@ -45,9 +45,15 @@ export function TechnologySection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Badge variant="outline" className="w-fit gap-2 px-4 py-2 mb-6 text-xs font-semibold tracking-wider uppercase border border-white/20 bg-white/10 text-white backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
+              <motion.span 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 mb-6 text-xs font-semibold tracking-wider uppercase border border-orange-200/50 bg-gradient-to-r from-orange-50/80 to-orange-100/60 text-orange-900 backdrop-blur-xl shadow-md shadow-orange-500/10 hover:shadow-lg hover:shadow-orange-500/20 hover:border-orange-300/70 hover:from-orange-100/90 hover:to-orange-200/70 hover:scale-105 transition-all duration-300"
+              >
                 {t('technologyTitle')}
-              </Badge>
+              </motion.span>
               <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight text-white leading-[1.1]">
             {t('technologySubtitle')}
           </h1>

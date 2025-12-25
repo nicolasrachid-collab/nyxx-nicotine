@@ -157,11 +157,17 @@ export function ProductsSection() {
     >
       <div className="mb-16 md:mb-24 lg:mb-32 text-center">
         <div className="flex items-center justify-center gap-3 mb-6">
-          <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase border border-orange-200/50 bg-gradient-to-r from-orange-50/80 to-orange-100/60 text-orange-900 backdrop-blur-xl shadow-md shadow-orange-500/10 hover:shadow-lg hover:shadow-orange-500/20 hover:border-orange-300/70 hover:from-orange-100/90 hover:to-orange-200/70 hover:scale-105 transition-all duration-300"
+          >
             {t('productsTitle')}
-          </span>
+          </motion.span>
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto">
+        <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto" style={{ width: '626px' }}>
           {t('productsSubtitle')}
         </h1>
         <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">
@@ -185,17 +191,17 @@ export function ProductsSection() {
               <div className="absolute top-8 left-0 w-full h-px bg-neutral-100 -z-10 hidden md:block" />
               
               <div className="relative flex flex-col items-center pt-8 pb-6 group-hover:scale-[1.02] transition-all duration-500">
-                {/* Greek Pattern - mais visível */}
+                {/* Greek Pattern - preto */}
                 <motion.img 
                   src={greekCirclePattern} 
                   alt="Greek Pattern" 
-                  className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 object-contain invert opacity-30 group-hover:opacity-50 transition-opacity duration-500 z-0"
+                  className="absolute -top-12 left-[calc(50%-60px)] w-24 h-24 object-contain opacity-30 group-hover:opacity-50 transition-opacity duration-500 z-0"
                   animate={{ rotate: 360 }} 
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
                 />
                 
-                {/* Large Background Number - preto no hover */}
-                <span className="text-[6rem] md:text-[7rem] leading-none font-bold text-neutral-100 absolute -top-12 left-1/2 -translate-x-1/2 z-10 select-none transition-all duration-500 group-hover:text-black group-hover:-translate-y-3 pointer-events-none">
+                {/* Large Background Number - mais escuro, atrás dos textos, um pouco à esquerda */}
+                <span className="text-[6rem] md:text-[7rem] leading-none font-bold text-neutral-300 absolute -top-12 left-[calc(50%-60px)] -translate-x-1/2 z-0 select-none transition-all duration-500 group-hover:text-black group-hover:-translate-y-3 pointer-events-none">
                   {step.id}
                 </span>
 
@@ -203,11 +209,11 @@ export function ProductsSection() {
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full bg-orange-400/0 group-hover:bg-orange-400/10 blur-2xl transition-all duration-500 z-0" />
 
                 <div className="flex flex-col items-center pt-4 relative z-20">
-                  <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-neutral-900 mb-2 tracking-tight group-hover:text-orange-600 transition-colors duration-300">
+                  <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-neutral-900 mb-2 tracking-tight group-hover:text-orange-600 transition-colors duration-300 whitespace-nowrap">
                     {step.title}
                   </h3>
                   
-                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-medium max-w-[200px] group-hover:text-neutral-600 transition-colors duration-300">
+                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-medium max-w-[200px] group-hover:text-neutral-600 transition-colors duration-300 whitespace-nowrap">
                     {step.description}
                   </p>
                 </div>

@@ -50,9 +50,16 @@ export function TestimonialsSection() {
           className="flex flex-col items-center text-center mb-32"
         >
           <div className="flex items-center gap-2 mb-6">
-            <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
+            <motion.span 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase border border-orange-200/50 bg-gradient-to-r from-orange-50/80 to-orange-100/60 text-orange-900 backdrop-blur-xl shadow-md shadow-orange-500/10 hover:shadow-lg hover:shadow-orange-500/20 hover:border-orange-300/70 hover:from-orange-100/90 hover:to-orange-200/70 hover:scale-105 transition-all duration-300"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 group-hover:bg-orange-600 transition-colors duration-300" />
               Como funciona
-            </span>
+            </motion.span>
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold text-neutral-900 mb-6 tracking-tight">
@@ -77,7 +84,7 @@ export function TestimonialsSection() {
           >
             {/* Quote Icon */}
             <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Quote className="w-12 h-12 text-orange-500" />
+              <Quote className="w-12 h-12 text-orange-500" strokeWidth={1} />
             </div>
 
             <div className="mb-6 relative z-10">
