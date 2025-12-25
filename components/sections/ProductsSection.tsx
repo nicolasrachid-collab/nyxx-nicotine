@@ -124,14 +124,14 @@ export function ProductsSection() {
       ref={ref}
       className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans"
     >
-      <div className="mb-12 md:mb-16">
-        <div className="flex items-center gap-3 mb-6">
+      <div className="mb-12 md:mb-16 text-center">
+        <div className="flex items-center justify-center gap-3 mb-6">
           <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white">
             <Plus size={14} strokeWidth={3} />
           </div>
           <span className="text-sm font-semibold tracking-wide">{t('productsTitle')}</span>
         </div>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] max-w-3xl">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto">
           {t('productsSubtitle')}
         </h2>
       </div>

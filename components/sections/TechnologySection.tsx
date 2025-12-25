@@ -50,13 +50,13 @@ export function TechnologySection() {
                 {t('technologyTitle')}
               </Badge>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
-                {t('technologySubtitle')}
-              </h2>
+            {t('technologySubtitle')}
+          </h2>
               <p className="text-lg text-zinc-400 leading-relaxed max-w-md mt-2">
-                {t('technologyDescription')}
-              </p>
+            {t('technologyDescription')}
+          </p>
             </motion.div>
-          </div>
+        </div>
 
           {/* Right Column: Feature Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -76,11 +76,11 @@ export function TechnologySection() {
                     <div className="space-y-2">
                       <h3 className="text-xl font-bold text-white tracking-tight">
                         {feature.title}
-                      </h3>
+                </h3>
                       <p className="text-zinc-400 text-sm leading-relaxed">
                         {feature.description}
                       </p>
-                    </div>
+              </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -89,7 +89,7 @@ export function TechnologySection() {
         </div>
 
         {/* Bottom Section: Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-14 gap-x-10 border-t border-zinc-800 pt-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-14 gap-x-10 border-t border-zinc-800 pt-16 justify-items-center">
           <AnimatedStat 
             value={5} 
             suffix="" 

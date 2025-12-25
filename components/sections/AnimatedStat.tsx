@@ -30,7 +30,7 @@ export function AnimatedStat({
       (entries) => {
         if (entries[0].isIntersecting && !hasAnimated.current) {
           hasAnimated.current = true;
-          const duration = 2000;
+          const duration = 4000;
           const startTime = Date.now();
 
           const animate = () => {
