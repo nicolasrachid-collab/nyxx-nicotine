@@ -1,3 +1,4 @@
+import { Plus } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
 
@@ -13,10 +14,29 @@ export function ProvenResults() {
       }`}
     >
       <div className="flex flex-col gap-8">
-        <div className="max-w-[60%]">
-           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] md:leading-[1.05]">
-              {t('purposeTitle')} <span className="text-gray-400">{t('purposeSubtitle')}</span>
-           </h2>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white">
+            <Plus size={14} strokeWidth={3} />
+          </div>
+          <span className="text-sm font-semibold tracking-wide">{t('benefitsTitle')}</span>
+        </div>
+        
+        <div className="max-w-[60%] flex flex-col gap-4 md:gap-5">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+            {t('purposeTitle')}
+          </h2>
+          <p className="text-lg md:text-xl lg:text-2xl font-medium text-gray-600 leading-relaxed">
+            {t('purposeSubtitle')}
+          </p>
+          
+          {/* Botão CTA - Saiba Mais */}
+          <div className="mt-4 md:mt-6">
+            <button
+              className="px-6 py-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+            >
+              {t('learnMore')}
+            </button>
+          </div>
         </div>
       </div>
     </section>

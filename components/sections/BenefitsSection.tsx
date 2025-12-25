@@ -1,4 +1,4 @@
-import { Plus, Shield, Star, Package, CheckCircle } from 'lucide-react';
+import { Shield, Star, Package, CheckCircle } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
 
@@ -36,27 +36,18 @@ export function BenefitsSection() {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
-      <div className="mb-12 md:mb-16">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white">
-            <Plus size={14} strokeWidth={3} />
-          </div>
-          <span className="text-sm font-semibold tracking-wide">{t('benefitsTitle')}</span>
-        </div>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         {benefits.map((benefit, index) => {
           const Icon = benefit.icon;
           return (
             <div
               key={index}
-              className="bg-white rounded-2xl p-6 md:p-8 flex flex-col gap-4 hover:shadow-lg transition-shadow"
+              className="bg-white rounded-2xl p-6 md:p-8 flex flex-col gap-4 hover:shadow-lg transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center">
-                <Icon className="text-white" size={24} />
+              <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+                <Icon className="text-blue-400" size={24} strokeWidth={2} />
               </div>
-              <h3 className="text-xl md:text-2xl font-bold tracking-tight">
+              <h3 className="text-lg md:text-xl font-bold tracking-tight text-gray-800">
                 {t(benefit.titleKey)}
               </h3>
               <p className="text-gray-500 text-sm md:text-base leading-relaxed">

@@ -17,6 +17,7 @@ import {
   SocialSection,
   Footer
 } from './components/sections';
+import { NyxxSection } from './components/NyxxSection';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -78,6 +79,7 @@ const App = () => {
              <HeroCard />
           </div>
           <ProvenResults />
+          <NyxxSection />
           <BenefitsSection />
           <ProductsSection />
           <TechnologySection />

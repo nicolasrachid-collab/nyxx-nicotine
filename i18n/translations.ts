@@ -21,8 +21,8 @@ export const translations: Translations = {
     
     // Proven Results / Propósito
     whyChooseUs: 'Por que nos escolher',
-    purposeTitle: 'Nosso propósito na NYXX é oferecer alternativas',
-    purposeSubtitle: 'mais seguras e inovadoras para o consumo de nicotina.',
+    purposeTitle: 'Uma forma mais inteligente de consumir nicotina',
+    purposeSubtitle: 'Na NYXX desenvolvemos tecnologias inteligentes para oferecer alternativas mais seguras, modernas e equilibradas ao consumo de nicotina. Uma experiência sem fumaça, sem combustão e com mais controle para o usuário.',
     
     // Products
     productsTitle: 'Nossos produtos',
@@ -52,13 +52,13 @@ export const translations: Translations = {
     // Benefits
     benefitsTitle: 'Por que escolher Nyxx Nicotine?',
     benefitSaferTitle: 'Alternativa mais segura',
-    benefitSaferDesc: 'Tecnologia que reduz riscos associados ao consumo tradicional.',
+    benefitSaferDesc: 'Tecnologia desenvolvida para reduzir impactos do consumo tradicional. Experiência limpa, sem fumaça e sem combustão.',
     benefitSuperiorTasteTitle: 'Sabor superior',
-    benefitSuperiorTasteDesc: 'Sabores autênticos desenvolvidos com ingredientes premium.',
-    benefitConvenienceTitle: 'Conveniência',
-    benefitConvenienceDesc: 'Portátil, discreto e fácil de usar em qualquer lugar.',
+    benefitSuperiorTasteDesc: 'Sabores precisos e sofisticados, criados com ingredientes selecionados para uma experiência mais pura.',
+    benefitConvenienceTitle: 'Conveniência inteligente',
+    benefitConvenienceDesc: 'Uso discreto, portátil e prático para qualquer momento e lugar. Sem odores e sem fumaça.',
     benefitQualityTitle: 'Qualidade garantida',
-    benefitQualityDesc: 'Rigoroso controle de qualidade em cada etapa do processo.',
+    benefitQualityDesc: 'Controle rigoroso em todas as etapas para garantir consistência, segurança e alto desempenho.',
     
     // Stats
     statsUniqueFlavors: 'Sabores únicos\nno portfólio',
@@ -152,8 +152,8 @@ export const translations: Translations = {
     
     // Proven Results / Purpose
     whyChooseUs: 'Why choose us',
-    purposeTitle: 'Our purpose at NYXX is to offer',
-    purposeSubtitle: 'safer and more innovative alternatives for nicotine consumption.',
+    purposeTitle: 'A smarter way to consume nicotine',
+    purposeSubtitle: 'At NYXX we develop smart technologies to offer safer, modern and balanced alternatives to nicotine consumption. A smoke-free, combustion-free experience with more control for the user.',
     // Problem/Solution
     problemTitle: 'The problem with traditional consumption',
     problemText: 'Smoke, odor, restrictions. For decades, consuming nicotine meant giving up convenience, flavor, and respect for your environment.',
@@ -188,13 +188,13 @@ export const translations: Translations = {
     // Benefits
     benefitsTitle: 'Why choose Nyxx Nicotine?',
     benefitSaferTitle: 'Safer alternative',
-    benefitSaferDesc: 'Technology that reduces risks associated with traditional consumption.',
+    benefitSaferDesc: 'Technology developed to reduce impacts of traditional consumption. Clean experience, smoke-free and combustion-free.',
     benefitSuperiorTasteTitle: 'Superior taste',
-    benefitSuperiorTasteDesc: 'Authentic flavors developed with premium ingredients.',
-    benefitConvenienceTitle: 'Convenience',
-    benefitConvenienceDesc: 'Portable, discreet and easy to use anywhere.',
+    benefitSuperiorTasteDesc: 'Precise and sophisticated flavors, created with selected ingredients for a purer experience.',
+    benefitConvenienceTitle: 'Smart convenience',
+    benefitConvenienceDesc: 'Discreet, portable and practical use for any moment and place. Odor-free and smoke-free.',
     benefitQualityTitle: 'Guaranteed quality',
-    benefitQualityDesc: 'Rigorous quality control at every step of the process.',
+    benefitQualityDesc: 'Rigorous control at all stages to ensure consistency, safety and high performance.',
     
     // Stats
     statsUniqueFlavors: 'Unique flavors\nin portfolio',
@@ -284,8 +284,8 @@ export const translations: Translations = {
     
     // Proven Results / Propósito
     whyChooseUs: 'Por qué elegirnos',
-    purposeTitle: 'Nuestro propósito en NYXX es ofrecer',
-    purposeSubtitle: 'alternativas más seguras e innovadoras para el consumo de nicotina.',
+    purposeTitle: 'Una forma más inteligente de consumir nicotina',
+    purposeSubtitle: 'En NYXX desarrollamos tecnologías inteligentes para ofrecer alternativas más seguras, modernas y equilibradas al consumo de nicotina. Una experiencia sin humo, sin combustión y con más control para el usuario.',
     
     // Products
     productsTitle: 'Nuestros productos',
@@ -315,13 +315,13 @@ export const translations: Translations = {
     // Benefits
     benefitsTitle: '¿Por qué elegir Nyxx Nicotine?',
     benefitSaferTitle: 'Alternativa más segura',
-    benefitSaferDesc: 'Tecnología que reduce riesgos asociados al consumo tradicional.',
+    benefitSaferDesc: 'Tecnología desarrollada para reducir impactos del consumo tradicional. Experiencia limpia, sin humo y sin combustión.',
     benefitSuperiorTasteTitle: 'Sabor superior',
-    benefitSuperiorTasteDesc: 'Sabores auténticos desarrollados con ingredientes premium.',
-    benefitConvenienceTitle: 'Conveniencia',
-    benefitConvenienceDesc: 'Portátil, discreto y fácil de usar en cualquier lugar.',
+    benefitSuperiorTasteDesc: 'Sabores precisos y sofisticados, creados con ingredientes seleccionados para una experiencia más pura.',
+    benefitConvenienceTitle: 'Conveniencia inteligente',
+    benefitConvenienceDesc: 'Uso discreto, portátil y práctico para cualquier momento y lugar. Sin olores y sin humo.',
     benefitQualityTitle: 'Calidad garantizada',
-    benefitQualityDesc: 'Riguroso control de calidad en cada etapa del proceso.',
+    benefitQualityDesc: 'Control riguroso en todas las etapas para garantizar consistencia, seguridad y alto rendimiento.',
     
     // Stats
     statsUniqueFlavors: 'Sabores únicos\nen portafolio',
