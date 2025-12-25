@@ -4,9 +4,23 @@ interface AnimatedStatProps {
   value: number;
   suffix: string;
   label: ReactNode;
+  textColor?: string;
+  labelColor?: string;
+  textSize?: string;
+  labelSize?: string;
+  maxWidth?: string;
 }
 
-export function AnimatedStat({ value, suffix, label }: AnimatedStatProps) {
+export function AnimatedStat({ 
+  value, 
+  suffix, 
+  label, 
+  textColor = 'text-black',
+  labelColor = 'text-gray-500',
+  textSize = 'text-5xl md:text-6xl lg:text-7xl',
+  labelSize = 'text-xs md:text-sm',
+  maxWidth = 'max-w-[200px]'
+}: AnimatedStatProps) {
   const [count, setCount] = useState(0);
   const elementRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
@@ -50,14 +64,14 @@ export function AnimatedStat({ value, suffix, label }: AnimatedStatProps) {
   return (
     <div ref={elementRef} className="flex flex-col">
       <div className="flex items-baseline">
-        <span className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-black">
+        <span className={`${textSize} font-bold tracking-tight ${textColor}`}>
           {count}
         </span>
-        <span className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-black">
+        <span className={`${textSize} font-bold tracking-tight ${textColor}`}>
           {suffix}
         </span>
       </div>
-      <div className="mt-4 text-xs md:text-sm font-medium text-gray-500 max-w-[200px] leading-snug">
+      <div className={`mt-4 ${labelSize} font-medium ${labelColor} ${maxWidth} leading-snug`}>
         {label}
       </div>
     </div>

@@ -1,64 +1,135 @@
-import { Plus } from 'lucide-react';
-import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { motion } from 'motion/react';
+import { Atom, ShieldCheck, ClipboardCheck, FlaskConical, Plus } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
+import { Card, CardContent } from '../ui/Card';
+import { Badge } from '../ui/Badge';
+import { AnimatedStat } from './AnimatedStat';
 
 export function TechnologySection() {
-  const { ref, isVisible } = useScrollAnimation(0.2);
   const { t } = useTranslation();
   
-  const techPoints = [
-    { key: 'techSelectedIngredients' as const, descKey: 'techSelectedIngredientsDesc' as const },
-    { key: 'techAdvancedTech' as const, descKey: 'techAdvancedTechDesc' as const },
-    { key: 'techPremiumQuality' as const, descKey: 'techPremiumQualityDesc' as const },
-    { key: 'techRigorousTesting' as const, descKey: 'techRigorousTestingDesc' as const },
+  const features = [
+    {
+      title: t('techSelectedIngredients'),
+      description: t('techSelectedIngredientsDesc'),
+      icon: FlaskConical,
+    },
+    {
+      title: t('techAdvancedTech'),
+      description: t('techAdvancedTechDesc'),
+      icon: Atom,
+    },
+    {
+      title: t('techPremiumQuality'),
+      description: t('techPremiumQualityDesc'),
+      icon: ShieldCheck,
+    },
+    {
+      title: t('techRigorousTesting'),
+      description: t('techRigorousTestingDesc'),
+      icon: ClipboardCheck,
+    },
   ];
 
-  return (
-    <section 
-      ref={ref}
-      className={`px-7 md:px-14 pt-20 md:pt-24 pb-20 md:pb-24 max-w-[1800px] mx-auto bg-[#F5F5F5] text-black transition-all duration-700 ease-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
-    >
-      <div className="w-full h-px bg-gray-200 mb-12 md:mb-16"></div>
+  const supportText = t('statsSupport').split('\n');
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-        <div className="md:col-span-4 flex flex-col gap-6">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white">
-              <Plus size={14} strokeWidth={3} />
-            </div>
-            <span className="text-sm font-semibold tracking-wide">{t('technologyTitle')}</span>
+  return (
+    <section className="py-24 bg-black text-white overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start mb-24">
+          {/* Left Column: Header */}
+          <div className="flex flex-col gap-6 sticky top-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <Badge variant="outline" className="w-fit gap-1.5 px-3 py-1 mb-4 text-sm font-medium border-white/20 bg-white/10 text-white backdrop-blur-sm">
+                <Plus className="w-3.5 h-3.5" />
+                {t('technologyTitle')}
+              </Badge>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+                {t('technologySubtitle')}
+              </h2>
+              <p className="text-lg text-zinc-400 leading-relaxed max-w-md mt-2">
+                {t('technologyDescription')}
+              </p>
+            </motion.div>
           </div>
-          
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1]">
-            {t('technologySubtitle')}
-          </h2>
-          
-          <p className="text-gray-500 text-base md:text-lg font-medium leading-relaxed">
-            {t('technologyDescription')}
-          </p>
+
+          {/* Right Column: Feature Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="h-full border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-zinc-900 text-white">
+                  <CardContent className="p-8 flex flex-col gap-6 h-full">
+                    <div className="p-3.5 bg-zinc-800/50 border border-zinc-700/50 w-fit rounded-2xl backdrop-blur-sm shadow-inner">
+                      <feature.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-xl font-bold text-white tracking-tight">
+                        {feature.title}
+                      </h3>
+                      <p className="text-zinc-400 text-sm leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        <div className="md:col-span-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {techPoints.map((point) => (
-              <div
-                key={point.key}
-                className="bg-white rounded-2xl p-6 md:p-8 hover:shadow-lg transition-shadow"
-              >
-                <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-2">
-                  {t(point.key)}
-                </h3>
-                <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                  {t(point.descKey)}
-                </p>
-              </div>
-            ))}
+        {/* Bottom Section: Stats */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-14 gap-x-10 border-t border-zinc-800 pt-16">
+          <AnimatedStat 
+            value={5} 
+            suffix="" 
+            label={t('statsUniqueFlavors')}
+            textColor="text-white"
+            labelColor="text-zinc-400"
+            textSize="text-5xl md:text-6xl lg:text-7xl"
+            labelSize="text-xs md:text-sm"
+            maxWidth="max-w-[200px]"
+          />
+          <AnimatedStat 
+            value={98} 
+            suffix="%" 
+            label={t('statsSatisfaction')}
+            textColor="text-white"
+            labelColor="text-zinc-400"
+            textSize="text-5xl md:text-6xl lg:text-7xl"
+            labelSize="text-xs md:text-sm"
+            maxWidth="max-w-[200px]"
+          />
+          <AnimatedStat 
+            value={100} 
+            suffix="%" 
+            label={t('statsTested')}
+            textColor="text-white"
+            labelColor="text-zinc-400"
+            textSize="text-5xl md:text-6xl lg:text-7xl"
+            labelSize="text-xs md:text-sm"
+            maxWidth="max-w-[200px]"
+          />
+          <div className="flex flex-col">
+            <span className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white">
+              {supportText[0]}
+            </span>
+            <div className="mt-4 text-xs md:text-sm font-medium text-zinc-400 max-w-[200px] leading-snug">
+              {supportText[1]}
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

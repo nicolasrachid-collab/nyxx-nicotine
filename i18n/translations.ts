@@ -68,7 +68,7 @@ export const translations: Translations = {
     statsUniqueFlavors: 'Sabores desenvolvidos\ncom precisão',
     statsSatisfaction: 'Satisfação dos\nconsumidores',
     statsTested: 'Lotes testados\ne aprovados',
-    statsSupport: 'pH Balanceado\nFumaça',
+    statsSupport: '0\nFumaça',
     
     // How It Works
     howItWorksTitle: 'Como funciona',
@@ -208,7 +208,7 @@ export const translations: Translations = {
     statsUniqueFlavors: 'Flavors developed\nwith precision',
     statsSatisfaction: 'Consumer\nsatisfaction',
     statsTested: 'Batches tested\nand approved',
-    statsSupport: 'pH Balanced\nSmoke',
+    statsSupport: '0\nSmoke',
     
     // How It Works
     howItWorksTitle: 'How it works',
@@ -339,7 +339,7 @@ export const translations: Translations = {
     statsUniqueFlavors: 'Sabores desarrollados\ncon precisión',
     statsSatisfaction: 'Satisfacción de los\nconsumidores',
     statsTested: 'Lotes probados\ny aprobados',
-    statsSupport: 'pH Balanceado\nHumo',
+    statsSupport: '0\nHumo',
     
     // How It Works
     howItWorksTitle: 'Cómo funciona',
