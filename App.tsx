@@ -5,7 +5,6 @@ import {
   Header, 
   MenuOverlay, 
   HeroCard, 
-  ProvenResults,
   ProductsSection,
   TechnologySection,
   StatsSection,
@@ -77,7 +76,6 @@ const App = () => {
           <div>
              <HeroCard />
           </div>
-          <ProvenResults />
           <NyxxSection />
           <ProductsSection />
           <TechnologySection />

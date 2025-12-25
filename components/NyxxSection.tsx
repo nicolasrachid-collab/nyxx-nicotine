@@ -10,13 +10,18 @@ export function NyxxSection() {
       icon: Shield,
       title: "Alternativa mais segura",
       description:
-        "Tecnologia desenvolvida para reduzir impactos do consumo tradicional. Experiência limpa, sem fumaça e sem combustão.",
+        "Tecnologia desenvolvida para reduzir impactos. Experiência limpa, sem fumaça e sem combustão.",
     },
     {
       icon: Star,
       title: "Sabor superior",
-      description:
-        "Sabores precisos e sofisticados, criados com ingredientes selecionados para uma experiência mais pura.",
+      description: (
+        <>
+          Sabores precisos e sofisticados,<br />
+          criados com ingredientes selecionados<br />
+          para uma experiência pura.
+        </>
+      ),
     },
     {
       icon: Box,
@@ -33,57 +38,32 @@ export function NyxxSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-24 px-4 md:px-8 relative overflow-hidden font-sans">
+    <section className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Hero Section */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-24">
+        <div className="flex flex-col items-center justify-center gap-12 lg:gap-16 mb-24 lg:mb-32">
           
-          {/* Left Text - Extended Width */}
+          {/* Centered Text */}
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:w-1/3 text-left"
+            className="text-center max-w-4xl mx-auto"
           >
-            <div className="mb-4 text-gray-500 text-sm font-semibold tracking-widest uppercase">
-              Por que escolher Nyxx Nicotine?
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-black mb-[24px] leading-tight mt-[0px] mr-[-251px] ml-[0px]">
-              Uma forma mais <span className="text-gray-500">inteligente</span> de consumir nicotina.
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 lg:mb-8 leading-tight">
+              Uma forma mais <span className="bg-gradient-to-r from-gray-400 via-gray-600 to-gray-400 bg-clip-text text-transparent animate-gradient">inteligente</span><br className="hidden lg:block" />
+              de consumir nicotina.
             </h1>
-            <p className="text-gray-600 text-lg leading-relaxed max-w-2xl w-[140%]">
-              Na NYXX desenvolvemos tecnologias inteligentes para oferecer alternativas mais seguras, modernas e equilibradas. Uma experiência sem fumaça, sem combustão e com mais controle.
+            <p className="text-gray-600 text-lg md:text-xl lg:text-2xl leading-relaxed max-w-3xl lg:max-w-4xl mx-auto">
+              Na NYXX, tecnologia inteligente se traduz em alternativas mais seguras e modernas, com uma experiência sem fumaça, sem combustão e total controle.
             </p>
-          </motion.div>
-
-          {/* Center Space - Glow Effect Only */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="lg:w-1/3 flex justify-center relative"
-          >
-            {/* Glow effect behind phantom content */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-black/5 blur-[80px] rounded-full" />
-          </motion.div>
-
-          {/* Right Space - Empty for Layout Balance */}
-          <motion.div 
-             initial={{ opacity: 0, x: 30 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.8 }}
-             className="lg:w-1/3 flex flex-col items-start lg:items-end justify-center"
-          >
-             {/* Empty space intentional */}
           </motion.div>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-12 gap-y-12 lg:gap-y-16">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -98,18 +78,18 @@ export function NyxxSection() {
                 <motion.img 
                   src={greekCirclePattern} 
                   alt="Greek Pattern" 
-                  className="absolute inset-0 w-full h-full object-contain opacity-40 group-hover:opacity-100 transition-opacity duration-500 invert"
+                  className="absolute inset-0 w-full h-full object-contain invert"
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 />
                 <feature.icon className="w-8 h-8 text-black relative z-10" strokeWidth={1.5} />
               </div>
               
-              <h3 className="text-lg font-bold text-black mb-3 tracking-wide">
+              <h3 className="text-lg lg:text-xl font-bold text-black mb-3 lg:mb-4 tracking-wide">
                 {feature.title}
               </h3>
               
-              <p className="text-gray-600 text-sm leading-relaxed max-w-[250px]">
+              <p className="text-gray-600 text-sm lg:text-base leading-relaxed max-w-[250px] lg:max-w-[280px]">
                 {feature.description}
               </p>
             </motion.div>

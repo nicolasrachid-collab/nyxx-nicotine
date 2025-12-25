@@ -2,7 +2,6 @@ export { Header } from './Header';
 export { MenuOverlay } from './MenuOverlay';
 export { HeroCard } from './HeroCard';
 export { MissionSection } from './MissionSection';
-export { ProvenResults } from './ProvenResults';
 export { ProductsSection } from './ProductsSection';
 export { TechnologySection } from './TechnologySection';
 export { BenefitsSection } from './BenefitsSection';
