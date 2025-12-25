@@ -10,16 +10,16 @@ export function NyxxSection() {
       icon: Shield,
       title: "Alternativa mais segura",
       description:
-        "Tecnologia desenvolvida para reduzir impactos. Experiência limpa, sem fumaça e sem combustão.",
+        "Tecnologia desenvolvida para reduzir impactos. Experiência clara, sem fumaça e combustão",
     },
     {
       icon: Star,
       title: "Sabor superior",
       description: (
         <>
-          Sabores precisos e sofisticados,<br />
-          criados com ingredientes selecionados<br />
-          para uma experiência pura.
+          Sabores precisos e finos criados<br />
+          com ingredientes selecionados<br />
+          para experiência pura já.
         </>
       ),
     },
@@ -33,7 +33,7 @@ export function NyxxSection() {
       icon: CheckCircle,
       title: "Qualidade garantida",
       description:
-        "Controle rigoroso em todas as etapas para garantir consistência, segurança e alto desempenho.",
+        "Controle preciso em todas as etapas para garantir consistência segurança e desempenho!",
     },
   ];
 
