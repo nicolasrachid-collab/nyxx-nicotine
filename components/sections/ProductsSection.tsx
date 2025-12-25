@@ -12,45 +12,62 @@ export function ProductsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   
-  // Criar seções para cada produto com Intersection Observer
+
+  // Estado para controlar o movimento Y da imagem
+  const [productY, setProductY] = useState(0);
+
+  // Calcular progresso do scroll e atualizar activeIndex e productY
   useEffect(() => {
-    if (!scrollContainerRef.current) return;
+    const handleScroll = () => {
+      if (!containerRef.current || !scrollContainerRef.current) return;
 
-    const sections = scrollContainerRef.current.querySelectorAll('.product-section');
-    if (sections.length === 0) return;
-    
-    const observerOptions = {
-      root: null,
-      rootMargin: '-30% 0px -30% 0px',
-      threshold: 0.5
+      const container = containerRef.current;
+      const containerRect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const containerTop = containerRect.top;
+      const containerHeight = container.offsetHeight;
+      const containerBottom = containerRect.bottom;
+      
+      // Calcular progresso baseado na posição do container em relação à viewport
+      // Progresso = 0 quando o topo do container está na parte inferior da viewport (containerTop = windowHeight)
+      // Progresso = 1 quando o fundo do container está no topo da viewport (containerBottom = 0)
+      // Distância total a percorrer: windowHeight + containerHeight
+      const scrollDistance = windowHeight + containerHeight;
+      
+      // Quando containerTop = windowHeight, scrolled = 0
+      // Quando containerBottom = 0, scrolled = scrollDistance
+      // scrolled = windowHeight - containerTop (quando container está entrando/saindo)
+      let progress = 0;
+      if (containerTop <= windowHeight) {
+        // Container começou a entrar ou já está dentro
+        const scrolled = windowHeight - containerTop;
+        progress = Math.min(1, scrolled / scrollDistance);
+      }
+      // Se containerTop > windowHeight, progress permanece 0
+      
+      // Calcular productY baseado no progresso
+      // Limitar o movimento máximo para não sair da área visível
+      // Usar uma porcentagem da altura da viewport para movimento mais suave
+      const maxY = Math.min((products.length - 1) * 300, windowHeight * 0.8); // Máximo de 80% da altura da viewport
+      const newY = progress * maxY;
+      setProductY(newY);
+      
+      // Determinar qual seção está visível baseado no progresso do scroll
+      // Mapear progresso (0-1) para índices de produtos (0 a products.length-1)
+      const newActiveIndex = Math.min(
+        products.length - 1,
+        Math.floor(progress * products.length)
+      );
+      
+      setActiveIndex(newActiveIndex);
     };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Executar uma vez no mount
     
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const sectionIndex = parseInt(entry.target.getAttribute('data-index') || '0');
-            setActiveIndex(sectionIndex);
-          }
-        });
-      },
-      observerOptions
-    );
-
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
-
-    // Garantir que a primeira seção seja ativa inicialmente
-    if (sections[0]) {
-      const firstIndex = parseInt(sections[0].getAttribute('data-index') || '0');
-      setActiveIndex(firstIndex);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [products.length]);
+
 
   const activeProduct = products[activeIndex] || products[0];
 
@@ -77,6 +94,7 @@ export function ProductsSection() {
       <div 
         ref={containerRef}
         className="relative flex flex-col lg:flex-row gap-8 md:gap-12"
+        style={{ minHeight: `${products.length * 70}vh` }}
       >
         {/* Lado esquerdo: Seções scrolláveis */}
         <div 
@@ -84,10 +102,10 @@ export function ProductsSection() {
           className="flex-1 space-y-0 w-full lg:w-1/2"
         >
           {products.map((product, index) => (
-            <div
+            <motion.div
               key={product.id}
               data-index={index}
-              className="product-section min-h-screen flex items-center justify-center py-20"
+              className="product-section min-h-[70vh] flex items-center justify-center py-20"
             >
               <div className="w-full max-w-2xl px-8">
                 <div className="flex items-center gap-3 mb-6">
@@ -109,13 +127,18 @@ export function ProductsSection() {
                   {t(product.descriptionKey as keyof typeof t)}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Lado direito: Conteúdo sticky que muda - apenas imagem */}
-        <div className="w-full lg:w-1/2 lg:sticky lg:top-20 lg:h-screen lg:flex lg:items-center">
-          <div className="relative w-full max-w-md mx-auto">
+        {/* Lado direito: Conteúdo sticky que acompanha o scroll */}
+        <div className="w-full lg:w-1/2 lg:sticky lg:top-20 lg:h-screen lg:flex lg:items-start lg:self-start">
+          <div
+            className="relative w-full max-w-md mx-auto lg:mt-20"
+            style={{
+              transform: `translateY(${productY}px)`
+            }}
+          >
             {/* Conteúdo do produto ativo - apenas imagem */}
             <motion.div
               key={activeProduct.id}
@@ -127,9 +150,6 @@ export function ProductsSection() {
             >
               <div 
                 className="relative w-full aspect-square"
-                style={{
-                  animation: 'float 4s ease-in-out infinite',
-                }}
               >
                 <img
                   src={activeProduct.image}

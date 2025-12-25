@@ -90,10 +90,14 @@ export function NyxxSection() {
                   src={greekCirclePattern} 
                   alt="Greek Pattern" 
                   className="absolute inset-0 w-full h-full object-contain invert"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  animate={{ rotate: 360 }} 
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
                 />
-                <feature.icon className="w-8 h-8 text-gray-800 relative z-10" strokeWidth={1.5} style={{ filter: 'invert(1)' }} />
+                <feature.icon 
+                  className="w-8 h-8 relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:text-black" 
+                  strokeWidth={1.5} 
+                  style={{ color: '#C8CBCA' }} 
+                />
               </div>
               
               <h3 className="text-lg lg:text-xl font-bold text-black mb-3 lg:mb-4 tracking-wide">
