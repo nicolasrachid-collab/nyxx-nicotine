@@ -170,7 +170,7 @@ export function ProductsSection() {
                 >
                   {t(product.nameKey as keyof typeof t)}
                 </h3>
-                <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-line">
+                <p className="text-base md:text-lg lg:text-lg text-gray-600 leading-relaxed whitespace-pre-line">
                   {t(product.descriptionKey as keyof typeof t)}
                 </p>
               </div>
@@ -199,12 +199,9 @@ export function ProductsSection() {
                 className="relative w-full aspect-square"
               >
                 <img
-                  src={activeProduct.image}
+                  src={activeProduct.imageSide}
                   alt={activeProduct.name}
-                  className="w-full h-full object-contain drop-shadow-2xl"
-                  style={{
-                    filter: `drop-shadow(0 20px 40px ${activeProduct.color}20)`,
-                  }}
+                  className="w-full h-full object-contain"
                   loading="lazy"
                 />
               </div>

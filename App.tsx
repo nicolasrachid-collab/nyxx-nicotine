@@ -76,8 +76,8 @@ const App = () => {
              <HeroCard />
           </div>
           <NyxxSection />
-          <ProductsSection />
           <HowItWorksSection />
+          <ProductsSection />
           <TechnologySection />
           <TestimonialsSection />
           <MissionSection />

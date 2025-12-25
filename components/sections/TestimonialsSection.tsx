@@ -59,7 +59,7 @@ export function TestimonialsSection() {
             Uma nova forma de usar nicotina
           </h2>
           
-          <p className="text-xl text-neutral-500 max-w-2xl font-medium">
+          <p className="text-lg md:text-xl lg:text-xl text-neutral-500 max-w-2xl font-medium">
             Tecnologia avançada para uma experiência mais suave e consciente.
           </p>
         </motion.div>

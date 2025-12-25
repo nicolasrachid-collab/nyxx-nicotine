@@ -46,11 +46,11 @@ export function HowItWorksSection() {
                 </span>
 
                 <div className="flex flex-col items-start pt-4 relative z-10">
-                  <h3 className="text-3xl font-bold text-neutral-900 mb-3 tracking-tight">
+                  <h3 className="text-2xl md:text-3xl lg:text-3xl font-bold text-neutral-900 mb-3 tracking-tight">
                     {step.title}
                   </h3>
                   
-                  <p className="text-lg text-neutral-500 leading-relaxed font-medium">
+                  <p className="text-lg md:text-xl lg:text-xl text-neutral-500 leading-relaxed font-medium">
                     {step.description}
                   </p>
                 </div>

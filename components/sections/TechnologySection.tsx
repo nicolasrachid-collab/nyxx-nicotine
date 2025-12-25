@@ -73,13 +73,13 @@ export function TechnologySection() {
                       <feature.icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="space-y-2">
-                      <h3 className="text-xl font-bold text-white tracking-tight">
+                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight">
                         {feature.title}
                 </h3>
-                      <p className="text-zinc-400 text-sm leading-relaxed">
+                      <p className="text-zinc-400 text-base md:text-lg lg:text-lg leading-relaxed">
                         {feature.description}
                       </p>
-              </div>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
