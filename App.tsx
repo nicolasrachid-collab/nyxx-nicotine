@@ -8,7 +8,6 @@ import {
   ProvenResults,
   ProductsSection,
   TechnologySection,
-  BenefitsSection,
   StatsSection,
   HowItWorksSection,
   TestimonialsSection,
@@ -80,7 +79,6 @@ const App = () => {
           </div>
           <ProvenResults />
           <NyxxSection />
-          <BenefitsSection />
           <ProductsSection />
           <TechnologySection />
           <StatsSection />
