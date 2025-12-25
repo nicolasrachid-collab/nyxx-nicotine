@@ -34,9 +34,6 @@ export function ProductSliderClean({ products }: ProductSliderCleanProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // #region agent log
-        fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductSliderClean.tsx:observer',message:'intersection',data:{isIntersecting:entry.isIntersecting,intersectionRatio:entry.intersectionRatio},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
-        // #endregion
         setIsInView(entry.isIntersecting);
       },
       { threshold: 0.3 }
@@ -55,9 +52,6 @@ export function ProductSliderClean({ products }: ProductSliderCleanProps) {
     if (!container || !isInView) return;
 
     const handleWheel = (e: WheelEvent) => {
-      // #region agent log
-      fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductSliderClean.tsx:handleWheel',message:'wheel event',data:{isScrollingCurrent:isScrolling.current,deltaY:e.deltaY},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H4'})}).catch(()=>{});
-      // #endregion
       if (isScrolling.current) return;
       
       const rect = container.getBoundingClientRect();
@@ -66,10 +60,6 @@ export function ProductSliderClean({ products }: ProductSliderCleanProps) {
       const visibleBottom = Math.min(window.innerHeight, rect.bottom);
       const visibleHeight = visibleBottom - visibleTop;
       const isInViewport = visibleHeight > rect.height * 0.4;
-      
-      // #region agent log
-      fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductSliderClean.tsx:visibility',message:'visibility check',data:{rectTop:rect.top,rectBottom:rect.bottom,windowHeight:window.innerHeight,visibleHeight,isInViewport},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2',runId:'post-fix-v2'})}).catch(()=>{});
-      // #endregion
       
       if (!isInViewport) return;
 
@@ -81,10 +71,6 @@ export function ProductSliderClean({ products }: ProductSliderCleanProps) {
       ) {
         e.preventDefault();
         isScrolling.current = true;
-
-        // #region agent log
-        fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductSliderClean.tsx:indexChange',message:'changing activeIndex',data:{currentIndex:currentIdx,deltaY:e.deltaY,productsLength:products.length},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H5',runId:'post-fix'})}).catch(()=>{});
-        // #endregion
 
         if (e.deltaY > 0 && currentIdx < products.length - 1) {
           setActiveIndex(currentIdx + 1);

@@ -2,46 +2,6 @@ import { motion } from "motion/react";
 import { useEffect } from "react";
 
 export function BackgroundAnimation() {
-  // #region agent log
-  useEffect(() => {
-    const container = document.querySelector('div.absolute.inset-0.z-\\[2\\].w-full.h-full.overflow-hidden') || document.querySelector('div.absolute.inset-0[style*="z-index: 2"]') || document.querySelector('div.absolute.inset-0.w-full.h-full.overflow-hidden');
-    // Tentar diferentes seletores para encontrar os blobs
-    const blobs1 = container?.querySelectorAll('[class*="motion"]');
-    const blobs2 = container?.querySelectorAll('div[class*="absolute"][class*="top"]');
-    const blobs3 = container?.querySelectorAll('div[class*="bg-purple"], div[class*="bg-blue"], div[class*="bg-gray"]');
-    const allBlobs = container?.querySelectorAll('div');
-    const motionBlobs = container?.querySelectorAll('[class*="motion"]');
-    const allMotionDivs = Array.from(container?.querySelectorAll('div') || []).filter((el: Element) => {
-      const style = (el as HTMLElement).style;
-      return style.background && style.background.includes('radial-gradient');
-    });
-    const noiseLayer = container?.querySelector('div[class*="bg-\\[url"]') || container?.querySelector('div[style*="background"]');
-    const blobLayer = container?.querySelector('div[class*="opacity-100"]');
-    const purpleBlob = Array.from(allMotionDivs).find((el: Element) => {
-      const style = (el as HTMLElement).style;
-      return style.background && style.background.includes('192, 132, 252');
-    });
-    const blueBlob = Array.from(allMotionDivs).find((el: Element) => {
-      const style = (el as HTMLElement).style;
-      return style.background && style.background.includes('96, 165, 250');
-    });
-    const grayBlob = Array.from(allMotionDivs).find((el: Element) => {
-      const style = (el as HTMLElement).style;
-      return style.background && style.background.includes('209, 213, 219');
-    });
-    const purpleBlobFilter = purpleBlob ? window.getComputedStyle(purpleBlob as Element).filter : null;
-    const purpleBlobBlur = purpleBlob ? window.getComputedStyle(purpleBlob as Element).backdropFilter : null;
-    const purpleBlobRect = purpleBlob ? (purpleBlob as HTMLElement).getBoundingClientRect() : null;
-    const blueBlobFilter = blueBlob ? window.getComputedStyle(blueBlob as Element).filter : null;
-    const blueBlobRect = blueBlob ? (blueBlob as HTMLElement).getBoundingClientRect() : null;
-    const grayBlobFilter = grayBlob ? window.getComputedStyle(grayBlob as Element).filter : null;
-    const grayBlobRect = grayBlob ? (grayBlob as HTMLElement).getBoundingClientRect() : null;
-    const purpleBlobBg = purpleBlob ? (purpleBlob as HTMLElement).style.background : null;
-    const blueBlobBg = blueBlob ? (blueBlob as HTMLElement).style.background : null;
-    const grayBlobBg = grayBlob ? (grayBlob as HTMLElement).style.background : null;
-    fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'BackgroundAnimation.tsx:3',message:'BackgroundAnimation component rendered - detailed check',data:{containerExists:!!container,containerZIndex:container?window.getComputedStyle(container as Element).zIndex:null,containerOpacity:container?window.getComputedStyle(container as Element).opacity:null,containerBgColor:container?window.getComputedStyle(container as Element).backgroundColor:null,blobsCount1:blobs1?.length||0,blobsCount2:blobs2?.length||0,blobsCount3:blobs3?.length||0,motionBlobsCount:motionBlobs?.length||0,allMotionDivsCount:allMotionDivs.length,allDivsCount:allBlobs?.length||0,noiseLayerExists:!!noiseLayer,noiseLayerOpacity:noiseLayer?window.getComputedStyle(noiseLayer as Element).opacity:null,blobLayerExists:!!blobLayer,blobLayerOpacity:blobLayer?window.getComputedStyle(blobLayer as Element).opacity:null,purpleBlobExists:!!purpleBlob,purpleBlobOpacity:purpleBlob?window.getComputedStyle(purpleBlob as Element).opacity:null,purpleBlobBg:purpleBlobBg,purpleBlobFilter:purpleBlobFilter,purpleBlobBlur:purpleBlobBlur,purpleBlobRect:purpleBlobRect?{x:purpleBlobRect.x,y:purpleBlobRect.y,width:purpleBlobRect.width,height:purpleBlobRect.height,top:purpleBlobRect.top,left:purpleBlobRect.left}:null,blueBlobExists:!!blueBlob,blueBlobOpacity:blueBlob?window.getComputedStyle(blueBlob as Element).opacity:null,blueBlobBg:blueBlobBg,blueBlobFilter:blueBlobFilter,blueBlobRect:blueBlobRect?{x:blueBlobRect.x,y:blueBlobRect.y,width:blueBlobRect.width,height:blueBlobRect.height,top:blueBlobRect.top,left:blueBlobRect.left}:null,grayBlobExists:!!grayBlob,grayBlobOpacity:grayBlob?window.getComputedStyle(grayBlob as Element).opacity:null,grayBlobBg:grayBlobBg,grayBlobFilter:grayBlobFilter,grayBlobRect:grayBlobRect?{x:grayBlobRect.x,y:grayBlobRect.y,width:grayBlobRect.width,height:grayBlobRect.height,top:grayBlobRect.top,left:grayBlobRect.left}:null,containerChildren:container?.children.length||0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-  }, []);
-  // #endregion
   return (
     <div className="absolute inset-0 z-[10] w-full h-full overflow-visible pointer-events-none bg-transparent">
       {/* Camada de Simulação de Fumaça/Neblina */}
