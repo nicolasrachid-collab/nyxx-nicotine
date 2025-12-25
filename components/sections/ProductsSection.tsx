@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Plus } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
 import { products } from '../../data/products';
@@ -126,10 +125,9 @@ export function ProductsSection() {
     >
       <div className="mb-12 md:mb-16 text-center">
         <div className="flex items-center justify-center gap-3 mb-6">
-          <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white">
-            <Plus size={14} strokeWidth={3} />
-          </div>
-          <span className="text-sm font-semibold tracking-wide">{t('productsTitle')}</span>
+          <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
+            {t('productsTitle')}
+          </span>
         </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto">
           {t('productsSubtitle')}

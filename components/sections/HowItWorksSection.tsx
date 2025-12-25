@@ -33,13 +33,7 @@ export function HowItWorksSection() {
           className="flex flex-col items-center text-center mb-32"
         >
           <div className="flex items-center gap-2 mb-6">
-            <div className="bg-black text-white p-1 rounded-full">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-            </div>
-            <span className="text-sm font-semibold tracking-wide uppercase text-neutral-900">
+            <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
               Como funciona
             </span>
           </div>

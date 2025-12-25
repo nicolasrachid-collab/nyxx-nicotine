@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Atom, ShieldCheck, ClipboardCheck, FlaskConical, Plus } from 'lucide-react';
+import { Atom, ShieldCheck, ClipboardCheck, FlaskConical } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { Card, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -45,8 +45,7 @@ export function TechnologySection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Badge variant="outline" className="w-fit gap-1.5 px-3 py-1 mb-4 text-sm font-medium border-white/20 bg-white/10 text-white backdrop-blur-sm">
-                <Plus className="w-3.5 h-3.5" />
+              <Badge variant="outline" className="w-fit gap-2 px-4 py-2 mb-6 text-xs font-semibold tracking-wider uppercase border border-white/20 bg-white/10 text-white backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
                 {t('technologyTitle')}
               </Badge>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">

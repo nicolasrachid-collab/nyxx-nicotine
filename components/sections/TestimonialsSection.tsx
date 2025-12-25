@@ -1,4 +1,4 @@
-import { Plus, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
 
@@ -43,13 +43,10 @@ export function TestimonialsSection() {
     >
       <div className="mb-12 md:mb-16">
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white">
-            <Plus size={14} strokeWidth={3} />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-sm font-semibold tracking-wide">{t('testimonialsTitle')}</span>
-            <span className="text-sm font-semibold tracking-wide">{t('testimonialsSubtitle')}</span>
-          </div>
+          <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
+            {t('testimonialsTitle')}
+          </span>
+          <span className="text-sm font-semibold tracking-wide">{t('testimonialsSubtitle')}</span>
         </div>
       </div>
 
