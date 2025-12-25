@@ -7,10 +7,10 @@ export function TechnologySection() {
   const { t } = useTranslation();
   
   const techPoints = [
-    { key: 'techSelectedIngredients' as const },
-    { key: 'techAdvancedTech' as const },
-    { key: 'techPremiumQuality' as const },
-    { key: 'techRigorousTesting' as const },
+    { key: 'techSelectedIngredients' as const, descKey: 'techSelectedIngredientsDesc' as const },
+    { key: 'techAdvancedTech' as const, descKey: 'techAdvancedTechDesc' as const },
+    { key: 'techPremiumQuality' as const, descKey: 'techPremiumQualityDesc' as const },
+    { key: 'techRigorousTesting' as const, descKey: 'techRigorousTestingDesc' as const },
   ];
 
   return (
@@ -50,6 +50,9 @@ export function TechnologySection() {
                 <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-2">
                   {t(point.key)}
                 </h3>
+                <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+                  {t(point.descKey)}
+                </p>
               </div>
             ))}
           </div>

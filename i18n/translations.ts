@@ -42,12 +42,16 @@ export const translations: Translations = {
     
     // Technology
     technologyTitle: 'Tecnologia de ponta',
-    technologySubtitle: 'Desenvolvido com precisão e qualidade premium.',
-    technologyDescription: 'Utilizamos tecnologia avançada e ingredientes selecionados para garantir uma experiência superior em cada produto.',
+    technologySubtitle: 'Tecnologia que eleva a experiência',
+    technologyDescription: 'Cada produto NYXX é desenvolvido com foco em controle, conforto e consistência do início ao fim.',
     techSelectedIngredients: 'Ingredientes selecionados',
+    techSelectedIngredientsDesc: 'Matérias primas de alta pureza, escolhidas para garantir sabor limpo e experiência consistente.',
     techAdvancedTech: 'Tecnologia avançada',
+    techAdvancedTechDesc: 'Nicotina com pH balanceado para uma absorção mais suave e sem ardor.',
     techPremiumQuality: 'Qualidade premium',
+    techPremiumQualityDesc: 'Processos controlados que asseguram estabilidade, segurança e alto padrão.',
     techRigorousTesting: 'Testes rigorosos',
+    techRigorousTestingDesc: 'Cada lote passa por testes para garantir desempenho, pureza e confiabilidade.',
     
     // Benefits
     benefitsTitle: 'Por que escolher Nyxx Nicotine?',
@@ -61,10 +65,10 @@ export const translations: Translations = {
     benefitQualityDesc: 'Controle rigoroso em todas as etapas para garantir consistência, segurança e alto desempenho.',
     
     // Stats
-    statsUniqueFlavors: 'Sabores únicos\nno portfólio',
-    statsSatisfaction: 'Taxa de satisfação\ndo cliente',
-    statsTested: 'Produtos\n100% testados',
-    statsSupport: 'Suporte\n24/7 disponível',
+    statsUniqueFlavors: 'Sabores desenvolvidos\ncom precisão',
+    statsSatisfaction: 'Satisfação dos\nconsumidores',
+    statsTested: 'Lotes testados\ne aprovados',
+    statsSupport: 'pH Balanceado\nFumaça',
     
     // How It Works
     howItWorksTitle: 'Como funciona',
@@ -178,12 +182,16 @@ export const translations: Translations = {
     
     // Technology
     technologyTitle: 'Cutting-edge technology',
-    technologySubtitle: 'Developed with precision and premium quality.',
-    technologyDescription: 'We use advanced technology and selected ingredients to ensure a superior experience in every product.',
+    technologySubtitle: 'Technology that elevates the experience',
+    technologyDescription: 'Each NYXX product is developed with a focus on control, comfort and consistency from start to finish.',
     techSelectedIngredients: 'Selected ingredients',
+    techSelectedIngredientsDesc: 'High-purity raw materials, chosen to ensure clean flavor and consistent experience.',
     techAdvancedTech: 'Advanced technology',
+    techAdvancedTechDesc: 'Nicotine with balanced pH for smoother absorption and no irritation.',
     techPremiumQuality: 'Premium quality',
+    techPremiumQualityDesc: 'Controlled processes that ensure stability, safety and high standards.',
     techRigorousTesting: 'Rigorous testing',
+    techRigorousTestingDesc: 'Each batch undergoes testing to ensure performance, purity and reliability.',
     
     // Benefits
     benefitsTitle: 'Why choose Nyxx Nicotine?',
@@ -197,10 +205,10 @@ export const translations: Translations = {
     benefitQualityDesc: 'Rigorous control at all stages to ensure consistency, safety and high performance.',
     
     // Stats
-    statsUniqueFlavors: 'Unique flavors\nin portfolio',
-    statsSatisfaction: 'Client\nsatisfaction rate',
-    statsTested: 'Products\n100% tested',
-    statsSupport: 'Support\n24/7 available',
+    statsUniqueFlavors: 'Flavors developed\nwith precision',
+    statsSatisfaction: 'Consumer\nsatisfaction',
+    statsTested: 'Batches tested\nand approved',
+    statsSupport: 'pH Balanced\nSmoke',
     
     // How It Works
     howItWorksTitle: 'How it works',
@@ -305,12 +313,16 @@ export const translations: Translations = {
     
     // Technology
     technologyTitle: 'Tecnología de vanguardia',
-    technologySubtitle: 'Desarrollado con precisión y calidad premium.',
-    technologyDescription: 'Utilizamos tecnología avanzada e ingredientes seleccionados para garantizar una experiencia superior en cada producto.',
+    technologySubtitle: 'Tecnología que eleva la experiencia',
+    technologyDescription: 'Cada producto NYXX se desarrolla con enfoque en control, comodidad y consistencia de principio a fin.',
     techSelectedIngredients: 'Ingredientes seleccionados',
+    techSelectedIngredientsDesc: 'Materias primas de alta pureza, elegidas para garantizar sabor limpio y experiencia consistente.',
     techAdvancedTech: 'Tecnología avanzada',
+    techAdvancedTechDesc: 'Nicotina con pH balanceado para una absorción más suave y sin ardor.',
     techPremiumQuality: 'Calidad premium',
+    techPremiumQualityDesc: 'Procesos controlados que aseguran estabilidad, seguridad y alto estándar.',
     techRigorousTesting: 'Pruebas rigurosas',
+    techRigorousTestingDesc: 'Cada lote pasa por pruebas para garantizar rendimiento, pureza y confiabilidad.',
     
     // Benefits
     benefitsTitle: '¿Por qué elegir Nyxx Nicotine?',
@@ -324,10 +336,10 @@ export const translations: Translations = {
     benefitQualityDesc: 'Control riguroso en todas las etapas para garantizar consistencia, seguridad y alto rendimiento.',
     
     // Stats
-    statsUniqueFlavors: 'Sabores únicos\nen portafolio',
-    statsSatisfaction: 'Tasa de satisfacción\ndel cliente',
-    statsTested: 'Productos\n100% probados',
-    statsSupport: 'Soporte\n24/7 disponible',
+    statsUniqueFlavors: 'Sabores desarrollados\ncon precisión',
+    statsSatisfaction: 'Satisfacción de los\nconsumidores',
+    statsTested: 'Lotes probados\ny aprobados',
+    statsSupport: 'pH Balanceado\nHumo',
     
     // How It Works
     howItWorksTitle: 'Cómo funciona',

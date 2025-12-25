@@ -3,6 +3,7 @@ import { AnimatedStat } from './AnimatedStat';
 
 export function StatsSection() {
   const { t } = useTranslation();
+  const supportText = t('statsSupport').split('\n');
   
   return (
     <section className="px-7 md:px-14 pb-20 max-w-[1800px] mx-auto bg-[#F5F5F5]">
@@ -22,11 +23,14 @@ export function StatsSection() {
           suffix="%" 
           label={t('statsTested')} 
         />
-        <AnimatedStat 
-          value={24} 
-          suffix="/7" 
-          label={t('statsSupport')} 
-        />
+        <div className="flex flex-col">
+          <span className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-black">
+            {supportText[0]}
+          </span>
+          <div className="mt-4 text-xs md:text-sm font-medium text-gray-500 max-w-[200px] leading-snug">
+            {supportText[1]}
+          </div>
+        </div>
       </div>
     </section>
   );

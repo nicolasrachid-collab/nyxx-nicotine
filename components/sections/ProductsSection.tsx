@@ -24,47 +24,76 @@ export function ProductsSection() {
       const container = containerRef.current;
       const containerRect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      const windowCenter = windowHeight / 2; // Centro da viewport
       const containerTop = containerRect.top;
       const containerHeight = container.offsetHeight;
-      const containerCenter = containerTop + containerHeight / 2; // Centro do container
       const containerBottom = containerRect.bottom;
       
-      // Calcular progresso baseado na posição do centro do container (para movimento Y da imagem)
-      // Progresso = 0 quando o centro do container está no centro da viewport (containerCenter = windowCenter)
+      // Calcular progresso baseado na posição do centro do container em relação ao centro da viewport
+      // Progresso = 0 quando o centro do container está no centro da viewport
       // Progresso = 1 quando o fundo do container está no topo da viewport (containerBottom = 0)
-      
+      const windowCenter = windowHeight / 2;
+      const containerCenter = containerTop + containerHeight / 2;
       let progress = 0;
-      if (containerCenter <= windowCenter && containerBottom > 0) {
-        // Centro do container passou do centro da viewport, começar movimento
-        // Quando containerCenter = windowCenter, progress = 0
-        // Quando containerBottom = 0, containerCenter = -containerHeight/2, então progress = 1
-        const scrollDistance = windowCenter + containerHeight / 2;
-        const scrolled = windowCenter - containerCenter;
-        progress = Math.min(1, Math.max(0, scrolled / scrollDistance));
+      
+      if (containerBottom > 0 && containerTop < windowHeight) {
+        // Container está visível na viewport
+        // Calcular progresso baseado na posição do centro do container
+        // Quando containerCenter = windowCenter (centros alinhados), progress = 0
+        // Quando containerBottom = 0 (container saiu), progress = 1
+        const distanceFromAlignment = windowCenter - containerCenter; // Positivo quando containerCenter está acima de windowCenter
+        // Quando containerCenter = windowCenter, distanceFromAlignment = 0, então progress = 0
+        // Quando containerBottom = 0, containerCenter = containerHeight/2 (negativo), então precisamos calcular o progresso
+        // A distância total que o centro precisa percorrer é: de windowCenter até containerHeight/2 (quando containerBottom = 0)
+        const maxCenterDistance = windowCenter + containerHeight / 2; // Distância máxima do centro até o alinhamento
+        // Quando containerCenter está abaixo de windowCenter (distanceFromAlignment negativo), o progresso aumenta
+        // progress = (maxCenterDistance - distanceFromAlignment) / maxCenterDistance quando distanceFromAlignment < 0
+        if (containerCenter <= windowCenter) {
+          // Centro do container passou ou está no centro da viewport
+          const distanceTraveled = windowCenter - containerCenter; // Distância percorrida desde o alinhamento (0 quando alinhados)
+          const totalDistance = windowCenter + containerHeight / 2; // Distância total até containerBottom = 0
+          progress = Math.min(1, Math.max(0, distanceTraveled / totalDistance));
+        } else {
+          // Centro do container ainda está acima do centro da viewport
+          progress = 0;
+        }
+      } else if (containerTop >= windowHeight) {
+        // Container ainda não entrou na viewport (está abaixo)
+        progress = 0;
       } else if (containerBottom <= 0) {
-        // Container já saiu completamente da viewport
+        // Container já saiu completamente da viewport (está acima)
         progress = 1;
       }
       
+      // Buscar seções para cálculo de activeIndex
+      const sections = scrollContainerRef.current.querySelectorAll('.product-section');
+      
       // Calcular productY baseado no progresso - movimento mais rápido e responsivo
-      const maxY = (products.length - 1) * windowHeight * 0.6; // 60% da altura da viewport por produto
+      // O container sticky tem lg:h-screen e lg:mt-20 (80px de margem superior)
+      // A imagem começa em lg:mt-20, então temos windowHeight - 80px de altura disponível
+      // Queremos que a imagem desça suavemente mas sempre permaneça visível
+      // Calcular maxY para permitir movimento suficiente para todos os produtos
+      const availableHeight = windowHeight - 80; // Altura disponível (windowHeight - mt-20)
+      // Usar 50% da altura disponível para permitir movimento suficiente
+      // Isso garante que mesmo no último produto, a imagem ainda esteja visível
+      const maxY = availableHeight * 0.5; // 50% da altura disponível
       const newY = progress * maxY;
       setProductY(newY);
       
       // Determinar qual seção está visível baseado na posição de cada seção individual
-      // Encontrar a seção mais próxima do centro da viewport
-      const sections = scrollContainerRef.current.querySelectorAll('.product-section');
+      // Encontrar a seção cujo centro está mais próximo do centro da viewport
+      // Usar um threshold mais restritivo (150px) para garantir que a seção está realmente no centro antes de trocar
       let closestIndex = 0;
       let closestDistance = Infinity;
+      const centerThreshold = 150; // Threshold em pixels - só trocar se a seção estiver dentro de 150px do centro
       
       sections.forEach((section, index) => {
         const sectionRect = section.getBoundingClientRect();
         const sectionCenter = sectionRect.top + sectionRect.height / 2;
         const distanceFromCenter = Math.abs(windowCenter - sectionCenter);
         
-        // Só considerar seções que estão visíveis na viewport
-        if (sectionRect.bottom > 0 && sectionRect.top < windowHeight) {
+        // Só considerar seções que estão visíveis na viewport e cujo centro está muito próximo do centro da viewport
+        // Isso garante que a imagem só muda quando a seção está realmente no centro
+        if (sectionRect.bottom > 0 && sectionRect.top < windowHeight && distanceFromCenter < centerThreshold) {
           if (distanceFromCenter < closestDistance) {
             closestDistance = distanceFromCenter;
             closestIndex = index;
@@ -72,7 +101,11 @@ export function ProductsSection() {
         }
       });
       
-      setActiveIndex(closestIndex);
+      // Se encontramos uma seção próxima o suficiente do centro, atualizar o índice
+      // Caso contrário, manter o índice atual (não mudar prematuramente)
+      if (closestDistance !== Infinity) {
+        setActiveIndex(closestIndex);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

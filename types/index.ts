@@ -52,9 +52,13 @@ export interface TranslationKey {
   technologySubtitle: string;
   technologyDescription: string;
   techSelectedIngredients: string;
+  techSelectedIngredientsDesc: string;
   techAdvancedTech: string;
+  techAdvancedTechDesc: string;
   techPremiumQuality: string;
+  techPremiumQualityDesc: string;
   techRigorousTesting: string;
+  techRigorousTestingDesc: string;
   // Benefits
   benefitsTitle: string;
   benefitSaferTitle: string;
