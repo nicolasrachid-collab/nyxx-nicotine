@@ -39,6 +39,17 @@ export function NyxxSection() {
 
   return (
     <section className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans">
+      {/* Efeito de luz sutil - múltiplos pontos suaves */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(circle 400px at 20% 30%, rgba(255, 165, 0, 0.12) 0%, transparent 70%),
+            radial-gradient(circle 400px at 80% 70%, rgba(255, 140, 0, 0.10) 0%, transparent 70%),
+            radial-gradient(circle 500px at 50% 50%, rgba(255, 165, 0, 0.08) 0%, transparent 80%)
+          `,
+        }}
+      />
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Hero Section */}
@@ -82,7 +93,7 @@ export function NyxxSection() {
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 />
-                <feature.icon className="w-8 h-8 text-black relative z-10" strokeWidth={1.5} />
+                <feature.icon className="w-8 h-8 text-gray-800 relative z-10" strokeWidth={1.5} style={{ filter: 'invert(1)' }} />
               </div>
               
               <h3 className="text-lg lg:text-xl font-bold text-black mb-3 lg:mb-4 tracking-wide">
