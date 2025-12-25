@@ -136,7 +136,7 @@ export function ProductsSection() {
                 >
                   {t(product.nameKey as keyof typeof t)}
                 </h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-line">
                   {t(product.descriptionKey as keyof typeof t)}
                 </p>
               </div>
