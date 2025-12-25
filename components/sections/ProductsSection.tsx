@@ -167,7 +167,7 @@ export function ProductsSection() {
             {t('productsTitle')}
           </motion.span>
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto" style={{ width: '626px' }}>
+        <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto">
           {t('productsSubtitle')}
         </h1>
         <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">

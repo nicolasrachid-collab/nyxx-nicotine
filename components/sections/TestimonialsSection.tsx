@@ -13,7 +13,7 @@ interface Testimonial {
 
 // Função para gerar URL de avatar com IA usando DiceBear Adventurer (estilo mais feliz e expressivo)
 const generateAvatarUrl = (name: string, seed?: number): string => {
-  const seedValue = seed || name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const seedValue = seed !== undefined ? seed : name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   // Usando adventurer que gera avatares mais alegres e expressivos por padrão
   // Cores de fundo mais vibrantes e alegres
   return `https://api.dicebear.com/7.x/adventurer/svg?seed=${seedValue}&backgroundColor=ffd5dc,ffdfbf,b6e3f4,c0aede&radius=50`;
@@ -92,36 +92,39 @@ export function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative bg-white rounded-2xl p-6 md:p-8 flex flex-col border border-neutral-200/50 shadow-sm hover:shadow-xl hover:border-orange-200 transition-all duration-300 hover:-translate-y-1"
+            className="group relative bg-gradient-to-br from-white to-orange-50/30 rounded-3xl p-8 md:p-10 flex flex-col border border-orange-100/50 shadow-md hover:shadow-2xl hover:shadow-orange-500/10 hover:border-orange-200/80 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
           >
+            {/* Background gradient overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-50/0 to-orange-100/0 group-hover:from-orange-50/50 group-hover:to-orange-100/30 transition-all duration-500 rounded-3xl" />
+            
             {/* Quote Icon */}
-            <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Quote className="w-12 h-12 text-orange-500" strokeWidth={1} />
+            <div className="absolute top-8 right-8 opacity-5 group-hover:opacity-10 transition-opacity duration-500 z-0">
+              <Quote className="w-16 h-16 text-orange-400" strokeWidth={1.5} />
             </div>
 
-            <div className="mb-6 relative z-10">
+            <div className="mb-8 relative z-10">
               {/* Rating */}
-              <div className="flex gap-1 mb-4">
+              <div className="flex gap-1.5 mb-6">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
                   <Star 
                     key={i} 
-                    size={18} 
-                    className="fill-orange-400 text-orange-400 group-hover:fill-orange-500 group-hover:text-orange-500 transition-colors" 
+                    size={20} 
+                    className="fill-orange-400 text-orange-400 group-hover:fill-orange-500 group-hover:text-orange-500 transition-all duration-300 drop-shadow-sm" 
                   />
                 ))}
               </div>
               
               {/* Testimonial Text */}
-              <p className="text-sm md:text-base font-medium text-gray-800 leading-relaxed mb-6 relative">
-                <span className="text-2xl font-serif text-orange-400/30 leading-none absolute -left-2 -top-2">"</span>
-                {testimonial.text}
-                <span className="text-2xl font-serif text-orange-400/30 leading-none">"</span>
+              <p className="text-base md:text-lg font-medium text-gray-800 leading-relaxed mb-0 relative z-10">
+                <span className="text-4xl font-serif text-orange-300/40 leading-none absolute -left-3 -top-3 group-hover:text-orange-400/50 transition-colors duration-300">"</span>
+                <span className="relative z-10">{testimonial.text}</span>
+                <span className="text-4xl font-serif text-orange-300/40 leading-none group-hover:text-orange-400/50 transition-colors duration-300">"</span>
               </p>
             </div>
 
             {/* Author Info */}
-            <div className="flex items-center gap-3 pt-4 border-t border-neutral-100 mt-auto">
-              <div className="w-12 h-12 rounded-full overflow-hidden shadow-md shadow-orange-500/20 group-hover:shadow-lg group-hover:shadow-orange-500/30 transition-all ring-2 ring-orange-100 group-hover:ring-orange-200">
+            <div className="flex items-center gap-4 pt-6 border-t border-orange-100/50 group-hover:border-orange-200/70 mt-auto transition-colors duration-300 relative z-10">
+              <div className="w-14 h-14 rounded-full overflow-hidden shadow-lg shadow-orange-500/20 group-hover:shadow-xl group-hover:shadow-orange-500/30 transition-all duration-300 ring-2 ring-orange-100/50 group-hover:ring-orange-200/70 group-hover:scale-105">
                 {testimonial.image ? (
                   <img 
                     src={testimonial.image} 
@@ -137,9 +140,9 @@ export function TestimonialsSection() {
                   </div>
                 )}
               </div>
-              <div>
-                <div className="text-sm font-bold text-gray-900">{testimonial.name}</div>
-                <div className="text-xs text-gray-500">{testimonial.location}</div>
+              <div className="flex-1 min-w-0">
+                <div className="text-base font-bold text-gray-900 group-hover:text-orange-600 transition-colors duration-300 truncate">{testimonial.name}</div>
+                <div className="text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300 truncate">{testimonial.location}</div>
               </div>
             </div>
           </motion.div>

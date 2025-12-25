@@ -36,36 +36,35 @@ export function TechnologySection() {
   return (
     <section className="py-24 bg-black text-white overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start mb-24">
-          {/* Left Column: Header */}
-          <div className="flex flex-col gap-6 sticky top-24 items-center lg:items-start text-center lg:text-left">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+        {/* Header Section */}
+        <div className="flex flex-col gap-6 items-center lg:items-start text-center lg:text-left mb-16 lg:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="w-full"
+          >
+            <motion.span 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="w-full"
+              className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 mb-6 text-xs font-semibold tracking-wider uppercase bg-orange-500 text-white shadow-md shadow-orange-500/20 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/30 hover:scale-105 transition-all duration-300"
             >
-              <motion.span 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 mb-6 text-xs font-semibold tracking-wider uppercase bg-orange-500 text-white shadow-md shadow-orange-500/20 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/30 hover:scale-105 transition-all duration-300"
-              >
-                {t('technologyTitle')}
-              </motion.span>
-              <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight text-white leading-[1.1] max-w-md mx-auto lg:mx-0">
-                {t('technologySubtitle')}
-              </h1>
-              <p className="text-base text-zinc-400 leading-relaxed max-w-md mt-2 mx-auto lg:mx-0">
-                {t('technologyDescription')}
-              </p>
-            </motion.div>
-          </div>
+              {t('technologyTitle')}
+            </motion.span>
+            <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight text-white leading-[1.1] max-w-md mx-auto lg:mx-0">
+              {t('technologySubtitle')}
+            </h1>
+            <p className="text-base text-zinc-400 leading-relaxed max-w-md mt-2 mx-auto lg:mx-0">
+              {t('technologyDescription')}
+            </p>
+          </motion.div>
+        </div>
 
-          {/* Right Column: Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Feature Cards Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -82,7 +81,7 @@ export function TechnologySection() {
                     <div className="space-y-2">
                       <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight">
                         {feature.title}
-                </h3>
+                      </h3>
                       <p className="text-zinc-400 text-base md:text-lg lg:text-lg leading-relaxed">
                         {feature.description}
                       </p>
@@ -91,7 +90,6 @@ export function TechnologySection() {
                 </Card>
               </motion.div>
             ))}
-          </div>
         </div>
 
         {/* Bottom Section: Stats */}
