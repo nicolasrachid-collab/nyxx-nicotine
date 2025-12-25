@@ -55,7 +55,7 @@ export function TeamSection() {
                </div>
                <span className="text-sm font-semibold tracking-wide">Nossos Sabores</span>
             </div>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.9]">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
                <span className="text-black">Descubra </span>
                <span className="text-gray-400">seu sabor</span>
             </h2>

@@ -41,7 +41,11 @@ export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 flex justify-center items-center px-7 py-4 md:px-14 md:py-5 transition-all duration-300 ${isScrolled || isMenuOpen ? 'bg-white text-black shadow-sm' : 'bg-transparent text-white'}`}
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center items-center px-7 py-4 md:px-14 md:py-5 transition-all duration-300 ${
+        isScrolled || isMenuOpen 
+          ? 'bg-white/80 backdrop-blur-xl border-b border-black/10 text-black shadow-lg shadow-black/5' 
+          : 'bg-transparent text-white'
+      }`}
       style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50 }}
     >
       <div className="w-full max-w-[1800px] flex justify-between items-center">

@@ -24,8 +24,8 @@ const steps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans">
+      <div className="container mx-auto max-w-7xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ export function HowItWorksSection() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6 tracking-tight">
             Uma nova forma de usar nicotina
           </h2>
           

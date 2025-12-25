@@ -37,10 +37,11 @@ export function TestimonialsSection() {
   return (
     <section 
       ref={ref}
-      className={`px-7 md:px-14 pt-20 md:pt-24 pb-20 md:pb-24 max-w-[1800px] mx-auto bg-[#F5F5F5] text-black transition-all duration-700 ease-out ${
+      className={`w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans transition-all duration-700 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
+      <div className="max-w-[1800px] mx-auto">
       <div className="mb-12 md:mb-16">
         <div className="flex items-center gap-3 mb-6">
           <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
@@ -79,6 +80,7 @@ export function TestimonialsSection() {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </section>
   );

@@ -129,9 +129,12 @@ export function ProductsSection() {
             {t('productsTitle')}
           </span>
         </div>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto">
           {t('productsSubtitle')}
         </h2>
+        <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+          {t('productsDescription')}
+        </p>
       </div>
 
       {/* Container principal com layout flex */}

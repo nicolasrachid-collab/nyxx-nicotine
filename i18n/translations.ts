@@ -26,7 +26,8 @@ export const translations: Translations = {
     
     // Products
     productsTitle: 'NYXX Nicotine Pouches',
-    productsSubtitle: 'Descubra nossa linha completa de sabores únicos',
+    productsSubtitle: 'Sabores para evoluir sua experiência',
+    productsDescription: 'Tecnologia avançada, pH balanceado e sabores marcantes sem fumaça e sem ardor.',
     productCoffee: 'Coffee ☕',
     productCoffeeDesc: 'Intensidade, cremosidade e sofisticação.\n\nO sabor Coffee entrega notas encorpadas de café premium, com perfil aromático intenso e acabamento suave. Ideal para quem busca foco, energia equilibrada e uma experiência refinada, perfeita para iniciar o dia ou acompanhar momentos de produtividade. Uma alternativa moderna para amantes de café que valorizam praticidade e performance.',
     productEnergy: 'Energy ⚡',
@@ -165,8 +166,9 @@ export const translations: Translations = {
     solutionText: 'Advanced technology that eliminates smoke, preserves authentic flavor, and offers complete discretion. No compromises. No limits.',
     
     // Products
-    productsTitle: 'Our products',
-    productsSubtitle: 'Discover our complete line of unique flavors',
+    productsTitle: 'NYXX Nicotine Pouches',
+    productsSubtitle: 'Flavors to evolve your experience',
+    productsDescription: 'Advanced technology, balanced pH and remarkable flavors without smoke and without irritation.',
     productCoffee: 'Coffee',
     productCoffeeDesc: 'The intense and creamy flavor of premium coffee, perfect to start your day.',
     productEnergy: 'Energy',
@@ -296,8 +298,9 @@ export const translations: Translations = {
     purposeSubtitle: 'En NYXX desarrollamos tecnologías inteligentes para ofrecer alternativas más seguras, modernas y equilibradas al consumo de nicotina. Una experiencia sin humo, sin combustión y con más control para el usuario.',
     
     // Products
-    productsTitle: 'Nuestros productos',
-    productsSubtitle: 'Descubre nuestra línea completa de sabores únicos',
+    productsTitle: 'NYXX Nicotine Pouches',
+    productsSubtitle: 'Sabores para evolucionar tu experiencia',
+    productsDescription: 'Tecnología avanzada, pH balanceado y sabores marcantes sin humo y sin ardor.',
     productCoffee: 'Coffee',
     productCoffeeDesc: 'El sabor intenso y cremoso del café premium, perfecto para comenzar el día.',
     productEnergy: 'Energy',

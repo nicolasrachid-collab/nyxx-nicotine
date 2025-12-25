@@ -8,10 +8,11 @@ export function MissionSection() {
   return (
     <section 
       ref={ref}
-      className={`px-7 md:px-14 pt-20 md:pt-24 pb-20 md:pb-24 max-w-[1800px] mx-auto bg-[#F5F5F5] text-black transition-all duration-700 ease-out ${
+      className={`w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans transition-all duration-700 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
+      <div className="max-w-[1800px] mx-auto">
       <div className="w-full h-px bg-gray-200 mb-12 md:mb-16"></div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
@@ -25,7 +26,7 @@ export function MissionSection() {
         </div>
 
         <div className="md:col-span-9 flex flex-col gap-8 md:gap-10">
-           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight leading-[1.1]">
+           <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1]">
              {t('missionTitle')}
            </h2>
            
@@ -33,6 +34,7 @@ export function MissionSection() {
              {t('missionText')}
            </p>
         </div>
+      </div>
       </div>
     </section>
   );

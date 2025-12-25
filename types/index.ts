@@ -35,6 +35,7 @@ export interface TranslationKey {
   // Products
   productsTitle: string;
   productsSubtitle: string;
+  productsDescription: string;
   productCoffee: string;
   productCoffeeDesc: string;
   productEnergy: string;

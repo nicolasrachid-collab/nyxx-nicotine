@@ -46,14 +46,15 @@ export function FAQSection() {
   return (
     <section 
       ref={ref}
-      className={`px-7 md:px-14 py-40 max-w-[1800px] mx-auto bg-[#F5F5F5] text-black transition-all duration-700 ease-out ${
+      className={`w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans transition-all duration-700 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
       aria-labelledby="faq-heading"
     >
+      <div className="max-w-[1800px] mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
         <div className="lg:col-span-4 space-y-10">
-           <h2 id="faq-heading" className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9]">
+           <h2 id="faq-heading" className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
              {t('frequentlyAsked')} <br/>
              {t('questions')}
            </h2>
@@ -96,6 +97,7 @@ export function FAQSection() {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
