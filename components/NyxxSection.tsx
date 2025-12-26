@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Shield, Star, Box, CheckCircle, ArrowRight } from "lucide-react";
+import { Shield, Star, Box, CheckCircle } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
 
 // Padrão grego - imagem localizada em /public/greek-pattern.svg
@@ -126,13 +126,6 @@ export function NyxxSection() {
           ))}
         </div>
 
-      </div>
-
-      {/* Linha decorativa no final */}
-      <div className="absolute bottom-0 left-0 right-0 pb-12 md:pb-16 z-10">
-        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-        </div>
       </div>
     </section>
   );
