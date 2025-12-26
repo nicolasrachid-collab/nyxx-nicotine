@@ -161,23 +161,11 @@ export function ProductsSection() {
 
   return (
     <section 
+      id="products"
       ref={ref}
-      className="w-full bg-white py-24 lg:py-32 xl:py-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans"
+      className="w-full bg-white py-24 lg:py-32 xl:py-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans products-section"
       aria-label="Seção de produtos"
     >
-      {/* Efeito de luz sutil - múltiplos pontos suaves */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(circle 700px at 10% 20%, rgba(156, 163, 175, 0.12) 0%, transparent 70%),
-            radial-gradient(circle 600px at 90% 80%, rgba(107, 114, 128, 0.10) 0%, transparent 70%),
-            radial-gradient(circle 800px at 50% 50%, rgba(75, 85, 99, 0.08) 0%, transparent 80%),
-            radial-gradient(circle 500px at 5% 50%, rgba(156, 163, 175, 0.08) 0%, transparent 70%),
-            radial-gradient(circle 500px at 95% 50%, rgba(107, 114, 128, 0.08) 0%, transparent 70%)
-          `,
-        }}
-      />
       {/* Cabeçalho */}
       <div className="mb-16 md:mb-24 lg:mb-32 text-center relative z-10">
         <div className="flex items-center justify-center gap-3 mb-6">
@@ -186,11 +174,9 @@ export function ProductsSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="group inline-flex items-center gap-4 text-sm font-semibold tracking-[0.2em] uppercase text-gray-600"
+            className="text-sm font-semibold tracking-[0.2em] uppercase text-gray-600"
           >
-            <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
             {t('productsTitle')}
-            <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
           </motion.span>
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-4xl mx-auto text-gray-900 mb-6">
@@ -304,6 +290,10 @@ export function ProductsSection() {
               stiffness: 100,
               damping: 30
             }}
+            style={{
+              boxShadow: 'none',
+              filter: 'none'
+            }}
           >
             {/* Conteúdo do produto ativo - apenas imagem */}
             <motion.div
@@ -313,12 +303,26 @@ export function ProductsSection() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
               className="relative"
-              style={{ background: 'transparent' }}
+              style={{ 
+                background: 'transparent',
+                boxShadow: 'none',
+                filter: 'none'
+              }}
             >
               <img
                 src={activeProduct.imageSide}
                 alt={activeProduct.name}
-                className="w-full h-auto object-contain"
+                className="w-full h-auto"
+                style={{ 
+                  objectFit: 'contain',
+                  filter: 'none !important', 
+                  boxShadow: 'none !important',
+                  textShadow: 'none !important',
+                  WebkitFilter: 'none !important',
+                  MozFilter: 'none !important',
+                  msFilter: 'none !important',
+                  OFilter: 'none !important'
+                }}
                 loading="lazy"
                 decoding="async"
               />

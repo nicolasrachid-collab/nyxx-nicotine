@@ -111,3 +111,20 @@ section {
   background-size: 200% 200%;
   animation: gradient 3s ease infinite;
 }
+
+/* Remover sombra de imagens de produtos */
+.products-section img {
+  filter: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-filter: none !important;
+  -moz-filter: none !important;
+  -ms-filter: none !important;
+  -o-filter: none !important;
+}
+
+.products-section img::before,
+.products-section img::after {
+  display: none !important;
+  box-shadow: none !important;
+}

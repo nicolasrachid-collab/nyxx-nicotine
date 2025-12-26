@@ -147,6 +147,38 @@ export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
           </a>
         </div>
 
+        {/* Menu de navegação */}
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Main navigation">
+          {[
+            { key: 'menuHome', href: '#home' },
+            { key: 'menuProducts', href: '#products' },
+            { key: 'menuAbout', href: '#about' },
+            { key: 'menuContact', href: '#contact' }
+          ].map((item) => (
+            <a
+              key={item.key}
+              href={item.href}
+              className="text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:opacity-70 relative group"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.querySelector(item.href);
+                if (target) {
+                  const headerOffset = 100;
+                  const elementPosition = target.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+            >
+              {t(item.key as keyof typeof t)}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+            </a>
+          ))}
+        </nav>
+
         <div className="flex justify-end items-center gap-4">
           <div className="relative">
             <button
@@ -155,8 +187,20 @@ export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
               aria-label={t('language')}
               aria-expanded={showLanguageMenu}
             >
-              <Globe size={12} />
-              <span>{language.toUpperCase()}</span>
+              {(() => {
+                const currentLang = languages.find(l => l.code === language);
+                return currentLang ? (
+                  <>
+                    <FlagIcon country={currentLang.flagComponent} />
+                    <span>{language.toUpperCase()}</span>
+                  </>
+                ) : (
+                  <>
+                    <Globe size={12} />
+                    <span>{language.toUpperCase()}</span>
+                  </>
+                );
+              })()}
             </button>
             
             {showLanguageMenu && (

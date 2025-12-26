@@ -8,39 +8,6 @@ export function HeroCard() {
   const particleIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const particleContainerRef = useRef<HTMLDivElement | null>(null);
   
-  // Função para adicionar quebra de linha após "Tecnologia" ou "Technology"
-  const formatDescription = (text: string) => {
-    const techIndex = text.indexOf('Tecnologia');
-    const technologyIndex = text.indexOf('Technology');
-    const tecnologiaIndex = text.indexOf('Tecnología');
-    
-    if (techIndex !== -1) {
-      return (
-        <>
-          {text.substring(0, techIndex)}
-          <br />
-          {text.substring(techIndex)}
-        </>
-      );
-    } else if (technologyIndex !== -1) {
-      return (
-        <>
-          {text.substring(0, technologyIndex)}
-          <br />
-          {text.substring(technologyIndex)}
-        </>
-      );
-    } else if (tecnologiaIndex !== -1) {
-      return (
-        <>
-          {text.substring(0, tecnologiaIndex)}
-          <br />
-          {text.substring(tecnologiaIndex)}
-        </>
-      );
-    }
-    return text;
-  };
 
   // Animação de partículas flutuantes no container principal
   useEffect(() => {
@@ -169,15 +136,10 @@ export function HeroCard() {
           </div>
 
           <div className="max-w-md text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed opacity-90">
-            <p className="overflow-hidden" style={{ 
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical' as 'vertical',
-              lineHeight: '1.6'
-            } as React.CSSProperties}>
+            <p className="line-height-1.6">
               <span className="font-bold text-white text-xl md:text-[22px] lg:text-2xl xl:text-[28px]">{t('heroSubtitle')}</span>{' '}
               <span className="bg-gradient-to-r from-gray-300 via-white to-gray-400 bg-clip-text text-transparent text-base md:text-base lg:text-xl xl:text-2xl">
-                {formatDescription(t('heroDescription'))}
+                {t('heroDescription')}
               </span>
             </p>
           </div>

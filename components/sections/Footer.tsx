@@ -20,6 +20,7 @@ export function Footer() {
 
   return (
     <footer 
+      id="contact"
       ref={footerRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}

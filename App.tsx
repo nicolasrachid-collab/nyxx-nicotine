@@ -72,7 +72,7 @@ const App = () => {
        
        {/* Main Content */}
        <div className={`transition-opacity duration-500 ease-in-out ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <div>
+          <div id="home">
              <HeroCard />
           </div>
           
