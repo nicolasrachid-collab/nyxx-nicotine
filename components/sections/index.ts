@@ -1,10 +1,14 @@
 export { Header } from './Header';
 export { MenuOverlay } from './MenuOverlay';
 export { HeroCard } from './HeroCard';
+export { HeroSection } from './HeroSection';
 export { MissionSection } from './MissionSection';
 export { ProductsSection } from './ProductsSection';
 export { TechnologySection } from './TechnologySection';
 export { BenefitsSection } from './BenefitsSection';
+export { ProcessSection } from './ProcessSection';
+export { ProductShowcaseSection } from './ProductShowcaseSection';
+export { TechStatsSection } from './TechStatsSection';
 export { HowItWorksSection } from './HowItWorksSection';
 export { TestimonialsSection } from './TestimonialsSection';
 export { FAQSection } from './FAQSection';

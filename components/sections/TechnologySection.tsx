@@ -34,16 +34,16 @@ export function TechnologySection() {
   const supportText = t('statsSupport').split('\n');
 
   return (
-    <section className="py-24 bg-black text-white overflow-hidden">
+    <section className="pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 bg-black text-white overflow-hidden px-4 md:px-8 lg:px-12 xl:px-16" aria-label="Seção de tecnologia">
       <div className="container mx-auto px-4 md:px-6">
         {/* Header Section */}
-        <div className="flex flex-col gap-6 items-center lg:items-start text-center lg:text-left mb-16 lg:mb-24">
+        <div className="flex flex-col gap-6 items-center text-center mb-16 md:mb-20 lg:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="w-full"
+            className="w-full flex flex-col items-center"
           >
             <motion.span 
               initial={{ opacity: 0, scale: 0.9 }}
@@ -54,17 +54,17 @@ export function TechnologySection() {
             >
               {t('technologyTitle')}
             </motion.span>
-            <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight text-white leading-[1.1] max-w-md mx-auto lg:mx-0">
+            <h1 className="text-4xl md:text-5xl lg:text-[38px] xl:text-[42px] 2xl:text-[46px] font-bold tracking-tight text-white leading-[1.1] max-w-2xl xl:max-w-3xl mx-auto">
               {t('technologySubtitle')}
             </h1>
-            <p className="text-base text-zinc-400 leading-relaxed max-w-md mt-2 mx-auto lg:mx-0">
+            <p className="text-base text-zinc-400 leading-relaxed max-w-md mt-2 mx-auto">
               {t('technologyDescription')}
             </p>
           </motion.div>
         </div>
 
         {/* Feature Cards Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 md:mb-20 lg:mb-24">
             {features.map((feature, index) => (
               <motion.div
                 key={index}

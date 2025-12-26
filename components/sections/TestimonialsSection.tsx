@@ -50,7 +50,7 @@ export function TestimonialsSection() {
   return (
     <section 
       ref={ref}
-      className={`w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans transition-all duration-700 ease-out ${
+      className={`w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans transition-all duration-700 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
@@ -59,7 +59,7 @@ export function TestimonialsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center text-center mb-32"
+          className="flex flex-col items-center text-center mb-16 md:mb-20 lg:mb-24"
         >
           <div className="flex items-center gap-2 mb-6">
             <motion.span 
@@ -74,7 +74,7 @@ export function TestimonialsSection() {
             </motion.span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-[38px] font-bold text-neutral-900 mb-6 tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-[38px] xl:text-[42px] 2xl:text-[46px] font-bold text-neutral-900 mb-6 tracking-tight">
             Uma nova forma de usar nicotina
           </h1>
           
@@ -131,6 +131,7 @@ export function TestimonialsSection() {
                     alt={testimonial.name}
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">

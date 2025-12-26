@@ -40,22 +40,24 @@ export function NyxxSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans">
+    <section className="w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans" aria-label="Seção NYXX">
       {/* Efeito de luz sutil - múltiplos pontos suaves */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(circle 400px at 20% 30%, rgba(251, 146, 60, 0.12) 0%, transparent 70%),
-            radial-gradient(circle 400px at 80% 70%, rgba(249, 115, 22, 0.10) 0%, transparent 70%),
-            radial-gradient(circle 500px at 50% 50%, rgba(234, 88, 12, 0.08) 0%, transparent 80%)
+            radial-gradient(circle 700px at 10% 20%, rgba(156, 163, 175, 0.12) 0%, transparent 70%),
+            radial-gradient(circle 600px at 90% 80%, rgba(107, 114, 128, 0.10) 0%, transparent 70%),
+            radial-gradient(circle 800px at 50% 50%, rgba(75, 85, 99, 0.08) 0%, transparent 80%),
+            radial-gradient(circle 500px at 5% 50%, rgba(156, 163, 175, 0.08) 0%, transparent 70%),
+            radial-gradient(circle 500px at 95% 50%, rgba(107, 114, 128, 0.08) 0%, transparent 70%)
           `,
         }}
       />
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Hero Section */}
-        <div className="flex flex-col items-center justify-center gap-12 lg:gap-16 mb-24 lg:mb-32">
+        <div className="flex flex-col items-center justify-center gap-12 lg:gap-16 mb-16 md:mb-20 lg:mb-24">
           
           {/* Centered Text */}
           <motion.div 
@@ -63,8 +65,7 @@ export function NyxxSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
-            style={{ lineHeight: '16px' }}
+            className="text-center max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto"
           >
             <div className="flex items-center justify-center gap-3 mb-6">
               <motion.span 
@@ -72,9 +73,9 @@ export function NyxxSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase border border-orange-200/50 bg-gradient-to-r from-orange-50/80 to-orange-100/60 text-orange-900 backdrop-blur-xl shadow-md shadow-orange-500/10 hover:shadow-lg hover:shadow-orange-500/20 hover:border-orange-300/70 hover:from-orange-100/90 hover:to-orange-200/70 hover:scale-105 transition-all duration-300"
+                className="group inline-flex items-center rounded-full w-fit gap-2.5 px-6 py-3 text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase border border-black/10 bg-white/90 text-black backdrop-blur-sm shadow-sm hover:shadow-md hover:border-black/20 hover:bg-white transition-all duration-300"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 group-hover:bg-orange-600 transition-colors duration-300" />
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 group-hover:scale-125 transition-transform duration-300" />
                 Propósito NYXX
               </motion.span>
             </div>
@@ -82,18 +83,18 @@ export function NyxxSection() {
               Uma forma mais <span className="text-black">inteligente</span><br />
               de consumir nicotina.
             </h1>
-            <p className="text-gray-600 text-base leading-relaxed max-w-2xl lg:max-w-3xl mx-auto" style={{ width: '468px' }}>
+            <p className="text-gray-600 text-base leading-relaxed max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto">
               Na NYXX, tecnologia inteligente se traduz em alternativas mais seguras e modernas, com uma experiência sem fumaça, sem combustão e total controle.
             </p>
           </motion.div>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-12 gap-y-12 lg:gap-y-16 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-x-8 lg:gap-x-12 xl:gap-x-16 gap-y-12 lg:gap-y-16 xl:gap-y-20 items-start">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center text-center group h-full"
+              className="flex flex-col items-center text-center group h-full hover:scale-105 transition-transform duration-300"
             >
               {/* Greek Circle Icon Container */}
               <div className="relative w-24 h-24 mb-6 flex items-center justify-center">
@@ -102,7 +103,9 @@ export function NyxxSection() {
                   alt="Greek Pattern" 
                   className="absolute inset-0 w-full h-full object-contain invert"
                   animate={{ rotate: 360 }} 
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <feature.icon 
                   className="w-8 h-8 relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:text-black" 

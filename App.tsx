@@ -4,7 +4,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { 
   Header, 
   MenuOverlay, 
-  HeroCard, 
+  HeroCard,
   ProductsSection,
   TechnologySection,
   HowItWorksSection,
@@ -14,6 +14,7 @@ import {
   Footer
 } from './components/sections';
 import { NyxxSection } from './components/NyxxSection';
+import { MarqueeSeparator } from './components/MarqueeSeparator';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,11 +75,34 @@ const App = () => {
           <div>
              <HeroCard />
           </div>
+          
+          {/* Nova estrutura com componentes intercalados */}
           <NyxxSection />
+          
+          {/* Separador */}
+          <div className="w-full py-12 md:py-16 bg-white relative">
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `
+                  radial-gradient(circle 700px at 10% 20%, rgba(156, 163, 175, 0.12) 0%, transparent 70%),
+                  radial-gradient(circle 600px at 90% 80%, rgba(107, 114, 128, 0.10) 0%, transparent 70%),
+                  radial-gradient(circle 800px at 50% 50%, rgba(75, 85, 99, 0.08) 0%, transparent 80%),
+                  radial-gradient(circle 500px at 5% 50%, rgba(156, 163, 175, 0.08) 0%, transparent 70%),
+                  radial-gradient(circle 500px at 95% 50%, rgba(107, 114, 128, 0.08) 0%, transparent 70%)
+                `,
+              }}
+            />
+            <div className="max-w-[1800px] mx-auto px-7 md:px-14 relative z-10">
+              <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+            </div>
+          </div>
+          
           <ProductsSection />
           <TechnologySection />
           <TestimonialsSection />
           <MissionSection />
+          <MarqueeSeparator />
           <FAQSection />
           <Footer />
        </div>
