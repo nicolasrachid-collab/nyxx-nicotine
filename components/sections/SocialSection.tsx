@@ -61,7 +61,20 @@ export function SocialSection() {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
-      <div className="max-w-[1800px] mx-auto">
+      {/* Efeito de luz sutil - múltiplos pontos suaves */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(circle 700px at 10% 20%, rgba(156, 163, 175, 0.12) 0%, transparent 70%),
+            radial-gradient(circle 600px at 90% 80%, rgba(107, 114, 128, 0.10) 0%, transparent 70%),
+            radial-gradient(circle 800px at 50% 50%, rgba(75, 85, 99, 0.08) 0%, transparent 80%),
+            radial-gradient(circle 500px at 5% 50%, rgba(156, 163, 175, 0.08) 0%, transparent 70%),
+            radial-gradient(circle 500px at 95% 50%, rgba(107, 114, 128, 0.08) 0%, transparent 70%)
+          `,
+        }}
+      />
+      <div className="max-w-[1800px] mx-auto relative z-10">
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
         <div>
           <div className="flex items-center gap-2 mb-2">

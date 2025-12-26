@@ -18,6 +18,7 @@ export function DeusaAnimation({ className = '', duration = 4 }: DeusaAnimationP
         const svgText = await response.text();
         
         if (containerRef.current) {
+          // Usar innerHTML diretamente (mais compatível com referências de gradiente)
           containerRef.current.innerHTML = svgText;
           
           const svg = containerRef.current.querySelector('svg');
@@ -46,46 +47,49 @@ export function DeusaAnimation({ className = '', duration = 4 }: DeusaAnimationP
               height = h;
             }
             
-            // Criar gradiente linear com cores dos sabores
-            const gradient = document.createElementNS(svgNS, 'linearGradient');
-            gradient.setAttribute('id', 'flavor-gradient');
-            gradient.setAttribute('x1', '0');
-            gradient.setAttribute('y1', '0');
-            gradient.setAttribute('x2', width.toString());
-            gradient.setAttribute('y2', '0');
-            gradient.setAttribute('gradientUnits', 'userSpaceOnUse');
-            
-            // Adicionar stops com cores dos sabores - cores mais vibrantes
-            const colors = [
-              { offset: '0%', color: '#8B5A2B', opacity: '0.6' },   // Coffee
-              { offset: '20%', color: '#FFB800', opacity: '1' },    // Energy
-              { offset: '40%', color: '#FF9500', opacity: '1' },    // Mango
-              { offset: '60%', color: '#FF6B7A', opacity: '1' },   // Watermelon
-              { offset: '80%', color: '#00C896', opacity: '1' },    // Menthol
-              { offset: '100%', color: '#8B5A2B', opacity: '0.6' } // Coffee (volta)
+            // Cores dos sabores para animação sequencial
+            const flavorColors = [
+              { name: 'Coffee', color: '#8B5A2B' },
+              { name: 'Energy', color: '#FFB800' },
+              { name: 'Mango', color: '#FF9500' },
+              { name: 'Watermelon', color: '#FF6B7A' },
+              { name: 'Menthol', color: '#00C896' }
             ];
+
+            // Criar um único gradiente que será animado
+            const animatedGradient = document.createElementNS(svgNS, 'linearGradient');
+            animatedGradient.setAttribute('id', 'flavor-animated');
+            animatedGradient.setAttribute('x1', '0%');
+            animatedGradient.setAttribute('y1', '0%');
+            animatedGradient.setAttribute('x2', '100%');
+            animatedGradient.setAttribute('y2', '0%');
             
-            colors.forEach(({ offset, color, opacity }) => {
-              const stop = document.createElementNS(svgNS, 'stop');
-              stop.setAttribute('offset', offset);
-              stop.setAttribute('stop-color', color);
-              stop.setAttribute('stop-opacity', opacity);
-              gradient.appendChild(stop);
-            });
+            // Criar stops que serão animados
+            const stop1 = document.createElementNS(svgNS, 'stop');
+            stop1.setAttribute('offset', '0%');
+            stop1.setAttribute('stop-color', flavorColors[0].color);
+            stop1.setAttribute('stop-opacity', '0.9');
+            animatedGradient.appendChild(stop1);
             
-            // Criar animação para mover o gradiente (efeito de luz passando)
-            const animate = document.createElementNS(svgNS, 'animateTransform');
-            animate.setAttribute('attributeName', 'gradientTransform');
-            animate.setAttribute('type', 'translate');
-            animate.setAttribute('values', `-${width} 0; ${width} 0`);
-            animate.setAttribute('dur', '4s');
-            animate.setAttribute('repeatCount', 'indefinite');
-            gradient.appendChild(animate);
+            const stop2 = document.createElementNS(svgNS, 'stop');
+            stop2.setAttribute('offset', '50%');
+            stop2.setAttribute('stop-color', flavorColors[0].color);
+            stop2.setAttribute('stop-opacity', '1');
+            animatedGradient.appendChild(stop2);
             
-            defs.appendChild(gradient);
+            const stop3 = document.createElementNS(svgNS, 'stop');
+            stop3.setAttribute('offset', '100%');
+            stop3.setAttribute('stop-color', flavorColors[0].color);
+            stop3.setAttribute('stop-opacity', '0.9');
+            animatedGradient.appendChild(stop3);
+            
+            defs.appendChild(animatedGradient);
+            
+            // Armazenar referências aos stops para animação
+            (animatedGradient as any).stops = [stop1, stop2, stop3];
             
             // Preparar paths para animação
-            paths.forEach((path) => {
+            paths.forEach((path, pathIndex) => {
               const length = path.getTotalLength?.() || 1000;
               const computedStyle = window.getComputedStyle(path);
               const currentFill = computedStyle.fill;
@@ -93,14 +97,23 @@ export function DeusaAnimation({ className = '', duration = 4 }: DeusaAnimationP
               // Salvar fill original
               path.setAttribute('data-original-fill', currentFill);
               
-              // Aplicar gradiente RGB no stroke (efeito de luz passando diretamente no desenho)
-              path.setAttribute('stroke', 'url(#flavor-gradient)');
-              path.setAttribute('stroke-width', '4');
-              path.setAttribute('stroke-linecap', 'round');
-              path.setAttribute('stroke-linejoin', 'round');
+              // Iniciar com o gradiente animado
+              // Remover fill/stroke existentes primeiro para forçar atualização
+              path.removeAttribute('fill');
+              path.removeAttribute('stroke');
               
-              // Esconder fill inicialmente
-              path.style.fill = 'transparent';
+              // Aplicar gradiente usando setAttributeNS para garantir namespace correto
+              const svgNS = 'http://www.w3.org/2000/svg';
+              path.setAttributeNS(null, 'fill', 'url(#flavor-animated)');
+              path.setAttributeNS(null, 'stroke', 'url(#flavor-animated)');
+              path.setAttributeNS(null, 'stroke-width', '2');
+              path.setAttributeNS(null, 'stroke-linecap', 'round');
+              path.setAttributeNS(null, 'stroke-linejoin', 'round');
+              
+              // Usar atributo SVG para fill-opacity (não CSS style, que não funciona bem com SVGs dinâmicos)
+              path.setAttributeNS(null, 'fill-opacity', '0');
+              
+              // Iniciar com stroke transparente para animação progressiva
               path.style.strokeDasharray = `${length}`;
               path.style.strokeDashoffset = `${length}`;
             });
@@ -114,18 +127,91 @@ export function DeusaAnimation({ className = '', duration = 4 }: DeusaAnimationP
               paths.forEach((path, index) => {
                 const delay = (index / paths.length) * (duration * 0.08); // Reduzido de 0.1 para 0.08 para começar ainda mais rápido
                 
-                // Animação do stroke - desenho progressivo mais visível
-                path.style.transition = `stroke-dashoffset ${pathDuration}s ease-out ${delay}s, fill ${pathDuration * 0.3}s ease-in-out ${delay + pathDuration * 0.7}s`;
+                // Animação do stroke primeiro (desenho progressivo)
+                path.style.transition = `stroke-dashoffset ${pathDuration}s ease-out ${delay}s`;
                 
-                // Trigger animation
+                // Trigger animation do stroke
                 requestAnimationFrame(() => {
                   path.style.strokeDashoffset = '0';
-                  // Aplicar gradiente também no fill após animação para maior visibilidade
+                  
+                  // Revelar o fill com gradiente RGB usando animação SVG nativa (fill-opacity não anima com CSS transition)
+                  const fillRevealDelay = (delay + pathDuration * 0.6) * 1000;
                   setTimeout(() => {
-                    path.setAttribute('fill', 'url(#flavor-gradient)');
-                  }, (delay + pathDuration * 0.7) * 1000);
+                    // Criar animação SVG nativa para fill-opacity
+                    const animateFillOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+                    animateFillOpacity.setAttribute('attributeName', 'fill-opacity');
+                    animateFillOpacity.setAttribute('from', '0');
+                    animateFillOpacity.setAttribute('to', '1');
+                    animateFillOpacity.setAttribute('dur', `${pathDuration * 0.4}s`);
+                    animateFillOpacity.setAttribute('fill', 'freeze');
+                    path.appendChild(animateFillOpacity);
+                    animateFillOpacity.beginElement();
+                  }, fillRevealDelay);
                 });
               });
+
+              // Iniciar ciclo de cores após animação inicial (começar mais cedo)
+              const startColorCycle = () => {
+                const colorChangeDuration = 3000; // 3 segundos por cor
+                let currentColorIndex = 0;
+                
+                const changeColor = () => {
+                  // Mudar para próxima cor
+                  currentColorIndex = (currentColorIndex + 1) % flavorColors.length;
+                  const newColor = flavorColors[currentColorIndex].color;
+                  
+                  // Animar os stops do gradiente diretamente usando animação SVG
+                  const stops = (animatedGradient as any).stops;
+                  if (stops && stops.length > 0) {
+                    stops.forEach((stop: SVGStopElement) => {
+                      // Remover animações anteriores
+                      const existingAnimate = stop.querySelector('animate');
+                      if (existingAnimate) {
+                        stop.removeChild(existingAnimate);
+                      }
+                      
+                      // Obter cor atual
+                      const currentColor = stop.getAttribute('stop-color') || flavorColors[0].color;
+                      
+                      // Criar nova animação SVG
+                      const animate = document.createElementNS(svgNS, 'animate');
+                      animate.setAttribute('attributeName', 'stop-color');
+                      animate.setAttribute('from', currentColor);
+                      animate.setAttribute('to', newColor);
+                      animate.setAttribute('dur', '2s');
+                      animate.setAttribute('fill', 'freeze');
+                      
+                      stop.appendChild(animate);
+                      
+                      // Iniciar animação
+                      try {
+                        animate.beginElement();
+                      } catch (e) {
+                        // Fallback: mudar cor diretamente se animação falhar
+                        stop.setAttribute('stop-color', newColor);
+                      }
+                    });
+                  }
+                };
+                
+                // Iniciar primeira mudança de cor após um pequeno delay
+                setTimeout(() => {
+                  changeColor();
+                }, 1000);
+                
+                // Continuar mudando cor a cada intervalo
+                const colorInterval = setInterval(() => {
+                  changeColor();
+                }, colorChangeDuration);
+                
+                // Armazenar intervalo para limpeza
+                (window as any).deusaColorInterval = colorInterval;
+              };
+              
+              // Começar ciclo de cores mais cedo (após 50% da animação)
+              setTimeout(() => {
+                startColorCycle();
+              }, totalAnimationTime * 0.5);
 
               // Adicionar efeito de partículas flutuantes após a animação terminar
               timeoutRef.current = setTimeout(() => {
@@ -229,6 +315,11 @@ export function DeusaAnimation({ className = '', duration = 4 }: DeusaAnimationP
       if (particleContainerRef.current?.parentElement) {
         particleContainerRef.current.remove();
         particleContainerRef.current = null;
+      }
+      // Limpar intervalo de cores
+      if ((window as any).deusaColorInterval) {
+        clearInterval((window as any).deusaColorInterval);
+        (window as any).deusaColorInterval = null;
       }
     };
   }, [duration]);

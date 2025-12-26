@@ -15,9 +15,20 @@ export function MissionSection() {
       }`}
       aria-label="Seção de missão"
     >
-      <div className="max-w-[1800px] mx-auto">
-        <div className="w-full h-px bg-gray-200 mb-16 md:mb-20 lg:mb-24"></div>
-
+      {/* Efeito de luz sutil - múltiplos pontos suaves */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(circle 700px at 10% 20%, rgba(156, 163, 175, 0.12) 0%, transparent 70%),
+            radial-gradient(circle 600px at 90% 80%, rgba(107, 114, 128, 0.10) 0%, transparent 70%),
+            radial-gradient(circle 800px at 50% 50%, rgba(75, 85, 99, 0.08) 0%, transparent 80%),
+            radial-gradient(circle 500px at 5% 50%, rgba(156, 163, 175, 0.08) 0%, transparent 70%),
+            radial-gradient(circle 500px at 95% 50%, rgba(107, 114, 128, 0.08) 0%, transparent 70%)
+          `,
+        }}
+      />
+      <div className="max-w-[1800px] mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 lg:gap-20">
           {/* Left Column: Brand and Tagline */}
           <div className="md:col-span-4 lg:col-span-3 flex flex-col gap-6">

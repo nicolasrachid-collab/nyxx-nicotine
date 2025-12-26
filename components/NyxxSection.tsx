@@ -73,10 +73,11 @@ export function NyxxSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="group inline-flex items-center rounded-full w-fit gap-2.5 px-6 py-3 text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase border border-black/10 bg-white/90 text-black backdrop-blur-sm shadow-sm hover:shadow-md hover:border-black/20 hover:bg-white transition-all duration-300"
+                className="group inline-flex items-center gap-4 text-sm font-semibold tracking-[0.2em] uppercase text-gray-600"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 group-hover:scale-125 transition-transform duration-300" />
+                <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
                 Propósito NYXX
+                <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
               </motion.span>
             </div>
             <h1 className="text-4xl lg:text-[38px] font-bold text-black mb-6 lg:mb-8 leading-tight line-clamp-2 break-words">
@@ -125,6 +126,13 @@ export function NyxxSection() {
           ))}
         </div>
 
+      </div>
+
+      {/* Linha decorativa no final */}
+      <div className="absolute bottom-0 left-0 right-0 pb-12 md:pb-16 z-10">
+        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        </div>
       </div>
     </section>
   );

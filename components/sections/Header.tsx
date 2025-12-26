@@ -9,15 +9,103 @@ interface HeaderProps {
   toggleMenu: () => void;
 }
 
+// Componente de bandeira SVG
+function FlagIcon({ country }: { country: 'br' | 'us' | 'es' }) {
+  const flags = {
+    br: (
+      <svg viewBox="0 0 640 480" className="w-5 h-5 flex-shrink-0" aria-hidden="true">
+        {/* Fundo verde */}
+        <rect fill="#009739" width="640" height="480"/>
+        {/* Losango amarelo */}
+        <path fill="#FEDD00" d="M320 60l140 180-140 180-140-180z"/>
+        {/* Círculo azul */}
+        <circle cx="320" cy="240" r="70" fill="#002776"/>
+        {/* Faixa branca com "ORDEM E PROGRESSO" */}
+        <path fill="#FFF" d="M250 240h140l-10 5-10-5-10 5-10-5-10 5-10-5-10 5-10-5-10 5-10-5-10 5-10-5-10 5-10-5z" opacity="0.9"/>
+        {/* Estrelas principais */}
+        <path fill="#FFF" d="M320 200l-3 9h9l-7 5 3 9-7-5-7 5 3-9-7-5h9z"/>
+        <circle cx="300" cy="220" r="2.5" fill="#FFF"/>
+        <circle cx="340" cy="220" r="2.5" fill="#FFF"/>
+        <circle cx="310" cy="250" r="2.5" fill="#FFF"/>
+        <circle cx="330" cy="250" r="2.5" fill="#FFF"/>
+        <circle cx="320" cy="270" r="2.5" fill="#FFF"/>
+        <circle cx="290" cy="235" r="2" fill="#FFF"/>
+        <circle cx="350" cy="235" r="2" fill="#FFF"/>
+        <circle cx="305" cy="260" r="2" fill="#FFF"/>
+        <circle cx="335" cy="260" r="2" fill="#FFF"/>
+      </svg>
+    ),
+    us: (
+      <svg viewBox="0 0 640 480" className="w-5 h-5 flex-shrink-0" aria-hidden="true">
+        {/* Listras vermelhas e brancas */}
+        <rect fill="#b22234" width="640" height="480"/>
+        <rect fill="#fff" y="37.9" width="640" height="37.9"/>
+        <rect fill="#fff" y="113.7" width="640" height="37.9"/>
+        <rect fill="#fff" y="189.5" width="640" height="37.9"/>
+        <rect fill="#fff" y="265.3" width="640" height="37.9"/>
+        <rect fill="#fff" y="341.1" width="640" height="37.9"/>
+        {/* Cantão azul */}
+        <rect fill="#3c3b6e" width="256" height="204.8"/>
+        {/* Estrelas no cantão - 50 estrelas simplificadas */}
+        <g fill="#fff">
+          {/* Primeira fileira */}
+          <circle cx="20" cy="15" r="2"/>
+          <circle cx="40" cy="15" r="2"/>
+          <circle cx="60" cy="15" r="2"/>
+          <circle cx="80" cy="15" r="2"/>
+          <circle cx="100" cy="15" r="2"/>
+          <circle cx="120" cy="15" r="2"/>
+          {/* Segunda fileira */}
+          <circle cx="30" cy="30" r="2"/>
+          <circle cx="50" cy="30" r="2"/>
+          <circle cx="70" cy="30" r="2"/>
+          <circle cx="90" cy="30" r="2"/>
+          <circle cx="110" cy="30" r="2"/>
+          {/* Terceira fileira */}
+          <circle cx="20" cy="45" r="2"/>
+          <circle cx="40" cy="45" r="2"/>
+          <circle cx="60" cy="45" r="2"/>
+          <circle cx="80" cy="45" r="2"/>
+          <circle cx="100" cy="45" r="2"/>
+          <circle cx="120" cy="45" r="2"/>
+          {/* Continuação do padrão */}
+          <circle cx="30" cy="60" r="2"/>
+          <circle cx="50" cy="60" r="2"/>
+          <circle cx="70" cy="60" r="2"/>
+          <circle cx="90" cy="60" r="2"/>
+          <circle cx="110" cy="60" r="2"/>
+        </g>
+      </svg>
+    ),
+    es: (
+      <svg viewBox="0 0 640 480" className="w-5 h-5 flex-shrink-0" aria-hidden="true">
+        {/* Listras horizontais */}
+        <rect fill="#AA151B" width="640" height="160"/>
+        <rect fill="#F1BF00" y="160" width="640" height="160"/>
+        <rect fill="#AA151B" y="320" width="640" height="160"/>
+        {/* Brasão simplificado à esquerda */}
+        <g transform="translate(80, 160)">
+          <rect fill="#AA151B" x="0" y="0" width="120" height="160" opacity="0.3"/>
+          <circle fill="#F1BF00" cx="60" cy="80" r="30"/>
+          <path fill="#AA151B" d="M60 50l10 30h-20z"/>
+          <path fill="#AA151B" d="M60 110l10-30h-20z"/>
+        </g>
+      </svg>
+    ),
+  };
+  
+  return flags[country];
+}
+
 export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
   const { language, setLanguage, t } = useTranslation();
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const languages: { code: Language; label: string; flag: string }[] = [
-    { code: 'pt', label: 'PT', flag: '🇧🇷' },
-    { code: 'en', label: 'EN', flag: '🇺🇸' },
-    { code: 'es', label: 'ES', flag: '🇪🇸' },
+  const languages: { code: Language; label: string; flagComponent: 'br' | 'us' | 'es' }[] = [
+    { code: 'pt', label: 'PT', flagComponent: 'br' },
+    { code: 'en', label: 'EN', flagComponent: 'us' },
+    { code: 'es', label: 'ES', flagComponent: 'es' },
   ];
 
   useEffect(() => {
@@ -94,7 +182,7 @@ export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
                       role="menuitem"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="text-lg leading-none" aria-hidden="true">{lang.flag}</span>
+                        <FlagIcon country={lang.flagComponent} />
                         <span className={`w-2 h-2 rounded-full ${language === lang.code ? 'bg-white' : 'bg-white/40'}`} aria-hidden="true"></span>
                         {lang.label}
                       </div>

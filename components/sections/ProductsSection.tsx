@@ -31,8 +31,6 @@ const steps = [
 // Constantes para otimização
 const SCROLL_THROTTLE_MS = 16; // ~60fps
 const CENTER_THRESHOLD = 150; // Threshold em pixels para trocar seção
-const MAX_Y_PERCENTAGE = 0.5; // 50% da altura disponível para movimento
-const HEADER_OFFSET = 80; // Margem superior do sticky container
 
 // Mapeamento de ícones para cada produto
 const productIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -56,61 +54,31 @@ export function ProductsSection() {
 
   // Handler de scroll com useCallback para memoização
   const handleScroll = useCallback(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:57',message:'handleScroll called',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     if (!containerRef.current || !scrollContainerRef.current) {
+      // #region agent log
+      fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:60',message:'Early return - refs missing',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
       return;
     }
 
-    const container = containerRef.current;
     const scrollContainer = scrollContainerRef.current;
-    const containerRect = container.getBoundingClientRect();
     const windowHeight = window.innerHeight;
-    const containerTop = containerRect.top;
-    const containerHeight = container.offsetHeight;
-    const containerBottom = containerRect.bottom;
+    const windowCenter = windowHeight / 2;
     
-    // Buscar seções para cálculo de activeIndex e progresso
+    // Buscar seções para cálculo de activeIndex
     const sections = scrollContainer.querySelectorAll('.product-section');
     
-    // Calcular progresso baseado em quanto o container foi rolado
-    // Progresso vai de 0 (container entrando na viewport pelo topo) a 1 (container saindo pelo fundo)
-    let progress = 0;
+    // #region agent log
+    fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:67',message:'Sections found',data:{sectionsCount:sections.length,windowHeight,windowCenter},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    // #endregion
     
-    // Calcular progresso de forma contínua baseado na posição do container
-    // Progresso começa quando qualquer parte do container entra na viewport
-    // Quando containerTop = windowHeight (topo do container no topo da viewport): progress = 0
-    // Quando containerBottom = 0 (fundo do container no topo da viewport): progress = 1
-    
-    // Ponto de início: quando containerTop = windowHeight (progress = 0)
-    // Ponto de fim: quando containerBottom = 0, ou seja, containerTop = -containerHeight (progress = 1)
-    const startPoint = windowHeight; // Quando containerTop = windowHeight
-    const endPoint = -containerHeight; // Quando containerTop = -containerHeight (containerBottom = 0)
-    const totalRange = startPoint - endPoint; // windowHeight + containerHeight
-    
-    if (containerBottom <= 0) {
-      // Container já saiu completamente da viewport
-      progress = 1;
-    } else if (containerTop >= windowHeight) {
-      // Container ainda não entrou na viewport (ou está exatamente no ponto de entrada)
-      progress = 0;
-    } else {
-      // Container está parcial ou completamente visível - calcular progresso contínuo
-      const currentPosition = containerTop;
-      const distanceFromStart = startPoint - currentPosition; // Quanto já foi rolado desde o início
-      
-      progress = Math.min(1, Math.max(0, distanceFromStart / totalRange));
-    }
-    
-    // Calcular productY baseado no progresso
-    const availableHeight = windowHeight - HEADER_OFFSET;
-    const maxY = availableHeight * MAX_Y_PERCENTAGE;
-    const newY = progress * maxY;
-    
-    setProductY(newY);
-    
-    // Determinar qual seção está visível
-    const windowCenter = windowHeight / 2;
+    // Determinar qual seção está visível e mais próxima do centro
     let closestIndex = 0;
     let closestDistance = Infinity;
+    let activeSection: HTMLElement | null = null;
     
     sections.forEach((section, index) => {
       const sectionRect = section.getBoundingClientRect();
@@ -121,12 +89,55 @@ export function ProductsSection() {
         if (distanceFromCenter < closestDistance) {
           closestDistance = distanceFromCenter;
           closestIndex = index;
+          activeSection = section as HTMLElement;
         }
       }
     });
     
-    if (closestDistance !== Infinity) {
+    // #region agent log
+    fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:86',message:'Section detection result',data:{closestIndex,closestDistance,hasActiveSection:!!activeSection},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    // #endregion
+    
+    if (closestDistance !== Infinity && activeSection) {
       setActiveIndex(closestIndex);
+      
+      const sectionRect = activeSection.getBoundingClientRect();
+      const sectionCenter = sectionRect.top + sectionRect.height / 2;
+      
+      // Verificar se a seção já passou pelo centro da tela
+      const hasReachedCenter = sectionCenter <= windowCenter;
+      
+      // #region agent log
+      fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:93',message:'Center check',data:{sectionCenter,windowCenter,hasReachedCenter,sectionTop:sectionRect.top,sectionHeight:sectionRect.height},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+      // #endregion
+      
+      if (hasReachedCenter) {
+        // Calcular quanto a seção se moveu desde que chegou ao centro
+        // Quando sectionCenter == windowCenter: offset = 0
+        // Conforme a seção desce, offset aumenta proporcionalmente
+        const offsetFromCenter = windowCenter - sectionCenter;
+        
+        // #region agent log
+        fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:100',message:'Setting productY - reached center',data:{offsetFromCenter,productY:offsetFromCenter},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
+        
+        // Aplicar o mesmo offset ao produto (mesma velocidade de scroll)
+        setProductY(offsetFromCenter);
+      } else {
+        // #region agent log
+        fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:107',message:'Setting productY - not reached center',data:{productY:0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
+        
+        // Seção ainda não chegou ao centro: produto fica fixo
+        setProductY(0);
+      }
+    } else {
+      // #region agent log
+      fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:111',message:'No active section - setting productY to 0',data:{productY:0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
+      
+      // Nenhuma seção ativa: produto fica fixo
+      setProductY(0);
     }
   }, []);
 
@@ -168,48 +179,18 @@ export function ProductsSection() {
         }}
       />
       {/* Cabeçalho */}
-      <div className="mb-16 md:mb-24 lg:mb-32 text-center">
+      <div className="mb-16 md:mb-24 lg:mb-32 text-center relative z-10">
         <div className="flex items-center justify-center gap-3 mb-6">
           <motion.span 
-            initial={{ opacity: 0, scale: 0.8, y: -10 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ 
-              duration: 0.6,
-              type: "spring",
-              stiffness: 200,
-              damping: 15
-            }}
-            whileHover={{ 
-              scale: 1.05,
-              y: -2,
-              transition: { duration: 0.2 }
-            }}
-            className="group relative inline-flex items-center rounded-full px-5 py-2.5 text-xs font-semibold tracking-wider uppercase text-orange-600 border border-orange-200 bg-gradient-to-r from-orange-50/80 to-orange-100/60 backdrop-blur-sm shadow-sm hover:shadow-md hover:border-orange-300 transition-all duration-300 overflow-hidden"
+            transition={{ duration: 0.5 }}
+            className="group inline-flex items-center gap-4 text-sm font-semibold tracking-[0.2em] uppercase text-gray-600"
           >
-            {/* Efeito de brilho animado no hover */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              initial={{ x: '-100%' }}
-              whileHover={{ x: '100%' }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            />
-            
-            {/* Ponto decorativo animado */}
-            <motion.span
-              className="w-1.5 h-1.5 rounded-full bg-orange-500 mr-2"
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.7, 1, 0.7]
-              }}
-              transition={{ 
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            
-            <span className="relative z-10">{t('productsTitle')}</span>
+            <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
+            {t('productsTitle')}
+            <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
           </motion.span>
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-4xl mx-auto text-gray-900 mb-6">
@@ -220,16 +201,16 @@ export function ProductsSection() {
         </p>
       </div>
 
-        {/* Container principal com layout flex */}
+        {/* Container principal com layout grid */}
         <div 
           ref={containerRef}
-          className="relative flex flex-col lg:flex-row gap-8 md:gap-12 max-w-7xl mx-auto"
+          className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-7xl mx-auto"
           style={{ minHeight: `${products.length * 70}vh` }}
         >
         {/* Lado esquerdo: Seções scrolláveis */}
         <div 
           ref={scrollContainerRef}
-          className="flex-1 space-y-0 w-full lg:w-1/2"
+          className="space-y-0"
         >
           {products.map((product, index) => {
             const ProductIcon = productIcons[product.id] || Coffee;
@@ -312,7 +293,7 @@ export function ProductsSection() {
         </div>
 
         {/* Lado direito: Conteúdo sticky que acompanha o scroll */}
-        <div className="w-full lg:w-1/2 lg:sticky lg:top-20 lg:h-screen lg:flex lg:items-center lg:justify-center lg:self-start">
+        <div className="w-full lg:sticky lg:top-20 lg:h-screen lg:flex lg:items-center lg:justify-center lg:self-start">
           <motion.div
             className="relative w-full max-w-md mx-auto lg:mt-20"
             animate={{
@@ -347,14 +328,14 @@ export function ProductsSection() {
       </div>
 
       {/* Separador */}
-      <div className="w-full py-12 md:py-16 bg-white">
+      <div className="w-full py-12 md:py-16 bg-white relative z-10">
         <div className="max-w-[1800px] mx-auto px-7 md:px-14">
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+          <div className="w-full h-px bg-gray-300"></div>
         </div>
       </div>
 
       {/* HowItWorks Section - Clean */}
-      <div className="container mx-auto max-w-6xl mt-24 md:mt-32 lg:mt-40">
+      <div className="container mx-auto max-w-6xl mt-24 md:mt-32 lg:mt-40 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 relative">
           {/* Linha conectora - apenas desktop */}
           <div className="hidden md:block absolute top-12 left-0 right-0 h-px bg-gray-300" />

@@ -54,7 +54,20 @@ export function TestimonialsSection() {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
-      <div className="max-w-[1800px] mx-auto">
+      {/* Efeito de luz sutil - múltiplos pontos suaves */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(circle 700px at 10% 20%, rgba(156, 163, 175, 0.12) 0%, transparent 70%),
+            radial-gradient(circle 600px at 90% 80%, rgba(107, 114, 128, 0.10) 0%, transparent 70%),
+            radial-gradient(circle 800px at 50% 50%, rgba(75, 85, 99, 0.08) 0%, transparent 80%),
+            radial-gradient(circle 500px at 5% 50%, rgba(156, 163, 175, 0.08) 0%, transparent 70%),
+            radial-gradient(circle 500px at 95% 50%, rgba(107, 114, 128, 0.08) 0%, transparent 70%)
+          `,
+        }}
+      />
+      <div className="max-w-[1800px] mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -67,10 +80,11 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="group inline-flex items-center rounded-full w-fit gap-2 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase border border-orange-200/50 bg-gradient-to-r from-orange-50/80 to-orange-100/60 text-orange-900 backdrop-blur-xl shadow-md shadow-orange-500/10 hover:shadow-lg hover:shadow-orange-500/20 hover:border-orange-300/70 hover:from-orange-100/90 hover:to-orange-200/70 hover:scale-105 transition-all duration-300"
+              className="group inline-flex items-center gap-4 text-sm font-semibold tracking-[0.2em] uppercase text-gray-600"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 group-hover:bg-orange-600 transition-colors duration-300" />
+              <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
               Como funciona
+              <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
             </motion.span>
           </div>
 
