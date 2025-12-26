@@ -11,11 +11,11 @@ interface ProductSliderCleanProps {
 
 // Cores por sabor
 const flavorColors: Record<string, string> = {
-  Coffee: '#8B5A2B',
-  Energy: '#FFB800',
-  Mango: '#FF9500',
-  Watermelon: '#FF6B7A',
-  Menthol: '#00C896',
+  Coffee: '#6D4A30',
+  Energy: '#FFD867',
+  Mango: '#E17237',
+  Watermelon: '#E5989B',
+  Menthol: '#94C1D5',
 };
 
 export function ProductSliderClean({ products }: ProductSliderCleanProps) {
