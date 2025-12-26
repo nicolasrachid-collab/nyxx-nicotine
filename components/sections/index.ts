@@ -1,5 +1,4 @@
 export { Header } from './Header';
-export { MenuOverlay } from './MenuOverlay';
 export { HeroCard } from './HeroCard';
 export { HeroSection } from './HeroSection';
 export { MissionSection } from './MissionSection';
