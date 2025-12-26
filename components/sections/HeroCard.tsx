@@ -1,6 +1,6 @@
+import React, { useEffect, useRef } from 'react';
 import { DeusaAnimation } from '../DeusaAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
-import { useEffect, useRef } from 'react';
 
 export function HeroCard() {
   const { t } = useTranslation();
@@ -169,8 +169,13 @@ export function HeroCard() {
           </div>
 
           <div className="max-w-md text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed opacity-90">
-            <p>
-              <span className="font-bold text-white whitespace-nowrap text-xl md:text-[22px] lg:text-2xl xl:text-[28px]">{t('heroSubtitle')}</span>{' '}
+            <p className="overflow-hidden" style={{ 
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical' as 'vertical',
+              lineHeight: '1.6'
+            } as React.CSSProperties}>
+              <span className="font-bold text-white text-xl md:text-[22px] lg:text-2xl xl:text-[28px]">{t('heroSubtitle')}</span>{' '}
               <span className="bg-gradient-to-r from-gray-300 via-white to-gray-400 bg-clip-text text-transparent text-base md:text-base lg:text-xl xl:text-2xl">
                 {formatDescription(t('heroDescription'))}
               </span>
