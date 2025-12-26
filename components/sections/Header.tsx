@@ -14,10 +14,10 @@ export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const languages: { code: Language; label: string }[] = [
-    { code: 'pt', label: 'PT' },
-    { code: 'en', label: 'EN' },
-    { code: 'es', label: 'ES' },
+  const languages: { code: Language; label: string; flag: string }[] = [
+    { code: 'pt', label: 'PT', flag: '🇧🇷' },
+    { code: 'en', label: 'EN', flag: '🇺🇸' },
+    { code: 'es', label: 'ES', flag: '🇪🇸' },
   ];
 
   useEffect(() => {
@@ -93,7 +93,8 @@ export function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
                       }`}
                       role="menuitem"
                     >
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-3">
+                        <span className="text-lg leading-none" aria-hidden="true">{lang.flag}</span>
                         <span className={`w-2 h-2 rounded-full ${language === lang.code ? 'bg-white' : 'bg-white/40'}`} aria-hidden="true"></span>
                         {lang.label}
                       </div>

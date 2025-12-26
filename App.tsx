@@ -80,7 +80,7 @@ const App = () => {
           <NyxxSection />
           
           {/* Separador */}
-          <div className="w-full py-12 md:py-16 bg-white relative">
+          <div className="w-full py-12 md:py-16 bg-white relative overflow-hidden">
             <div 
               className="absolute inset-0 pointer-events-none"
               style={{
