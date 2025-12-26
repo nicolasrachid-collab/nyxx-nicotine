@@ -37,23 +37,32 @@ export function DeusaAnimation({ className = '', duration = 4 }: DeusaAnimationP
               svg.insertBefore(defs, svg.firstChild);
             }
             
+            // Obter viewBox do SVG para coordenadas do gradiente
+            const viewBox = svg.getAttribute('viewBox');
+            let width = 21000, height = 29700; // Valores padrão do viewBox
+            if (viewBox) {
+              const [x, y, w, h] = viewBox.split(' ').map(Number);
+              width = w;
+              height = h;
+            }
+            
             // Criar gradiente linear com cores dos sabores
             const gradient = document.createElementNS(svgNS, 'linearGradient');
             gradient.setAttribute('id', 'flavor-gradient');
-            gradient.setAttribute('x1', '0%');
-            gradient.setAttribute('y1', '0%');
-            gradient.setAttribute('x2', '100%');
-            gradient.setAttribute('y2', '0%');
+            gradient.setAttribute('x1', '0');
+            gradient.setAttribute('y1', '0');
+            gradient.setAttribute('x2', width.toString());
+            gradient.setAttribute('y2', '0');
             gradient.setAttribute('gradientUnits', 'userSpaceOnUse');
             
-            // Adicionar stops com cores dos sabores
+            // Adicionar stops com cores dos sabores - cores mais vibrantes
             const colors = [
-              { offset: '0%', color: '#8B5A2B', opacity: '0.4' },   // Coffee
-              { offset: '20%', color: '#FFB800', opacity: '0.8' },  // Energy
-              { offset: '40%', color: '#FF9500', opacity: '0.8' },  // Mango
-              { offset: '60%', color: '#FF6B7A', opacity: '0.8' },  // Watermelon
-              { offset: '80%', color: '#00C896', opacity: '0.8' },  // Menthol
-              { offset: '100%', color: '#8B5A2B', opacity: '0.4' }   // Coffee (volta)
+              { offset: '0%', color: '#8B5A2B', opacity: '0.6' },   // Coffee
+              { offset: '20%', color: '#FFB800', opacity: '1' },    // Energy
+              { offset: '40%', color: '#FF9500', opacity: '1' },    // Mango
+              { offset: '60%', color: '#FF6B7A', opacity: '1' },   // Watermelon
+              { offset: '80%', color: '#00C896', opacity: '1' },    // Menthol
+              { offset: '100%', color: '#8B5A2B', opacity: '0.6' } // Coffee (volta)
             ];
             
             colors.forEach(({ offset, color, opacity }) => {
@@ -68,7 +77,7 @@ export function DeusaAnimation({ className = '', duration = 4 }: DeusaAnimationP
             const animate = document.createElementNS(svgNS, 'animateTransform');
             animate.setAttribute('attributeName', 'gradientTransform');
             animate.setAttribute('type', 'translate');
-            animate.setAttribute('values', '-100 0; 100 0');
+            animate.setAttribute('values', `-${width} 0; ${width} 0`);
             animate.setAttribute('dur', '4s');
             animate.setAttribute('repeatCount', 'indefinite');
             gradient.appendChild(animate);
@@ -111,7 +120,10 @@ export function DeusaAnimation({ className = '', duration = 4 }: DeusaAnimationP
                 // Trigger animation
                 requestAnimationFrame(() => {
                   path.style.strokeDashoffset = '0';
-                  path.style.fill = path.getAttribute('data-original-fill') || '#4D4D4D';
+                  // Aplicar gradiente também no fill após animação para maior visibilidade
+                  setTimeout(() => {
+                    path.setAttribute('fill', 'url(#flavor-gradient)');
+                  }, (delay + pathDuration * 0.7) * 1000);
                 });
               });
 
