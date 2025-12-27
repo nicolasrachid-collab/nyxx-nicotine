@@ -4,6 +4,7 @@ import { useTranslation } from '../../hooks/useTranslation';
 import { Card, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { AnimatedStat } from './AnimatedStat';
+import { AnimatedLineGradient } from '../AnimatedTextGradient';
 
 export function TechnologySection() {
   const { t } = useTranslation();
@@ -53,9 +54,9 @@ export function TechnologySection() {
                 transition={{ duration: 0.5 }}
                 className="group inline-flex items-center gap-4 text-sm font-semibold tracking-[0.2em] uppercase text-gray-300"
               >
-                <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
+                <AnimatedLineGradient />
                 {t('technologyTitle')}
-                <span className="block w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent group-hover:w-20 transition-all duration-500 ease-out" />
+                <AnimatedLineGradient />
               </motion.span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-[38px] xl:text-[42px] 2xl:text-[46px] font-bold tracking-tight text-white leading-[1.1] max-w-2xl xl:max-w-3xl mx-auto">

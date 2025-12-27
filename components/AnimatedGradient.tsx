@@ -62,29 +62,23 @@ export function AnimatedGradient({ gradientId, stop1Ref, stop2Ref }: AnimatedGra
       }
       
       const elapsed = (Date.now() - startTime) / 1000;
-      const cycleTime = 15; // 15 segundos para um ciclo completo (mais lento e suave)
-      const totalCycleTime = cycleTime * 2; // ida e volta
+      const cycleTime = 3; // 3 segundos para um ciclo completo (5x mais rápido)
       
-      // Progresso normalizado de 0 a 1 (com reversão)
-      const rawProgress = (elapsed % totalCycleTime) / totalCycleTime;
-      const isReversing = rawProgress > 0.5;
-      const normalizedProgress = isReversing 
-        ? 1 - (rawProgress - 0.5) * 2 
-        : rawProgress * 2;
-      
-      // Aplicar easing para transição mais suave
-      const easedProgress = easeInOutCubic(normalizedProgress);
+      // Progresso normalizado de 0 a 1 (loop contínuo imediato)
+      const rawProgress = (elapsed % cycleTime) / cycleTime;
       
       // Calcular posição no array de cores (com interpolação)
-      const colorPosition1 = easedProgress * colors.length;
+      const colorPosition1 = rawProgress * colors.length;
       const colorIndex1 = Math.floor(colorPosition1) % colors.length;
-      const nextIndex1 = (colorIndex1 + 1) % colors.length;
+      // Quando está na última cor, próxima é a primeira (loop imediato)
+      const nextIndex1 = colorIndex1 === colors.length - 1 ? 0 : (colorIndex1 + 1) % colors.length;
       const t1 = colorPosition1 - Math.floor(colorPosition1);
       
       // Segundo stop com offset para criar efeito de "onda"
-      const colorPosition2 = (easedProgress * colorsShifted.length + 0.3) % colorsShifted.length;
+      const colorPosition2 = (rawProgress * colorsShifted.length + 0.3) % colorsShifted.length;
       const colorIndex2 = Math.floor(colorPosition2) % colorsShifted.length;
-      const nextIndex2 = (colorIndex2 + 1) % colorsShifted.length;
+      // Quando está na última cor, próxima é a primeira (loop imediato)
+      const nextIndex2 = colorIndex2 === colorsShifted.length - 1 ? 0 : (colorIndex2 + 1) % colorsShifted.length;
       const t2 = colorPosition2 - Math.floor(colorPosition2);
       
       // Interpolar entre as cores para transição suave

@@ -5,6 +5,7 @@ import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useThrottle } from '../../hooks/useThrottle';
 import { products } from '../../data/products';
+import { AnimatedLineGradient } from '../AnimatedTextGradient';
 
 // Padrão grego - imagem localizada em /public/greek-pattern.svg
 const greekCirclePattern = "/greek-pattern.svg";
@@ -163,7 +164,7 @@ export function ProductsSection() {
     <section 
       id="products"
       ref={ref}
-      className="w-full bg-white py-24 lg:py-32 xl:py-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans products-section"
+      className="w-full bg-white py-24 lg:py-32 xl:py-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans products-section bg-clean-pattern"
       aria-label="Seção de produtos"
     >
       {/* Cabeçalho */}
@@ -174,9 +175,11 @@ export function ProductsSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-sm font-semibold tracking-[0.2em] uppercase text-gray-600"
+            className="group inline-flex items-center gap-4 text-sm font-semibold tracking-[0.2em] uppercase text-gray-600"
           >
+            <AnimatedLineGradient />
             {t('productsTitle')}
+            <AnimatedLineGradient />
           </motion.span>
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-4xl mx-auto text-gray-900 mb-6">

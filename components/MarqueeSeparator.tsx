@@ -12,7 +12,7 @@ export function MarqueeSeparator({
   className = ''
 }: MarqueeSeparatorProps) {
   return (
-    <div className={`w-full overflow-hidden bg-gray-100 text-black border-2 border-gray-300 outline-none py-4 md:py-6 ${className}`}>
+    <div className={`w-full overflow-hidden bg-white bg-light-pattern text-black border-2 border-gray-300 outline-none py-4 md:py-6 ${className}`}>
       <div className="flex">
         <motion.div
           className="flex whitespace-nowrap"

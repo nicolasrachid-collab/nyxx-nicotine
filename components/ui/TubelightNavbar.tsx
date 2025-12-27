@@ -94,7 +94,7 @@ export function TubelightNavbar({
               className={cn(
                 'relative cursor-pointer text-sm sm:text-base font-semibold px-6 sm:px-8 py-2.5 rounded-full transition-colors',
                 'text-white/80 hover:text-white',
-                isActive && 'bg-white/20 text-white',
+                isActive && 'bg-black text-white',
               )}
             >
               <span className="hidden md:inline">{item.label}</span>
@@ -104,7 +104,7 @@ export function TubelightNavbar({
               {isActive && (
                 <motion.div
                   layoutId="lamp"
-                  className="absolute inset-0 w-full bg-white/10 rounded-full -z-10"
+                  className="absolute inset-0 w-full bg-black rounded-full -z-10"
                   initial={false}
                   transition={{
                     type: 'spring',
