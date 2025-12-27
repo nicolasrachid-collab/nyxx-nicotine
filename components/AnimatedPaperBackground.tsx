@@ -1,8 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { ShaderPlane } from './ShaderPlane';
+import React, { useEffect, useRef } from 'react';
 
 interface AnimatedPaperBackgroundProps {
   className?: string;
@@ -11,7 +9,9 @@ interface AnimatedPaperBackgroundProps {
 }
 
 /**
- * Versão com shader Three.js para efeitos avançados
+ * Background animado usando CSS puro
+ * Canvas Three.js desabilitado devido à incompatibilidade com React 19
+ * Esta versão CSS oferece performance similar sem dependências problemáticas
  */
 export function AnimatedPaperBackground({ 
   className = '', 
@@ -61,46 +61,17 @@ export function AnimatedPaperBackground({
         zIndex: 0,
       }}
     >
-      <Suspense fallback={
-        <div 
-          className="w-full h-full bg-gradient-to-br from-orange-50 to-white opacity-30"
-          style={{
-            background: `
-              radial-gradient(circle at 20% 30%, rgba(255, 165, 0, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.12) 0%, transparent 50%),
-              linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(250, 250, 250, 0.99) 50%, rgba(255, 255, 255, 0.98) 100%)
-            `
-          }}
-        />
-      }>
-        <Canvas
-          camera={{ position: [0, 0, 1], fov: 75 }}
-          style={{ 
-            width: '100%', 
-            height: '100%',
-            display: 'block',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-          }}
-          gl={{ 
-            alpha: true, 
-            antialias: true,
-            preserveDrawingBuffer: false,
-            powerPreference: 'high-performance',
-          }}
-          dpr={[1, 2]}
-          onCreated={({ gl }) => {
-            gl.setClearColor('#ffffff', 0);
-          }}
-        >
-          <ShaderPlane 
-            position={[0, 0, 0]} 
-            color1="#ffa500"
-            color2="#ffffff"
-          />
-        </Canvas>
-      </Suspense>
+      <div 
+        className="w-full h-full"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 30%, rgba(255, 165, 0, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.12) 0%, transparent 50%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(250, 250, 250, 0.99) 50%, rgba(255, 255, 255, 0.98) 100%)
+          `,
+          animation: 'shimmer 8s ease-in-out infinite',
+        }}
+      />
     </div>
   );
 }
