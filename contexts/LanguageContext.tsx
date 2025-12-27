@@ -1,4 +1,4 @@
-import { createContext, useState, useMemo, useEffect, type ReactNode } from 'react';
+import { createContext, useState, useMemo, useEffect, useContext, type ReactNode } from 'react';
 import type { Language, TranslationKey } from '../types';
 import { translations } from '../i18n/translations';
 
@@ -43,4 +43,13 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+}
+
+// Hook para usar o contexto de idioma
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
 }

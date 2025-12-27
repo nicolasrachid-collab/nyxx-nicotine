@@ -123,7 +123,6 @@ export interface TranslationKey {
   kits: string;
   shipping: string;
   returns: string;
-  contact: string;
   siteMap: string;
   socialLinks: string;
   faq: string;

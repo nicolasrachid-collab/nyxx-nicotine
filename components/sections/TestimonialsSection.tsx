@@ -131,6 +131,8 @@ export function TestimonialsSection() {
                   <img 
                     src={testimonial.image} 
                     alt={testimonial.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"

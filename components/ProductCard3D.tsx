@@ -167,6 +167,8 @@ export function ProductCard3D({ name, image, isHighlighted = false, className = 
           src={image}
           alt={name}
           className="w-full h-full object-contain"
+          loading="lazy"
+          decoding="async"
           style={{
             filter: isHovered 
               ? `drop-shadow(0 30px 40px rgba(0,0,0,0.5)) drop-shadow(0 0 30px ${theme.glow})`

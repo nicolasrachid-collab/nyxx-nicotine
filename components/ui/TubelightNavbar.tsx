@@ -46,8 +46,7 @@ export function TubelightNavbar({
     }
   }, [activeTab]);
 
-  const handleClick = (item: NavItem, e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
+  const navigateToSection = (item: NavItem) => {
     setCurrentActiveTab(item.name);
     if (onTabChange) {
       onTabChange(item.name);
@@ -63,6 +62,18 @@ export function TubelightNavbar({
         top: offsetPosition,
         behavior: 'smooth'
       });
+    }
+  };
+
+  const handleClick = (item: NavItem, e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    navigateToSection(item);
+  };
+
+  const handleKeyDown = (item: NavItem, e: React.KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navigateToSection(item);
     }
   };
 
@@ -91,9 +102,13 @@ export function TubelightNavbar({
               key={item.name}
               href={item.url}
               onClick={(e) => handleClick(item, e)}
+              onKeyDown={(e) => handleKeyDown(item, e)}
+              role="button"
+              tabIndex={0}
+              aria-label={item.label}
               className={cn(
                 'relative cursor-pointer text-sm sm:text-base font-semibold px-6 sm:px-8 py-2.5 rounded-full transition-colors',
-                'text-white/80 hover:text-white',
+                'text-white/80 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50',
                 isActive && 'bg-black text-white',
               )}
             >

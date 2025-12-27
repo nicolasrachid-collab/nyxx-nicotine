@@ -181,6 +181,8 @@ export function ProductSlider({ products }: ProductSliderProps) {
                 src={product.image}
                 alt={product.name}
                 className="w-full h-full object-contain drop-shadow-2xl"
+                loading="lazy"
+                decoding="async"
                 style={{
                   filter: `drop-shadow(0 30px 60px rgba(0,0,0,0.5)) drop-shadow(0 0 40px ${theme.glow})`,
                 }}

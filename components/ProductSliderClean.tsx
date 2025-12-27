@@ -132,6 +132,8 @@ export function ProductSliderClean({ products }: ProductSliderCleanProps) {
                     className={`w-full h-auto object-contain transition-all duration-700 ${
                       isActive ? 'drop-shadow-2xl' : ''
                     }`}
+                    loading="lazy"
+                    decoding="async"
                     style={{
                       filter: isActive ? `drop-shadow(0 20px 40px rgba(0,0,0,0.15))` : 'none',
                     }}

@@ -316,6 +316,8 @@ export function ProductsSection() {
                 src={activeProduct.imageSide}
                 alt={activeProduct.name}
                 className="w-full h-auto"
+                loading="lazy"
+                decoding="async"
                 style={{ 
                   objectFit: 'contain',
                   filter: 'none !important', 
