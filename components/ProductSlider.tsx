@@ -17,34 +17,34 @@ const flavorThemes: Record<string, {
   textColor: string;
 }> = {
   Coffee: { 
-    gradient: 'linear-gradient(135deg, #1a0f0a 0%, #3d2617 100%)',
-    glow: 'rgba(139, 90, 43, 0.8)',
-    accent: '#C4956A',
-    textColor: '#C4956A'
+    gradient: 'linear-gradient(135deg, #1a0f0a 0%, #2d1f15 100%)',
+    glow: 'rgba(109, 74, 48, 0.8)',
+    accent: '#6D4A30',
+    textColor: '#9D7A5A'
   },
   Energy: { 
-    gradient: 'linear-gradient(135deg, #1a1500 0%, #3d3000 100%)',
-    glow: 'rgba(255, 215, 0, 0.8)',
-    accent: '#FFD700',
-    textColor: '#FFD700'
+    gradient: 'linear-gradient(135deg, #1a1700 0%, #3d3500 100%)',
+    glow: 'rgba(255, 216, 103, 0.8)',
+    accent: '#FFD867',
+    textColor: '#FFE699'
   },
   Mango: { 
-    gradient: 'linear-gradient(135deg, #1a0f00 0%, #3d2400 100%)',
-    glow: 'rgba(255, 149, 0, 0.8)',
-    accent: '#FF9500',
-    textColor: '#FF9500'
+    gradient: 'linear-gradient(135deg, #1a0f00 0%, #3d1f00 100%)',
+    glow: 'rgba(225, 114, 55, 0.8)',
+    accent: '#E17237',
+    textColor: '#F09A5F'
   },
   Watermelon: { 
-    gradient: 'linear-gradient(135deg, #1a0508 0%, #3d0f17 100%)',
-    glow: 'rgba(255, 107, 122, 0.8)',
-    accent: '#FF6B7A',
-    textColor: '#FF6B7A'
+    gradient: 'linear-gradient(135deg, #1a0508 0%, #3d0f14 100%)',
+    glow: 'rgba(229, 152, 155, 0.8)',
+    accent: '#E5989B',
+    textColor: '#F0B8BB'
   },
   Menthol: { 
-    gradient: 'linear-gradient(135deg, #001a14 0%, #003d2e 100%)',
-    glow: 'rgba(0, 200, 150, 0.8)',
-    accent: '#00C896',
-    textColor: '#00C896'
+    gradient: 'linear-gradient(135deg, #001a1f 0%, #003d4a 100%)',
+    glow: 'rgba(148, 193, 213, 0.8)',
+    accent: '#94C1D5',
+    textColor: '#B8D9E8'
   },
 };
 
@@ -181,6 +181,8 @@ export function ProductSlider({ products }: ProductSliderProps) {
                 src={product.image}
                 alt={product.name}
                 className="w-full h-full object-contain drop-shadow-2xl"
+                loading="lazy"
+                decoding="async"
                 style={{
                   filter: `drop-shadow(0 30px 60px rgba(0,0,0,0.5)) drop-shadow(0 0 40px ${theme.glow})`,
                 }}
@@ -193,8 +195,8 @@ export function ProductSlider({ products }: ProductSliderProps) {
       {/* Nome do produto */}
       <div className="absolute bottom-20 md:bottom-28 left-0 right-0 text-center">
         <div className="overflow-hidden">
-          <h2 
-            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight transition-all duration-500"
+          <h1 
+            className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight transition-all duration-500"
             style={{
               color: theme.textColor,
               textShadow: `0 0 60px ${theme.glow}`,
@@ -202,7 +204,7 @@ export function ProductSlider({ products }: ProductSliderProps) {
             }}
           >
             {activeProduct?.name}
-          </h2>
+          </h1>
         </div>
         <p 
           className="text-white/60 text-sm md:text-base mt-2 transition-all duration-500"

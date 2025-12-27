@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 interface ProductCard3DProps {
   name: string;
@@ -16,39 +16,39 @@ const flavorThemes: Record<string, {
   textColor: string;
 }> = {
   Coffee: { 
-    gradient: 'linear-gradient(145deg, #FBF4EC 0%, #F5E6D3 50%, #EDD9C4 100%)',
-    glow: 'rgba(139, 90, 43, 0.5)',
-    accent: '#8B5A2B',
-    particle: '#C4956A',
-    textColor: '#5D3A1A'
+    gradient: 'linear-gradient(145deg, #F5EDE6 0%, #E8D9CC 50%, #DCC4B3 100%)',
+    glow: 'rgba(109, 74, 48, 0.5)',
+    accent: '#6D4A30',
+    particle: '#9D7A5A',
+    textColor: '#4A2F1F'
   },
   Energy: { 
-    gradient: 'linear-gradient(145deg, #FFFEF5 0%, #FFF8DC 50%, #FFF0B3 100%)',
-    glow: 'rgba(255, 180, 0, 0.5)',
-    accent: '#FFB800',
-    particle: '#FFD700',
-    textColor: '#8B6914'
+    gradient: 'linear-gradient(145deg, #FFFEF5 0%, #FFF9E6 50%, #FFF4CC 100%)',
+    glow: 'rgba(255, 216, 103, 0.5)',
+    accent: '#FFD867',
+    particle: '#FFE699',
+    textColor: '#B89A3C'
   },
   Mango: { 
-    gradient: 'linear-gradient(145deg, #FFF5E6 0%, #FFE4C4 50%, #FFD4A3 100%)',
-    glow: 'rgba(255, 149, 0, 0.5)',
-    accent: '#FF9500',
-    particle: '#FFB347',
-    textColor: '#8B5000'
+    gradient: 'linear-gradient(145deg, #FDF0E8 0%, #F8DCC8 50%, #F3C8A8 100%)',
+    glow: 'rgba(225, 114, 55, 0.5)',
+    accent: '#E17237',
+    particle: '#F09A5F',
+    textColor: '#9D4E1F'
   },
   Watermelon: { 
-    gradient: 'linear-gradient(145deg, #FFF5F7 0%, #FFE4E8 50%, #FFD4DA 100%)',
-    glow: 'rgba(255, 107, 122, 0.5)',
-    accent: '#FF6B7A',
-    particle: '#FF8A98',
-    textColor: '#8B3040'
+    gradient: 'linear-gradient(145deg, #FDF5F6 0%, #F8E8EA 50%, #F3DBDD 100%)',
+    glow: 'rgba(229, 152, 155, 0.5)',
+    accent: '#E5989B',
+    particle: '#F0B8BB',
+    textColor: '#A06B6E'
   },
   Menthol: { 
-    gradient: 'linear-gradient(145deg, #F0FAF8 0%, #E0F5F0 50%, #C8EFE6 100%)',
-    glow: 'rgba(0, 200, 150, 0.5)',
-    accent: '#00C896',
-    particle: '#4DFFC3',
-    textColor: '#006450'
+    gradient: 'linear-gradient(145deg, #F0F7FA 0%, #E0EFF5 50%, #C8E3ED 100%)',
+    glow: 'rgba(148, 193, 213, 0.5)',
+    accent: '#94C1D5',
+    particle: '#B8D9E8',
+    textColor: '#5A7A87'
   },
 };
 
@@ -167,6 +167,8 @@ export function ProductCard3D({ name, image, isHighlighted = false, className = 
           src={image}
           alt={name}
           className="w-full h-full object-contain"
+          loading="lazy"
+          decoding="async"
           style={{
             filter: isHovered 
               ? `drop-shadow(0 30px 40px rgba(0,0,0,0.5)) drop-shadow(0 0 30px ${theme.glow})`

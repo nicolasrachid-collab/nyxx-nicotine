@@ -4,6 +4,7 @@ import { useTranslation } from '../../hooks/useTranslation';
 import { Card, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { AnimatedStat } from './AnimatedStat';
+import { AnimatedLineGradient } from '../AnimatedTextGradient';
 
 export function TechnologySection() {
   const { t } = useTranslation();
@@ -34,31 +35,41 @@ export function TechnologySection() {
   const supportText = t('statsSupport').split('\n');
 
   return (
-    <section className="py-24 bg-black text-white overflow-hidden">
+    <section className="pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 bg-black text-white overflow-hidden px-4 md:px-8 lg:px-12 xl:px-16" aria-label="Seção de tecnologia">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start mb-24">
-          {/* Left Column: Header */}
-          <div className="flex flex-col gap-6 sticky top-24">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <Badge variant="outline" className="w-fit gap-2 px-4 py-2 mb-6 text-xs font-semibold tracking-wider uppercase border border-white/20 bg-white/10 text-white backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
+        {/* Header Section */}
+        <div className="flex flex-col gap-6 items-center text-center mb-16 md:mb-20 lg:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="w-full flex flex-col items-center"
+          >
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <motion.span 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="group inline-flex items-center gap-4 text-sm font-semibold tracking-[0.2em] uppercase text-gray-300"
+              >
+                <AnimatedLineGradient />
                 {t('technologyTitle')}
-              </Badge>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
-            {t('technologySubtitle')}
-          </h2>
-              <p className="text-lg text-zinc-400 leading-relaxed max-w-md mt-2">
-            {t('technologyDescription')}
-          </p>
-            </motion.div>
+                <AnimatedLineGradient />
+              </motion.span>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-[38px] xl:text-[42px] 2xl:text-[46px] font-bold tracking-tight text-white leading-[1.1] max-w-2xl xl:max-w-3xl mx-auto">
+              {t('technologySubtitle')}
+            </h1>
+            <p className="text-base text-zinc-400 leading-relaxed max-w-md mt-2 mx-auto">
+              {t('technologyDescription')}
+            </p>
+          </motion.div>
         </div>
 
-          {/* Right Column: Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Feature Cards Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 md:mb-20 lg:mb-24">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -75,7 +86,7 @@ export function TechnologySection() {
                     <div className="space-y-2">
                       <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight">
                         {feature.title}
-                </h3>
+                      </h3>
                       <p className="text-zinc-400 text-base md:text-lg lg:text-lg leading-relaxed">
                         {feature.description}
                       </p>
@@ -84,7 +95,6 @@ export function TechnologySection() {
                 </Card>
               </motion.div>
             ))}
-          </div>
         </div>
 
         {/* Bottom Section: Stats */}

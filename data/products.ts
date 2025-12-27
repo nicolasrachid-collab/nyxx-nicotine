@@ -8,7 +8,7 @@ export const products: Product[] = [
     image: '/Coffee.png',
     imageSide: '/Coffee_lado.png',
     imageFront: '/Coffee_frente.png',
-    color: '#8B5A2B',
+    color: '#6D4A30',
     descriptionKey: 'productCoffeeDesc',
     features: ['Intenso', 'Cremoso', 'Premium']
   },
@@ -19,7 +19,7 @@ export const products: Product[] = [
     image: '/Energy.png',
     imageSide: '/Energy_lado.png',
     imageFront: '/Energy_frente.png',
-    color: '#FFB800',
+    color: '#FFD867',
     descriptionKey: 'productEnergyDesc',
     features: ['Energizante', 'Único', 'Foco']
   },
@@ -30,7 +30,7 @@ export const products: Product[] = [
     image: '/Mango.png',
     imageSide: '/Mango_lado.png',
     imageFront: '/Mango_frente.png',
-    color: '#FF9500',
+    color: '#E17237',
     descriptionKey: 'productMangoDesc',
     features: ['Tropical', 'Doce', 'Refrescante']
   },
@@ -41,7 +41,7 @@ export const products: Product[] = [
     image: '/Watermelon.png',
     imageSide: '/Watermelon_lado.png',
     imageFront: '/Watermelon_frente.png',
-    color: '#FF6B7A',
+    color: '#E5989B',
     descriptionKey: 'productWatermelonDesc',
     features: ['Suave', 'Doce', 'Leve']
   },
@@ -52,7 +52,7 @@ export const products: Product[] = [
     image: '/Menthol.png',
     imageSide: '/Menthol_lado.png',
     imageFront: '/Menthol_frente.png',
-    color: '#00C896',
+    color: '#94C1D5',
     descriptionKey: 'productMentholDesc',
     features: ['Intenso', 'Fresco', 'Limpo']
   }

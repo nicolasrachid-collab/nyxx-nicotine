@@ -54,7 +54,7 @@ export class ErrorBoundary extends Component<Props, State> {
         <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center px-7 md:px-14">
           <div className="max-w-2xl w-full bg-white rounded-[2rem] p-8 md:p-12 shadow-lg">
             <div className="text-center mb-8">
-              <h1 className="text-3xl md:text-[44px] font-bold tracking-tight mb-4 text-black line-clamp-2">
+              <h1 className="text-4xl lg:text-[38px] font-bold tracking-tight mb-4 text-black line-clamp-2">
                 Ops! Algo deu errado
               </h1>
               <p className="text-lg text-gray-600 mb-8">

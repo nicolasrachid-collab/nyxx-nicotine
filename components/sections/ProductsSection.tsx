@@ -1,28 +1,37 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { Coffee, Zap, Droplets, Snowflake, Circle } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
+import { useThrottle } from '../../hooks/useThrottle';
 import { products } from '../../data/products';
+import { AnimatedLineGradient } from '../AnimatedTextGradient';
+
+// Padrão grego - imagem localizada em /public/greek-pattern.svg
+const greekCirclePattern = "/greek-pattern.svg";
 
 // Dados dos passos do HowItWorks
 const steps = [
   {
     id: "01",
     title: "Escolha",
-    description: "Selecione seu sabor favorito",
+    description: "Selecione seu sabor favorito entre nossas opções exclusivas.",
   },
   {
     id: "02",
     title: "Use",
-    description: "Quando e onde quiser",
+    description: "Posicione sob o lábio superior e deixe agir.",
   },
   {
     id: "03",
     title: "Desfrute",
-    description: "Experiência premium garantida",
+    description: "Aproveite a liberação gradual de sabor e nicotina.",
   },
 ];
+
+// Constantes para otimização
+const SCROLL_THROTTLE_MS = 16; // ~60fps
+const CENTER_THRESHOLD = 150; // Threshold em pixels para trocar seção
 
 // Mapeamento de ícones para cada produto
 const productIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -44,103 +53,107 @@ export function ProductsSection() {
   // Estado para controlar o movimento Y da imagem
   const [productY, setProductY] = useState(0);
 
+  // Handler de scroll com useCallback para memoização
+  const handleScroll = useCallback(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:57',message:'handleScroll called',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
+    if (!containerRef.current || !scrollContainerRef.current) {
+      // #region agent log
+      fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:60',message:'Early return - refs missing',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
+      return;
+    }
+
+    const scrollContainer = scrollContainerRef.current;
+    const windowHeight = window.innerHeight;
+    const windowCenter = windowHeight / 2;
+    
+    // Buscar seções para cálculo de activeIndex
+    const sections = scrollContainer.querySelectorAll('.product-section');
+    
+    // #region agent log
+    fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:67',message:'Sections found',data:{sectionsCount:sections.length,windowHeight,windowCenter},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    // #endregion
+    
+    // Determinar qual seção está visível e mais próxima do centro
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+    let activeSection: HTMLElement | null = null;
+    
+    sections.forEach((section, index) => {
+      const sectionRect = section.getBoundingClientRect();
+      const sectionCenter = sectionRect.top + sectionRect.height / 2;
+      const distanceFromCenter = Math.abs(windowCenter - sectionCenter);
+      
+      if (sectionRect.bottom > 0 && sectionRect.top < windowHeight && distanceFromCenter < CENTER_THRESHOLD) {
+        if (distanceFromCenter < closestDistance) {
+          closestDistance = distanceFromCenter;
+          closestIndex = index;
+          activeSection = section as HTMLElement;
+        }
+      }
+    });
+    
+    // #region agent log
+    fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:86',message:'Section detection result',data:{closestIndex,closestDistance,hasActiveSection:!!activeSection},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    // #endregion
+    
+    if (closestDistance !== Infinity && activeSection) {
+      setActiveIndex(closestIndex);
+      
+      const sectionRect = activeSection.getBoundingClientRect();
+      const sectionCenter = sectionRect.top + sectionRect.height / 2;
+      
+      // Verificar se a seção já passou pelo centro da tela
+      const hasReachedCenter = sectionCenter <= windowCenter;
+      
+      // #region agent log
+      fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:93',message:'Center check',data:{sectionCenter,windowCenter,hasReachedCenter,sectionTop:sectionRect.top,sectionHeight:sectionRect.height},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+      // #endregion
+      
+      if (hasReachedCenter) {
+        // Calcular quanto a seção se moveu desde que chegou ao centro
+        // Quando sectionCenter == windowCenter: offset = 0
+        // Conforme a seção desce, offset aumenta proporcionalmente
+        const offsetFromCenter = windowCenter - sectionCenter;
+        
+        // #region agent log
+        fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:100',message:'Setting productY - reached center',data:{offsetFromCenter,productY:offsetFromCenter},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
+        
+        // Aplicar o mesmo offset ao produto (mesma velocidade de scroll)
+        setProductY(offsetFromCenter);
+      } else {
+        // #region agent log
+        fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:107',message:'Setting productY - not reached center',data:{productY:0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
+        
+        // Seção ainda não chegou ao centro: produto fica fixo
+        setProductY(0);
+      }
+    } else {
+      // #region agent log
+      fetch('http://127.0.0.1:7247/ingest/8d140757-7318-41f0-a0f8-97af37d4b0c5',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProductsSection.tsx:111',message:'No active section - setting productY to 0',data:{productY:0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
+      
+      // Nenhuma seção ativa: produto fica fixo
+      setProductY(0);
+    }
+  }, []);
+
+  // Aplicar throttle ao handler
+  const throttledHandleScroll = useThrottle(handleScroll, SCROLL_THROTTLE_MS);
+
   // Calcular progresso do scroll e atualizar activeIndex e productY
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current || !scrollContainerRef.current) return;
-
-      const container = containerRef.current;
-      const containerRect = container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const containerTop = containerRect.top;
-      const containerHeight = container.offsetHeight;
-      const containerBottom = containerRect.bottom;
-      
-      // Calcular progresso baseado na posição do centro do container em relação ao centro da viewport
-      // Progresso = 0 quando o centro do container está no centro da viewport
-      // Progresso = 1 quando o fundo do container está no topo da viewport (containerBottom = 0)
-      const windowCenter = windowHeight / 2;
-      const containerCenter = containerTop + containerHeight / 2;
-      let progress = 0;
-      
-      if (containerBottom > 0 && containerTop < windowHeight) {
-        // Container está visível na viewport
-        // Calcular progresso baseado na posição do centro do container
-        // Quando containerCenter = windowCenter (centros alinhados), progress = 0
-        // Quando containerBottom = 0 (container saiu), progress = 1
-        const distanceFromAlignment = windowCenter - containerCenter; // Positivo quando containerCenter está acima de windowCenter
-        // Quando containerCenter = windowCenter, distanceFromAlignment = 0, então progress = 0
-        // Quando containerBottom = 0, containerCenter = containerHeight/2 (negativo), então precisamos calcular o progresso
-        // A distância total que o centro precisa percorrer é: de windowCenter até containerHeight/2 (quando containerBottom = 0)
-        const maxCenterDistance = windowCenter + containerHeight / 2; // Distância máxima do centro até o alinhamento
-        // Quando containerCenter está abaixo de windowCenter (distanceFromAlignment negativo), o progresso aumenta
-        // progress = (maxCenterDistance - distanceFromAlignment) / maxCenterDistance quando distanceFromAlignment < 0
-        if (containerCenter <= windowCenter) {
-          // Centro do container passou ou está no centro da viewport
-          const distanceTraveled = windowCenter - containerCenter; // Distância percorrida desde o alinhamento (0 quando alinhados)
-          const totalDistance = windowCenter + containerHeight / 2; // Distância total até containerBottom = 0
-          progress = Math.min(1, Math.max(0, distanceTraveled / totalDistance));
-        } else {
-          // Centro do container ainda está acima do centro da viewport
-          progress = 0;
-        }
-      } else if (containerTop >= windowHeight) {
-        // Container ainda não entrou na viewport (está abaixo)
-        progress = 0;
-      } else if (containerBottom <= 0) {
-        // Container já saiu completamente da viewport (está acima)
-        progress = 1;
-      }
-      
-      // Buscar seções para cálculo de activeIndex
-      const sections = scrollContainerRef.current.querySelectorAll('.product-section');
-      
-      // Calcular productY baseado no progresso - movimento mais rápido e responsivo
-      // O container sticky tem lg:h-screen e lg:mt-20 (80px de margem superior)
-      // A imagem começa em lg:mt-20, então temos windowHeight - 80px de altura disponível
-      // Queremos que a imagem desça suavemente mas sempre permaneça visível
-      // Calcular maxY para permitir movimento suficiente para todos os produtos
-      const availableHeight = windowHeight - 80; // Altura disponível (windowHeight - mt-20)
-      // Usar 50% da altura disponível para permitir movimento suficiente
-      // Isso garante que mesmo no último produto, a imagem ainda esteja visível
-      const maxY = availableHeight * 0.5; // 50% da altura disponível
-      const newY = progress * maxY;
-      setProductY(newY);
-      
-      // Determinar qual seção está visível baseado na posição de cada seção individual
-      // Encontrar a seção cujo centro está mais próximo do centro da viewport
-      // Usar um threshold mais restritivo (150px) para garantir que a seção está realmente no centro antes de trocar
-      let closestIndex = 0;
-      let closestDistance = Infinity;
-      const centerThreshold = 150; // Threshold em pixels - só trocar se a seção estiver dentro de 150px do centro
-      
-      sections.forEach((section, index) => {
-        const sectionRect = section.getBoundingClientRect();
-        const sectionCenter = sectionRect.top + sectionRect.height / 2;
-        const distanceFromCenter = Math.abs(windowCenter - sectionCenter);
-        
-        // Só considerar seções que estão visíveis na viewport e cujo centro está muito próximo do centro da viewport
-        // Isso garante que a imagem só muda quando a seção está realmente no centro
-        if (sectionRect.bottom > 0 && sectionRect.top < windowHeight && distanceFromCenter < centerThreshold) {
-          if (distanceFromCenter < closestDistance) {
-            closestDistance = distanceFromCenter;
-            closestIndex = index;
-          }
-        }
-      });
-      
-      // Se encontramos uma seção próxima o suficiente do centro, atualizar o índice
-      // Caso contrário, manter o índice atual (não mudar prematuramente)
-      if (closestDistance !== Infinity) {
-        setActiveIndex(closestIndex);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
     handleScroll(); // Executar uma vez no mount
     
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [products.length]);
+    return () => {
+      window.removeEventListener('scroll', throttledHandleScroll);
+    };
+  }, [throttledHandleScroll, handleScroll]);
 
 
   const activeProduct = products[activeIndex] || products[0];
@@ -149,69 +162,44 @@ export function ProductsSection() {
 
   return (
     <section 
+      id="products"
       ref={ref}
-      className="w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans"
+      className="w-full bg-white py-24 lg:py-32 xl:py-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans products-section bg-clean-pattern"
+      aria-label="Seção de produtos"
     >
-      <div className="mb-16 md:mb-24 lg:mb-32 text-center">
+      {/* Cabeçalho */}
+      <div className="mb-16 md:mb-24 lg:mb-32 text-center relative z-10">
         <div className="flex items-center justify-center gap-3 mb-6">
-          <span className="inline-flex items-center rounded-full w-fit gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase border border-black/20 bg-black/10 text-black backdrop-blur-xl shadow-lg shadow-black/20 hover:bg-black/15 hover:border-black/30 transition-all duration-300">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="group inline-flex items-center gap-4 text-sm font-semibold tracking-[0.2em] uppercase text-gray-600"
+          >
+            <AnimatedLineGradient />
             {t('productsTitle')}
-          </span>
+            <AnimatedLineGradient />
+          </motion.span>
         </div>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-4xl mx-auto text-gray-900 mb-6">
           {t('productsSubtitle')}
-        </h2>
-        <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+        </h1>
+        <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
           {t('productsDescription')}
         </p>
       </div>
 
-      {/* HowItWorks Section */}
-      <div className="container mx-auto max-w-7xl mb-16 md:mb-24 pt-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 justify-items-center items-start h-auto overflow-visible">
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2, duration: 0.6, ease: "easeOut" }}
-              className="group relative w-full h-auto"
-            >
-              {/* Decorative line */}
-              <div className="absolute top-8 left-0 w-full h-px bg-neutral-100 -z-10 hidden md:block" />
-              
-              <div className="relative flex flex-col pt-8 pb-6">
-                {/* Large Background Number */}
-                <span className="text-[10rem] leading-none font-bold text-neutral-100 absolute -top-20 -left-8 z-0 select-none transition-all duration-700 group-hover:text-black group-hover:-translate-y-4 pointer-events-none">
-                  {step.id}
-                </span>
-
-                <div className="flex flex-col items-start pt-4 relative z-10">
-                  <h3 className="text-2xl md:text-3xl lg:text-3xl font-bold text-neutral-900 mb-3 tracking-tight">
-                    {step.title}
-                  </h3>
-                  
-                  <p className="text-lg md:text-xl lg:text-xl text-neutral-500 leading-relaxed font-medium">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Container principal com layout flex */}
-      <div 
-        ref={containerRef}
-        className="relative flex flex-col lg:flex-row gap-8 md:gap-12"
-        style={{ minHeight: `${products.length * 70}vh` }}
-      >
+        {/* Container principal com layout grid */}
+        <div 
+          ref={containerRef}
+          className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-7xl mx-auto"
+          style={{ minHeight: `${products.length * 70}vh` }}
+        >
         {/* Lado esquerdo: Seções scrolláveis */}
         <div 
           ref={scrollContainerRef}
-          className="flex-1 space-y-0 w-full lg:w-1/2"
+          className="space-y-0"
         >
           {products.map((product, index) => {
             const ProductIcon = productIcons[product.id] || Coffee;
@@ -226,28 +214,21 @@ export function ProductsSection() {
                 data-index={index}
                 className="product-section min-h-[70vh] flex items-center justify-center py-20"
               >
-                <div className="w-full max-w-xl p-8 md:p-12 bg-white">
-                  {/* Number and Line */}
+                <div className="w-full max-w-xl">
+                  {/* Number */}
                   <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="flex items-center gap-4 mb-6"
+                    transition={{ duration: 0.3 }}
+                    className="mb-8"
                   >
                     <span 
-                      className="font-medium text-sm tracking-widest"
+                      className="text-sm font-medium tracking-widest"
                       style={{ color: product.color }}
                     >
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <motion.div 
-                      initial={{ scaleX: 0, originX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                      className="h-px bg-gray-200 flex-1"
-                    ></motion.div>
                   </motion.div>
 
                   {/* Title */}
@@ -255,44 +236,40 @@ export function ProductsSection() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="flex items-center gap-4 mb-4"
+                    transition={{ duration: 0.4 }}
+                    className="mb-6"
                   >
-                    <h1 
-                      className="text-5xl md:text-6xl font-bold tracking-tight line-clamp-2 break-words"
-                      style={{ color: product.color }}
-                    >
-                      {t(product.nameKey as keyof typeof t).replace(/[☕⚡🥭🍉❄️]/g, '').trim()}
-                    </h1>
-                    <div 
-                      className="p-2 rounded-full"
-                      style={{ backgroundColor: `${product.color}15` }}
-                    >
-                      <ProductIcon className="w-8 h-8" style={{ color: product.color }} />
+                    <div className="flex items-center gap-4 mb-4">
+                      <h1 
+                        className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+                        style={{ color: product.color }}
+                      >
+                        {t(product.nameKey as keyof typeof t).replace(/[☕⚡🥭🍉❄️]/g, '').trim()}
+                      </h1>
+                      <ProductIcon className="w-8 h-8 flex-shrink-0" style={{ color: product.color }} />
                     </div>
                   </motion.div>
 
                   {/* Subtitle */}
                   <motion.h2 
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    className="text-xl font-medium mb-8"
-                    style={{ color: `${product.color}DD` }}
+                    transition={{ duration: 0.4, delay: 0.1 }}
+                    className="text-lg font-medium mb-8 text-gray-600"
                   >
                     {subtitle}
                   </motion.h2>
 
                   {/* Body Text */}
-                  <div className="space-y-6 text-gray-600 leading-relaxed text-lg">
+                  <div className="space-y-4 text-gray-700 leading-relaxed text-base">
                     {paragraphs.map((paragraph, pIndex) => (
                       <motion.p
                         key={pIndex}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.5 + pIndex * 0.1 }}
+                        transition={{ duration: 0.4, delay: 0.15 + pIndex * 0.05 }}
                       >
                         {paragraph.trim()}
                       </motion.p>
@@ -305,34 +282,98 @@ export function ProductsSection() {
         </div>
 
         {/* Lado direito: Conteúdo sticky que acompanha o scroll */}
-        <div className="w-full lg:w-1/2 lg:sticky lg:top-20 lg:h-screen lg:flex lg:items-start lg:self-start">
-          <div
+        <div className="w-full lg:sticky lg:top-20 lg:h-screen lg:flex lg:items-center lg:justify-center lg:self-start">
+          <motion.div
             className="relative w-full max-w-md mx-auto lg:mt-20"
+            animate={{
+              y: productY
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 30
+            }}
             style={{
-              transform: `translateY(${productY}px)`
+              boxShadow: 'none',
+              filter: 'none'
             }}
           >
             {/* Conteúdo do produto ativo - apenas imagem */}
             <motion.div
               key={activeProduct.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
               className="relative"
+              style={{ 
+                background: 'transparent',
+                boxShadow: 'none',
+                filter: 'none'
+              }}
             >
-              <div 
-                className="relative w-full aspect-square"
-              >
-                <img
-                  src={activeProduct.imageSide}
-                  alt={activeProduct.name}
-                  className="w-full h-full object-contain"
-                  loading="lazy"
-                />
-              </div>
+              <img
+                src={activeProduct.imageSide}
+                alt={activeProduct.name}
+                className="w-full h-auto"
+                loading="lazy"
+                decoding="async"
+                style={{ 
+                  objectFit: 'contain',
+                  filter: 'none !important', 
+                  boxShadow: 'none !important',
+                  textShadow: 'none !important',
+                  WebkitFilter: 'none !important',
+                  MozFilter: 'none !important',
+                  msFilter: 'none !important',
+                  OFilter: 'none !important'
+                }}
+                loading="lazy"
+                decoding="async"
+              />
             </motion.div>
-          </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Separador */}
+      <div className="w-full py-12 md:py-16 bg-white relative z-10">
+        <div className="max-w-[1800px] mx-auto px-7 md:px-14">
+          <div className="w-full h-px bg-gray-300"></div>
+        </div>
+      </div>
+
+      {/* HowItWorks Section - Clean */}
+      <div className="container mx-auto max-w-6xl mt-24 md:mt-32 lg:mt-40 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 relative">
+          {/* Linha conectora - apenas desktop */}
+          <div className="hidden md:block absolute top-12 left-0 right-0 h-px bg-gray-300" />
+          
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative flex flex-col items-center text-center space-y-4"
+            >
+              {/* Círculo com borda fina */}
+              <div className="w-24 h-24 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center relative z-10 mb-2 group hover:border-gray-400 transition-all duration-300">
+                <span className="text-3xl font-light text-gray-600 font-mono">
+                  {step.id}
+                </span>
+              </div>
+
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900">
+                {step.title}
+              </h3>
+              
+              <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-[280px]">
+                {step.description}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

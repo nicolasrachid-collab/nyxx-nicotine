@@ -11,11 +11,11 @@ interface ProductSliderCleanProps {
 
 // Cores por sabor
 const flavorColors: Record<string, string> = {
-  Coffee: '#8B5A2B',
-  Energy: '#FFB800',
-  Mango: '#FF9500',
-  Watermelon: '#FF6B7A',
-  Menthol: '#00C896',
+  Coffee: '#6D4A30',
+  Energy: '#FFD867',
+  Mango: '#E17237',
+  Watermelon: '#E5989B',
+  Menthol: '#94C1D5',
 };
 
 export function ProductSliderClean({ products }: ProductSliderCleanProps) {
@@ -132,6 +132,8 @@ export function ProductSliderClean({ products }: ProductSliderCleanProps) {
                     className={`w-full h-auto object-contain transition-all duration-700 ${
                       isActive ? 'drop-shadow-2xl' : ''
                     }`}
+                    loading="lazy"
+                    decoding="async"
                     style={{
                       filter: isActive ? `drop-shadow(0 20px 40px rgba(0,0,0,0.15))` : 'none',
                     }}
@@ -150,12 +152,12 @@ export function ProductSliderClean({ products }: ProductSliderCleanProps) {
                   >
                     Nyxx® Nicotine
                   </span>
-                  <h2 
-                    className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mt-2"
+                  <h1 
+                    className="text-4xl md:text-5xl lg:text-[38px] font-bold tracking-tight mt-2"
                     style={{ color }}
                   >
                     {product.name}
-                  </h2>
+                  </h1>
                   <p className="text-gray-500 text-lg mt-4 max-w-md">
                     Experimente o sabor premium com tecnologia de ponta.
                   </p>

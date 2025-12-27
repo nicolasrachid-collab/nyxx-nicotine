@@ -1,5 +1,40 @@
 /* Custom styles for Nyxx Nicotine site */
 
+/* Screen reader only - para acessibilidade */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -110,4 +145,70 @@ section {
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient 3s ease infinite;
+}
+
+/* Remover sombra de imagens de produtos */
+.products-section img {
+  filter: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-filter: none !important;
+  -moz-filter: none !important;
+  -ms-filter: none !important;
+  -o-filter: none !important;
+}
+
+.products-section img::before,
+.products-section img::after {
+  display: none !important;
+  box-shadow: none !important;
+}
+
+/* Background com gradientes radiais para seções com fundo claro */
+.bg-light-pattern {
+  position: relative;
+}
+
+.bg-light-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle 700px at 10% 20%, rgba(156, 163, 175, 0.12) 0%, transparent 70%),
+    radial-gradient(circle 600px at 90% 80%, rgba(107, 114, 128, 0.10) 0%, transparent 70%),
+    radial-gradient(circle 800px at 50% 50%, rgba(75, 85, 99, 0.08) 0%, transparent 80%),
+    radial-gradient(circle 500px at 5% 50%, rgba(156, 163, 175, 0.08) 0%, transparent 70%),
+    radial-gradient(circle 500px at 95% 50%, rgba(107, 114, 128, 0.08) 0%, transparent 70%);
+  z-index: 1;
+}
+
+.bg-light-pattern > * {
+  position: relative;
+  z-index: 10;
+}
+
+/* Background clean com gradientes radiais sutis que fluem entre seções */
+.bg-clean-pattern {
+  position: relative;
+}
+
+.bg-clean-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(ellipse 800px 600px at 10% 20%, rgba(0, 0, 0, 0.015) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 800px at 90% 80%, rgba(0, 0, 0, 0.015) 0%, transparent 70%),
+    radial-gradient(ellipse 1000px 500px at 50% 50%, rgba(0, 0, 0, 0.01) 0%, transparent 80%),
+    radial-gradient(ellipse 700px 400px at 5% 50%, rgba(0, 0, 0, 0.012) 0%, transparent 70%),
+    radial-gradient(ellipse 700px 400px at 95% 50%, rgba(0, 0, 0, 0.012) 0%, transparent 70%),
+    #FFFFFF;
+  z-index: 1;
+}
+
+.bg-clean-pattern > * {
+  position: relative;
+  z-index: 10;
 }

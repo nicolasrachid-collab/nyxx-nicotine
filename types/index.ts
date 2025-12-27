@@ -113,17 +113,30 @@ export interface TranslationKey {
   followAlong: string;
   // Footer
   newsletter: string;
+  newsletterDescription: string;
   emailPlaceholder: string;
+  explore: string;
+  support: string;
+  shop: string;
+  subscription: string;
+  flavors: string;
+  kits: string;
+  shipping: string;
+  returns: string;
   siteMap: string;
   socialLinks: string;
   faq: string;
   termsOfService: string;
   privacyPolicy: string;
+  privacy: string;
+  terms: string;
   legalNotice: string;
   ageRestriction: string;
+  ageOnly: string;
   madeBy: string;
   lastUpdated: string;
   copyright: string;
+  copyrightFooter: string;
   // Menu
   menuHome: string;
   menuProducts: string;

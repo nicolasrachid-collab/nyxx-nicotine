@@ -57,11 +57,11 @@ export function SocialSection() {
   return (
     <section 
       ref={ref}
-      className={`w-full bg-white py-24 lg:py-32 px-4 md:px-8 lg:px-12 relative overflow-hidden font-sans transition-all duration-700 ease-out ${
+      className={`w-full bg-white py-24 lg:py-32 xl:py-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans transition-all duration-700 ease-out bg-light-pattern ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
-      <div className="max-w-[1800px] mx-auto">
+      <div className="max-w-[1800px] mx-auto relative z-10">
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
         <div>
           <div className="flex items-center gap-2 mb-2">
@@ -69,9 +69,9 @@ export function SocialSection() {
                {t('social')}
              </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-[38px] xl:text-[42px] 2xl:text-[46px] font-bold tracking-tight">
             {t('followAlong')}
-          </h2>
+          </h1>
         </div>
         
         <a href="#" className="group flex items-center gap-2 text-lg font-medium border-b border-black pb-1 hover:opacity-60 transition-opacity" aria-label="Follow @nyxx_nicotine on social media">
