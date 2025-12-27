@@ -1,0 +1,27 @@
+{
+  "name": "Nyxx Nicotine Technologies",
+  "short_name": "Nyxx",
+  "description": "Tecnologia avançada, sabores premium e qualidade superior em cada produto. Uma forma mais inteligente de consumir nicotina.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "lifestyle"],
+  "lang": "pt-BR"
+}
+
