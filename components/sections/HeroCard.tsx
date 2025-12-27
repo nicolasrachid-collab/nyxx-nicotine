@@ -8,15 +8,6 @@ export function HeroCard() {
   
   return (
     <div className="relative w-full min-h-[100vh] overflow-hidden text-black hero-card-container bg-white bg-clean-pattern">
-      {/* Fundo branco */}
-      <div 
-        className="absolute inset-0"
-        style={{ 
-          backgroundColor: '#FFFFFF',
-          zIndex: 0,
-        }}
-      />
-
       <div 
         ref={containerRef}
         className="absolute inset-0 z-20 w-full max-w-[1800px] mx-auto px-7 md:px-14 flex items-center justify-between"
