@@ -42,9 +42,12 @@ export function HeroCard() {
 
           <div className="max-w-md text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed opacity-90">
             <p className="line-height-1.6">
-              <span className="font-bold text-black text-xl md:text-[22px] lg:text-2xl xl:text-[28px]">{t('heroSubtitle')}</span>
+              <span className="font-bold text-black text-2xl md:text-3xl lg:text-4xl xl:text-5xl whitespace-nowrap">{t('heroSubtitle')}</span>
               <br />
-              <span className="bg-gradient-to-r from-gray-600 via-gray-800 to-gray-600 bg-clip-text text-transparent text-base md:text-base lg:text-xl xl:text-2xl">
+              <span 
+                className="bg-gradient-to-r from-gray-600 via-gray-800 to-gray-600 bg-clip-text text-transparent text-base md:text-base lg:text-xl xl:text-2xl flex justify-start items-start"
+                style={{ width: '453px' }}
+              >
                 {t('heroDescription')}
               </span>
             </p>
