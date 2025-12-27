@@ -180,9 +180,12 @@ section {
   box-shadow: none !important;
 }
 
-/* Background com gradientes radiais para seções com fundo claro */
+/* Background com gradientes radiais melhorados para seções com fundo claro */
 .bg-light-pattern {
   position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .bg-light-pattern::before {
@@ -191,11 +194,11 @@ section {
   inset: 0;
   pointer-events: none;
   background: 
-    radial-gradient(circle 700px at 10% 20%, rgba(156, 163, 175, 0.12) 0%, transparent 70%),
-    radial-gradient(circle 600px at 90% 80%, rgba(107, 114, 128, 0.10) 0%, transparent 70%),
-    radial-gradient(circle 800px at 50% 50%, rgba(75, 85, 99, 0.08) 0%, transparent 80%),
-    radial-gradient(circle 500px at 5% 50%, rgba(156, 163, 175, 0.08) 0%, transparent 70%),
-    radial-gradient(circle 500px at 95% 50%, rgba(107, 114, 128, 0.08) 0%, transparent 70%);
+    radial-gradient(circle 900px at 10% 20%, rgba(255, 165, 0, 0.15) 0%, transparent 70%),
+    radial-gradient(circle 800px at 90% 80%, rgba(255, 140, 0, 0.12) 0%, transparent 70%),
+    radial-gradient(circle 1000px at 50% 50%, rgba(156, 163, 175, 0.25) 0%, transparent 80%),
+    radial-gradient(circle 700px at 5% 50%, rgba(107, 114, 128, 0.20) 0%, transparent 70%),
+    radial-gradient(circle 700px at 95% 50%, rgba(75, 85, 99, 0.18) 0%, transparent 70%);
   z-index: 1;
 }
 
@@ -204,9 +207,15 @@ section {
   z-index: 10;
 }
 
-/* Background clean - branco puro */
+/* Background clean melhorado - branco com textura sutil */
 .bg-clean-pattern {
   position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.03) 1px, transparent 0);
+  background-size: 20px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .bg-clean-pattern::before {

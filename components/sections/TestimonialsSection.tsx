@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
 import { AnimatedLineGradient } from '../AnimatedTextGradient';
+import { AnimatedPaperBackground } from '../AnimatedPaperBackground';
 
 interface Testimonial {
   name: string;
@@ -51,10 +52,12 @@ export function TestimonialsSection() {
   return (
     <section 
       ref={ref}
-      className={`w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans transition-all duration-700 ease-out bg-clean-pattern ${
+      className={`w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans transition-all duration-700 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
+      style={{ position: 'relative' }}
     >
+      <AnimatedPaperBackground intensity={0.2} speed={0.8} />
       <div className="max-w-[1800px] mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

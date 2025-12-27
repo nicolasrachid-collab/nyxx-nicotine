@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
+import { AnimatedPaperBackground } from '../AnimatedPaperBackground';
 
 export function FAQSection() {
   const { ref, isVisible } = useScrollAnimation(0.2);
@@ -46,11 +47,13 @@ export function FAQSection() {
   return (
     <section 
       ref={ref}
-      className={`w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans transition-all duration-700 ease-out bg-clean-pattern ${
+      className={`w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans transition-all duration-700 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
+      style={{ position: 'relative' }}
       aria-labelledby="faq-heading"
     >
+      <AnimatedPaperBackground intensity={0.2} speed={0.8} />
       <div className="max-w-[1800px] mx-auto relative z-10">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
         {/* Left Column: Header and Support Box */}

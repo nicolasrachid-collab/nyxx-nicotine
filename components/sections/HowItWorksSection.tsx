@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { MousePointer2, Zap, Star } from "lucide-react";
+import { AnimatedPaperBackground } from "../AnimatedPaperBackground";
 
 const steps = [
   {
@@ -24,7 +25,8 @@ const steps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans bg-light-pattern" aria-label="Seção como funciona">
+    <section className="w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans" style={{ position: 'relative' }} aria-label="Seção como funciona">
+      <AnimatedPaperBackground intensity={0.2} speed={0.8} />
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 justify-items-center items-center">
           {steps.map((step, index) => (

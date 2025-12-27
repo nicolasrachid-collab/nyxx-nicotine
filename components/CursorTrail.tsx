@@ -57,11 +57,37 @@ export function CursorTrail({
       }
     };
 
-    const animate = () => {
+    // Pool de elementos para reutilização (evita criar/destruir DOM)
+    const elementPool: HTMLDivElement[] = [];
+    const getPooledElement = (): HTMLDivElement => {
+      if (elementPool.length > 0) {
+        return elementPool.pop()!;
+      }
+      const el = document.createElement('div');
+      el.style.position = 'fixed';
+      el.style.pointerEvents = 'none';
+      el.style.zIndex = '9999';
+      el.style.borderRadius = '1px';
+      el.style.transition = 'none';
+      el.style.imageRendering = 'pixelated';
+      el.style.willChange = 'transform, opacity';
+      return el;
+    };
+
+    let lastFrameTime = performance.now();
+    const targetFPS = 30; // Reduzir FPS para melhor performance
+    const frameInterval = 1000 / targetFPS;
+
+    const animate = (currentTime: number) => {
       if (!container) return;
 
-      // Limpa o container
-      container.innerHTML = '';
+      // Throttle para controlar FPS
+      const elapsed = currentTime - lastFrameTime;
+      if (elapsed < frameInterval) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTime = currentTime - (elapsed % frameInterval);
 
       const now = Date.now();
       const maxAge = 500; // Remove pontos mais antigos que 500ms
@@ -70,6 +96,17 @@ export function CursorTrail({
       trailRef.current = trailRef.current.filter(
         point => now - point.timestamp < maxAge
       );
+
+      // Reutilizar elementos existentes ou criar novos
+      const existingElements = Array.from(container.children) as HTMLDivElement[];
+      const neededElements = trailRef.current.length;
+
+      // Remover elementos extras
+      while (existingElements.length > neededElements) {
+        const el = existingElements.pop()!;
+        container.removeChild(el);
+        elementPool.push(el);
+      }
 
       // Renderiza cada pixel da trilha
       trailRef.current.forEach((point, index) => {
@@ -82,22 +119,23 @@ export function CursorTrail({
         const pixelatedX = Math.round(point.x / spacing) * spacing;
         const pixelatedY = Math.round(point.y / spacing) * spacing;
 
-        const pixel = document.createElement('div');
-        pixel.style.position = 'fixed';
+        let pixel: HTMLDivElement;
+        if (index < existingElements.length) {
+          // Reutilizar elemento existente
+          pixel = existingElements[index];
+        } else {
+          // Criar novo elemento (do pool ou novo)
+          pixel = getPooledElement();
+          container.appendChild(pixel);
+        }
+
+        // Atualizar propriedades
         pixel.style.left = `${pixelatedX - size / 2}px`;
         pixel.style.top = `${pixelatedY - size / 2}px`;
         pixel.style.width = `${size}px`;
         pixel.style.height = `${size}px`;
         pixel.style.backgroundColor = color;
         pixel.style.opacity = Math.max(0, currentOpacity).toString();
-        pixel.style.pointerEvents = 'none';
-        pixel.style.zIndex = '9999';
-        pixel.style.borderRadius = '1px';
-        pixel.style.transition = 'none';
-        pixel.style.imageRendering = 'pixelated';
-        pixel.style.willChange = 'transform, opacity';
-
-        container.appendChild(pixel);
       });
 
       animationFrameRef.current = requestAnimationFrame(animate);
@@ -108,7 +146,7 @@ export function CursorTrail({
     
     if (!isTouchDevice) {
       window.addEventListener('mousemove', updateMousePosition, { passive: true });
-      animate();
+      animate(performance.now());
     }
 
     return () => {

@@ -6,6 +6,7 @@ import { useTranslation } from '../../hooks/useTranslation';
 import { useThrottle } from '../../hooks/useThrottle';
 import { products } from '../../data/products';
 import { AnimatedLineGradient } from '../AnimatedTextGradient';
+import { AnimatedPaperBackground } from '../AnimatedPaperBackground';
 
 // Padrão grego - imagem localizada em /public/greek-pattern.svg
 const greekCirclePattern = "/greek-pattern.svg";
@@ -164,9 +165,11 @@ export function ProductsSection() {
     <section 
       id="products"
       ref={ref}
-      className="w-full bg-white py-24 lg:py-32 xl:py-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans products-section bg-clean-pattern"
+      className="w-full bg-white py-24 lg:py-32 xl:py-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans products-section"
+      style={{ position: 'relative' }}
       aria-label="Seção de produtos"
     >
+      <AnimatedPaperBackground intensity={0.2} speed={0.8} />
       {/* Cabeçalho */}
       <div className="mb-16 md:mb-24 lg:mb-32 text-center relative z-10">
         <div className="flex items-center justify-center gap-3 mb-6">

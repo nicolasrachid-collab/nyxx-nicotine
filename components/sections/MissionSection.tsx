@@ -2,6 +2,7 @@ import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { AnimatedPaperBackground } from '../AnimatedPaperBackground';
 
 export function MissionSection() {
   const { ref, isVisible } = useScrollAnimation(0.2);
@@ -11,11 +12,13 @@ export function MissionSection() {
     <section 
       id="about"
       ref={ref}
-      className={`w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans transition-all duration-700 ease-out bg-clean-pattern ${
+      className={`w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans transition-all duration-700 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
+      style={{ position: 'relative' }}
       aria-label="Seção de missão"
     >
+      <AnimatedPaperBackground intensity={0.2} speed={0.8} />
       <div className="max-w-[1800px] mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 lg:gap-20">
           {/* Left Column: Brand and Tagline */}

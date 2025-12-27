@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { Shield, Star, Box, CheckCircle } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
 import { AnimatedLineGradient } from "./AnimatedTextGradient";
+import { AnimatedPaperBackground } from "./AnimatedPaperBackground";
 
 // Padrão grego - imagem localizada em /public/greek-pattern.svg
 const greekCirclePattern = "/greek-pattern.svg";
@@ -41,7 +42,8 @@ export function NyxxSection() {
   ];
 
   return (
-    <section className="w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans bg-clean-pattern" aria-label="Seção NYXX">
+    <section className="w-full bg-white pt-24 lg:pt-32 xl:pt-40 pb-24 lg:pb-32 xl:pb-40 px-4 md:px-8 lg:px-12 xl:px-16 relative overflow-hidden font-sans" style={{ position: 'relative' }} aria-label="Seção NYXX">
+      <AnimatedPaperBackground intensity={0.2} speed={0.8} />
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Hero Section */}

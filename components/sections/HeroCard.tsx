@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { DeusaAnimation } from '../DeusaAnimation';
 import { useTranslation } from '../../hooks/useTranslation';
+import { AnimatedPaperBackground } from '../AnimatedPaperBackground';
 
 export function HeroCard() {
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   
   return (
-    <div className="relative w-full min-h-[100vh] overflow-hidden text-black hero-card-container bg-white bg-clean-pattern">
+    <div className="relative w-full min-h-[100vh] overflow-hidden text-black hero-card-container bg-white" style={{ position: 'relative' }}>
+      <AnimatedPaperBackground intensity={0.2} speed={0.8} />
       <div 
         ref={containerRef}
         className="absolute inset-0 z-20 w-full max-w-[1800px] mx-auto px-7 md:px-14 flex items-center justify-between"
